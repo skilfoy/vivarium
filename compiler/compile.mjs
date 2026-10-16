@@ -1,9 +1,9 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { emitScope, loadCatalog, renderNft, repoRoot, scopeHash, validateCatalog } from "./lib.mjs";
+import { emitScope, loadCatalog, renderNft, repoRoot, scopeHash, validateCatalog, validateInhabitants } from "./lib.mjs";
 
 const catalog = loadCatalog();
-const errors = validateCatalog(catalog);
+const errors = [...validateCatalog(catalog), ...validateInhabitants(catalog)];
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exit(1);
@@ -29,6 +29,8 @@ const operatorView = {
   personas: catalog.personas.personas,
   chains: catalog.chains.chains,
   harnesses: catalog.harnesses,
+  shifts: catalog.shifts,
+  timeline: catalog.timeline,
   scope,
   scopeHash: hash,
 };

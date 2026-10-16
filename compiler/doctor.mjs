@@ -1,10 +1,11 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { emitScope, loadCatalog, repoRoot, scopeHash, validateCatalog } from "./lib.mjs";
+import { emitScope, loadCatalog, repoRoot, scopeHash, validateCatalog, validateInhabitants } from "./lib.mjs";
 
 const problems = [];
 const catalog = loadCatalog();
 problems.push(...validateCatalog(catalog));
+problems.push(...validateInhabitants(catalog));
 
 const scope = emitScope(catalog);
 const hash = scopeHash(scope);

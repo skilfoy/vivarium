@@ -19,7 +19,9 @@ export function loadCatalog() {
   const personas = readJson("catalogs/personas/northline.json");
   const chains = readJson("catalogs/chains/northline.json");
   const harnesses = readJson("catalogs/harnesses.json");
-  return { habitat, sector, personas, chains, harnesses };
+  const shifts = readJson("catalogs/shifts/northline.json");
+  const timeline = readJson("ghosts/northline-night.json");
+  return { habitat, sector, personas, chains, harnesses, shifts, timeline };
 }
 
 export function ipToInt(ip) {
@@ -154,6 +156,67 @@ export function flagValue(vaultKey, flagId, seed) {
 
 export function scopeHash(scope) {
   return createHash("sha256").update(JSON.stringify(scope)).digest("hex");
+}
+
+export function urlInRange(url, suffixes) {
+  let parsed;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return false;
+  }
+  if (parsed.username || parsed.password) return false;
+  if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return false;
+  const host = parsed.hostname.toLowerCase();
+  return suffixes.some((suffix) => host === suffix || host.endsWith(`.${suffix}`));
+}
+
+export function isNight(shifts, hour) {
+  return hour >= shifts.night.startHour || hour < shifts.night.endHour;
+}
+
+export function personaOnDesk(shifts, personaId, hour) {
+  const row = shifts.personas[personaId];
+  if (!row) return false;
+  const night = isNight(shifts, hour);
+  return night ? row.shift === "night" : row.shift === "day";
+}
+
+export function janitorState(shifts, seed, hour) {
+  const job = shifts.janitor;
+  const n = Number(seed);
+  if (!Number.isInteger(n) || n < 0 || n > 255) throw new Error("seed must be an integer 0-255");
+  if (!Number.isInteger(hour) || hour < 0 || hour > 23) throw new Error("hour must be 0-23");
+  if (!job.upHours.includes(hour)) {
+    return { up: false, controller: job.controller };
+  }
+  return {
+    up: true,
+    controller: job.controller,
+    fqdn: job.fqdn,
+    ip: job.address,
+    className: job.classes[(n + hour) % job.classes.length],
+  };
+}
+
+export function validateInhabitants(catalog) {
+  const errors = [];
+  const { shifts, timeline, personas } = catalog;
+  const ids = new Set(personas.personas.map((person) => person.id));
+  if (Object.keys(shifts.personas).length !== ids.size) errors.push("shift roster does not match personas");
+  for (const id of ids) {
+    if (!shifts.personas[id]) errors.push(`missing shift for ${id}`);
+  }
+  if (!urlInRange(shifts.phishSink.url, shifts.allowedSuffixes)) errors.push("phish sink left the range");
+  for (const action of timeline.actions) {
+    if (!ids.has(action.persona)) errors.push(`timeline names ${action.persona}`);
+    if (action.verb !== "open") errors.push(`timeline verb ${action.verb} is not allowed`);
+    if (!urlInRange(action.url, shifts.allowedSuffixes)) errors.push(`timeline left the range: ${action.url}`);
+  }
+  if (JSON.stringify(shifts).includes("0.0.0.0/0") || JSON.stringify(timeline).includes("0.0.0.0/0")) {
+    errors.push("default route is forbidden");
+  }
+  return errors;
 }
 
 export function renderNft(scope) {

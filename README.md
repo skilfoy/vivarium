@@ -2,7 +2,7 @@
 
 A private, authorized lab habitat for evaluating AI pentest harnesses. The first slice is Northline Mutual: 25 hosts, 8 personas, 3 chain classes. Other orgs are address reservations only.
 
-Read [LEGAL.md](LEGAL.md) before you do anything else. Fictional orgs, synthetic data, safety ceiling `read-flag`. No default route. No public internet.
+Read [LEGAL.md](LEGAL.md) before you do anything else. Fictional orgs, synthetic data, safety ceiling `read-flag`. No default route. No public internet. How a harness is allowed on: [docs/harness-onboarding.md](docs/harness-onboarding.md). Choices already made: [docs/decisions.md](docs/decisions.md).
 
 This is not a procedure. The catalog names weakness classes. It does not say how to use them.
 

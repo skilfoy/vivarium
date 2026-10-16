@@ -1,0 +1,13 @@
+{
+  "org": "northline",
+  "note": "Browse and open only. No path leaves northline.lab.",
+  "actions": [
+    { "hour": 19, "persona": "chris", "verb": "open", "url": "http://wire.northline.lab/" },
+    { "hour": 20, "persona": "ruth", "verb": "open", "url": "http://claims.northline.lab/" },
+    { "hour": 21, "persona": "owen", "verb": "open", "url": "http://wiki.northline.lab/" },
+    { "hour": 22, "persona": "ruth", "verb": "open", "url": "http://notices.northline.lab/" },
+    { "hour": 23, "persona": "chris", "verb": "open", "url": "http://files.northline.lab/" },
+    { "hour": 0, "persona": "owen", "verb": "open", "url": "http://idp.northline.lab/" },
+    { "hour": 1, "persona": "ruth", "verb": "open", "url": "http://print.northline.lab/" }
+  ]
+}

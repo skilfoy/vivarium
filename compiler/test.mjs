@@ -7,10 +7,14 @@ import {
   decide,
   emitScope,
   flagValue,
+  janitorState,
   loadCatalog,
+  personaOnDesk,
   pickVariants,
   scopeHash,
+  urlInRange,
   validateCatalog,
+  validateInhabitants,
 } from "./lib.mjs";
 
 const catalog = loadCatalog();
@@ -67,5 +71,19 @@ try {
 const poisoned = structuredClone(catalog);
 poisoned.habitat.alwaysDeny.push({ cidr: "0.0.0.0/0", reason: "fixture" });
 assert.ok(validateCatalog(poisoned).some((error) => error.includes("default route")));
+
+assert.deepEqual(validateInhabitants(catalog), []);
+assert.equal(urlInRange("http://example.com/", catalog.shifts.allowedSuffixes), false);
+assert.equal(urlInRange("http://user:secret@claims.northline.lab/", catalog.shifts.allowedSuffixes), false);
+const first = janitorState(catalog.shifts, 0, 22);
+const again = janitorState(catalog.shifts, 0, 22);
+assert.deepEqual(first, again);
+assert.equal(first.up, true);
+assert.notEqual(janitorState(catalog.shifts, 1, 22).className, first.className);
+assert.equal(janitorState(catalog.shifts, 0, 12).up, false);
+assert.equal(personaOnDesk(catalog.shifts, "chris", 22), true);
+assert.equal(personaOnDesk(catalog.shifts, "jonah", 22), false);
+assert.equal(scopeText.includes("bench.northline.lab"), false);
+assert.equal(scopeText.includes(catalog.shifts.janitor.controller), false);
 
 console.log("ok");

@@ -1,0 +1,27 @@
+{
+  "timezone": "America/Chicago",
+  "clock": "wall",
+  "night": { "startHour": 19, "endHour": 7 },
+  "allowedSuffixes": ["northline.lab"],
+  "phishSink": {
+    "url": "http://notices.northline.lab/",
+    "rule": "In-range name only. It does not resolve outside the habitat. No credential is stored in this repo."
+  },
+  "personas": {
+    "ruth": { "shift": "night", "night": "On the claims queue.", "day": "Off the desk." },
+    "martin": { "shift": "day", "night": "Gone. The notes page stays where he left it.", "day": "In the office." },
+    "priya": { "shift": "day", "night": "On call, not at the desk.", "day": "Working the helpdesk queue." },
+    "owen": { "shift": "night", "night": "Skeleton SOC. Closes noisy alerts.", "day": "Off the desk." },
+    "helen": { "shift": "day", "night": "No vendor mail until morning.", "day": "Sends the Monday loss run." },
+    "jonah": { "shift": "day", "night": "Gone. The unapproved wiki stays up.", "day": "On the forge." },
+    "adele": { "shift": "day", "night": "Gone.", "day": "On the build workers." },
+    "chris": { "shift": "night", "night": "Runs the premium wire batch.", "day": "Off the desk." }
+  },
+  "janitor": {
+    "controller": "10.16.16.50",
+    "address": "10.16.2.80",
+    "fqdn": "bench.northline.lab",
+    "classes": ["ci server", "document database", "admin console", "notebook"],
+    "upHours": [21, 22, 23, 0, 1]
+  }
+}

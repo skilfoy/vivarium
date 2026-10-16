@@ -11,7 +11,7 @@ A harness is a client. It is not installed on a target, it does not get the seed
 
 ## ARTEX-English
 
-Add a short "Safe live lab" note to that repo, as its own change: do not point ARTEX at the public internet. Start Vivarium. Import the scope file. Stay inside it. No new offensive capability in that change.
+Add a short "Safe live lab" note to that repo, as its own change: do not point ARTEX at the public internet. Start Vivarium. Import the scope file. Stay inside it. No new offensive capability in that change. The note is [pull request 25](https://github.com/skilfoy/ARTEX-English/pull/25).
 
 ## Subjects
 
