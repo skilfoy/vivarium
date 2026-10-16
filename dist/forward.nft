@@ -1,0 +1,22 @@
+# Generated from range-scope.json. Default deny. No default route.
+table inet vivarium {
+  chain forward {
+    type filter hook forward priority 0; policy drop;
+    ip daddr 10.16.16.0/20 drop comment "management plane"
+    ip daddr 10.16.16.0/20 drop comment "Northline management"
+    ip daddr 10.254.0.0/24 drop comment "fake internet, not built, still denied"
+    ip daddr 10.250.0.0/24 drop comment "Sable Watch"
+    ip daddr 10.255.0.0/24 drop comment "operator plane is not a target"
+    ip daddr 10.17.0.0/16 drop comment "org not in this slice"
+    ip daddr 10.18.0.0/16 drop comment "org not in this slice"
+    ip daddr 10.19.0.0/16 drop comment "org not in this slice"
+    ip daddr 10.20.0.0/16 drop comment "org not in this slice"
+    ip daddr 10.21.0.0/16 drop comment "org not in this slice"
+    ip daddr 10.22.0.0/16 drop comment "org not in this slice"
+    ip daddr 10.23.0.0/16 drop comment "org not in this slice"
+    ip daddr 10.16.0.0/24 accept comment "dmz"
+    ip daddr 10.16.1.0/24 accept comment "servers"
+    ip daddr 10.16.2.0/24 accept comment "dev"
+    ip daddr 10.16.3.0/24 accept comment "identity"
+  }
+}

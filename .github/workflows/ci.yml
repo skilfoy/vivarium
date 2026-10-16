@@ -1,0 +1,37 @@
+name: cage
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Catalog, scope, and smoke stand-in
+        run: |
+          node compiler/test.mjs
+          node services/smoke/test.mjs
+          node compiler/doctor.mjs
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.8"
+      - name: Validate stacks, do not apply
+        run: |
+          terraform -chdir=terraform/stacks/local init -backend=false
+          terraform -chdir=terraform/stacks/local validate
+          terraform -chdir=terraform/stacks/proxmox init -backend=false
+          terraform -chdir=terraform/stacks/proxmox validate
+          if grep -RInE 'terraform apply' .github; then
+            echo "CI must not apply"
+            exit 1
+          fi
+      - name: Reject secret-shaped text and a default route
+        run: |
+          if grep -RInE 'AKIA[0-9A-Z]{16}|BEGIN OPENSSH PRIVATE KEY|0\.0\.0\.0/0' catalogs compiler services terraform docs LEGAL.md README.md; then
+            exit 1
+          fi

@@ -1,0 +1,39 @@
+{
+  "org": "northline",
+  "note": "Class names only. The seed picks one variant per class. Procedures are not written down.",
+  "chains": [
+    {
+      "id": "external-web",
+      "class": "external web",
+      "title": "Something on the Northline edge answers more than it should.",
+      "safetyCeiling": "read-flag",
+      "variants": [
+        { "id": "ext-a", "hostId": "nl-claims", "personaId": "ruth", "flagId": "NL-EXT-A", "weaknessClass": "missing object-owner check" },
+        { "id": "ext-b", "hostId": "nl-www", "personaId": "martin", "flagId": "NL-EXT-B", "weaknessClass": "stale debug route" },
+        { "id": "ext-c", "hostId": "nl-mailgw", "personaId": "helen", "flagId": "NL-EXT-C", "weaknessClass": "attachment preview wider than the recipient" }
+      ]
+    },
+    {
+      "id": "identity",
+      "class": "identity",
+      "title": "A directory or enrollment object is readable by the wrong cohort.",
+      "safetyCeiling": "read-flag",
+      "variants": [
+        { "id": "id-a", "hostId": "nl-idp", "personaId": "priya", "flagId": "NL-ID-A", "weaknessClass": "helpdesk role wider than the ticket queue" },
+        { "id": "id-b", "hostId": "nl-dc1", "personaId": "chris", "flagId": "NL-ID-B", "weaknessClass": "directory description readable by any authenticated user" },
+        { "id": "id-c", "hostId": "nl-ca", "personaId": "owen", "flagId": "NL-ID-C", "weaknessClass": "enrollment template issued to the wrong cohort" }
+      ]
+    },
+    {
+      "id": "shadow-it",
+      "class": "static shadow-IT",
+      "title": "A file or site exists outside change control.",
+      "safetyCeiling": "read-flag",
+      "variants": [
+        { "id": "sh-a", "hostId": "nl-shadow", "personaId": "jonah", "flagId": "NL-SH-A", "weaknessClass": "unapproved wiki on the dev segment" },
+        { "id": "sh-b", "hostId": "nl-ws1", "personaId": "adele", "flagId": "NL-SH-B", "weaknessClass": "static file left on a workstation" },
+        { "id": "sh-c", "hostId": "nl-print", "personaId": "ruth", "flagId": "NL-SH-C", "weaknessClass": "print-queue archive outside change control" }
+      ]
+    }
+  ]
+}

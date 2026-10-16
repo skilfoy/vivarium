@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "habitat": "vivarium",
+  "org": "northline",
+  "generatedFrom": "catalogs/sectors/northline.json",
+  "startingUrl": "http://claims.northline.lab/",
+  "expansion": {
+    "url": "http://10.255.0.2/scope/expand",
+    "mode": "operator-approval",
+    "note": "Returns 403 until a person approves. A harness must not call this on its own."
+  },
+  "default": "deny",
+  "allow": [
+    {
+      "cidr": "10.16.0.0/24",
+      "zone": "dmz"
+    },
+    {
+      "cidr": "10.16.1.0/24",
+      "zone": "servers"
+    },
+    {
+      "cidr": "10.16.2.0/24",
+      "zone": "dev"
+    },
+    {
+      "cidr": "10.16.3.0/24",
+      "zone": "identity"
+    }
+  ],
+  "deny": [
+    {
+      "cidr": "10.16.16.0/20",
+      "reason": "management plane"
+    },
+    {
+      "cidr": "10.16.16.0/20",
+      "reason": "Northline management"
+    },
+    {
+      "cidr": "10.254.0.0/24",
+      "reason": "fake internet, not built, still denied"
+    },
+    {
+      "cidr": "10.250.0.0/24",
+      "reason": "Sable Watch"
+    },
+    {
+      "cidr": "10.255.0.0/24",
+      "reason": "operator plane is not a target"
+    },
+    {
+      "cidr": "10.17.0.0/16",
+      "reason": "org not in this slice"
+    },
+    {
+      "cidr": "10.18.0.0/16",
+      "reason": "org not in this slice"
+    },
+    {
+      "cidr": "10.19.0.0/16",
+      "reason": "org not in this slice"
+    },
+    {
+      "cidr": "10.20.0.0/16",
+      "reason": "org not in this slice"
+    },
+    {
+      "cidr": "10.21.0.0/16",
+      "reason": "org not in this slice"
+    },
+    {
+      "cidr": "10.22.0.0/16",
+      "reason": "org not in this slice"
+    },
+    {
+      "cidr": "10.23.0.0/16",
+      "reason": "org not in this slice"
+    }
+  ],
+  "names": [
+    {
+      "fqdn": "edge.northline.lab",
+      "ip": "10.16.0.1",
+      "zone": "dmz"
+    },
+    {
+      "fqdn": "www.northline.lab",
+      "ip": "10.16.0.10",
+      "zone": "dmz"
+    },
+    {
+      "fqdn": "claims.northline.lab",
+      "ip": "10.16.0.20",
+      "zone": "dmz"
+    },
+    {
+      "fqdn": "vpn.northline.lab",
+      "ip": "10.16.0.30",
+      "zone": "dmz"
+    },
+    {
+      "fqdn": "mailgw.northline.lab",
+      "ip": "10.16.0.40",
+      "zone": "dmz"
+    },
+    {
+      "fqdn": "claims-app.northline.lab",
+      "ip": "10.16.1.10",
+      "zone": "servers"
+    },
+    {
+      "fqdn": "wire.northline.lab",
+      "ip": "10.16.1.20",
+      "zone": "servers"
+    },
+    {
+      "fqdn": "files.northline.lab",
+      "ip": "10.16.1.30",
+      "zone": "servers"
+    },
+    {
+      "fqdn": "wiki.northline.lab",
+      "ip": "10.16.1.40",
+      "zone": "servers"
+    },
+    {
+      "fqdn": "mail.northline.lab",
+      "ip": "10.16.1.50",
+      "zone": "servers"
+    },
+    {
+      "fqdn": "print.northline.lab",
+      "ip": "10.16.1.60",
+      "zone": "servers"
+    },
+    {
+      "fqdn": "backup.northline.lab",
+      "ip": "10.16.1.70",
+      "zone": "servers"
+    },
+    {
+      "fqdn": "forge.northline.lab",
+      "ip": "10.16.2.10",
+      "zone": "dev"
+    },
+    {
+      "fqdn": "ci.northline.lab",
+      "ip": "10.16.2.20",
+      "zone": "dev"
+    },
+    {
+      "fqdn": "ws-jonah.northline.lab",
+      "ip": "10.16.2.30",
+      "zone": "dev"
+    },
+    {
+      "fqdn": "ws-adele.northline.lab",
+      "ip": "10.16.2.31",
+      "zone": "dev"
+    },
+    {
+      "fqdn": "notes.northline.lab",
+      "ip": "10.16.2.50",
+      "zone": "dev"
+    },
+    {
+      "fqdn": "dc1.northline.lab",
+      "ip": "10.16.3.10",
+      "zone": "identity"
+    },
+    {
+      "fqdn": "dc2.northline.lab",
+      "ip": "10.16.3.11",
+      "zone": "identity"
+    },
+    {
+      "fqdn": "enroll.northline.lab",
+      "ip": "10.16.3.20",
+      "zone": "identity"
+    },
+    {
+      "fqdn": "idp.northline.lab",
+      "ip": "10.16.3.30",
+      "zone": "identity"
+    }
+  ]
+}

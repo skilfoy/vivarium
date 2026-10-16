@@ -1,0 +1,40 @@
+{
+  "id": "northline",
+  "name": "Northline Mutual",
+  "prefix": "10.16.0.0/16",
+  "startingUrl": "http://claims.northline.lab/",
+  "zones": [
+    { "id": "dmz", "cidr": "10.16.0.0/24", "scope": "allow" },
+    { "id": "servers", "cidr": "10.16.1.0/24", "scope": "allow" },
+    { "id": "dev", "cidr": "10.16.2.0/24", "scope": "allow" },
+    { "id": "identity", "cidr": "10.16.3.0/24", "scope": "allow" },
+    { "id": "management", "cidr": "10.16.16.0/20", "scope": "deny", "denyReason": "management plane" }
+  ],
+  "hosts": [
+    { "id": "nl-edge", "name": "Edge", "fqdn": "edge.northline.lab", "ip": "10.16.0.1", "zone": "dmz", "ownerPersona": "owen", "purpose": "Northline edge router", "patchCohort": "current", "logging": "full", "classification": "internal" },
+    { "id": "nl-www", "name": "Public site", "fqdn": "www.northline.lab", "ip": "10.16.0.10", "zone": "dmz", "ownerPersona": "martin", "purpose": "Marketing site and investor notes", "patchCohort": "lagging", "logging": "sample", "classification": "public" },
+    { "id": "nl-claims", "name": "Claims portal", "fqdn": "claims.northline.lab", "ip": "10.16.0.20", "zone": "dmz", "ownerPersona": "ruth", "purpose": "Member claims desk", "patchCohort": "current", "logging": "full", "classification": "public" },
+    { "id": "nl-vpn", "name": "Remote access", "fqdn": "vpn.northline.lab", "ip": "10.16.0.30", "zone": "dmz", "ownerPersona": "priya", "purpose": "Staff remote access concentrator", "patchCohort": "current", "logging": "full", "classification": "internal" },
+    { "id": "nl-mailgw", "name": "Mail gateway", "fqdn": "mailgw.northline.lab", "ip": "10.16.0.40", "zone": "dmz", "ownerPersona": "helen", "purpose": "Inbound mail preview", "patchCohort": "lagging", "logging": "sample", "classification": "public" },
+    { "id": "nl-claims-app", "name": "Claims application", "fqdn": "claims-app.northline.lab", "ip": "10.16.1.10", "zone": "servers", "ownerPersona": "ruth", "purpose": "Claims system of record", "patchCohort": "current", "logging": "full", "classification": "restricted" },
+    { "id": "nl-wire", "name": "Wire desk", "fqdn": "wire.northline.lab", "ip": "10.16.1.20", "zone": "servers", "ownerPersona": "chris", "purpose": "Premium wire desk", "patchCohort": "current", "logging": "full", "classification": "restricted" },
+    { "id": "nl-files", "name": "File share", "fqdn": "files.northline.lab", "ip": "10.16.1.30", "zone": "servers", "ownerPersona": "priya", "purpose": "Department file share", "patchCohort": "lagging", "logging": "sample", "classification": "internal" },
+    { "id": "nl-wiki", "name": "Wiki", "fqdn": "wiki.northline.lab", "ip": "10.16.1.40", "zone": "servers", "ownerPersona": "adele", "purpose": "Approved internal wiki", "patchCohort": "current", "logging": "full", "classification": "internal" },
+    { "id": "nl-mail", "name": "Mail store", "fqdn": "mail.northline.lab", "ip": "10.16.1.50", "zone": "servers", "ownerPersona": "martin", "purpose": "Staff mailboxes", "patchCohort": "current", "logging": "full", "classification": "restricted" },
+    { "id": "nl-print", "name": "Print archive", "fqdn": "print.northline.lab", "ip": "10.16.1.60", "zone": "servers", "ownerPersona": "ruth", "purpose": "Print queue archive", "patchCohort": "frozen", "logging": "none", "classification": "internal" },
+    { "id": "nl-backup", "name": "Backup", "fqdn": "backup.northline.lab", "ip": "10.16.1.70", "zone": "servers", "ownerPersona": "owen", "purpose": "Nightly backup target", "patchCohort": "lagging", "logging": "sample", "classification": "restricted" },
+    { "id": "nl-git", "name": "Forge", "fqdn": "forge.northline.lab", "ip": "10.16.2.10", "zone": "dev", "ownerPersona": "jonah", "purpose": "First-party source forge", "patchCohort": "current", "logging": "full", "classification": "internal" },
+    { "id": "nl-ci", "name": "Build", "fqdn": "ci.northline.lab", "ip": "10.16.2.20", "zone": "dev", "ownerPersona": "adele", "purpose": "Build workers", "patchCohort": "current", "logging": "full", "classification": "internal" },
+    { "id": "nl-ws1", "name": "Workstation 1", "fqdn": "ws-jonah.northline.lab", "ip": "10.16.2.30", "zone": "dev", "ownerPersona": "jonah", "purpose": "Developer workstation", "patchCohort": "lagging", "logging": "none", "classification": "internal" },
+    { "id": "nl-ws2", "name": "Workstation 2", "fqdn": "ws-adele.northline.lab", "ip": "10.16.2.31", "zone": "dev", "ownerPersona": "adele", "purpose": "Developer workstation", "patchCohort": "current", "logging": "sample", "classification": "internal" },
+    { "id": "nl-shadow", "name": "Shadow wiki", "fqdn": "notes.northline.lab", "ip": "10.16.2.50", "zone": "dev", "ownerPersona": "jonah", "purpose": "Unapproved notes site on the dev segment", "patchCohort": "frozen", "logging": "none", "classification": "internal" },
+    { "id": "nl-dc1", "name": "Directory 1", "fqdn": "dc1.northline.lab", "ip": "10.16.3.10", "zone": "identity", "ownerPersona": "priya", "purpose": "Primary directory", "patchCohort": "current", "logging": "full", "classification": "restricted" },
+    { "id": "nl-dc2", "name": "Directory 2", "fqdn": "dc2.northline.lab", "ip": "10.16.3.11", "zone": "identity", "ownerPersona": "priya", "purpose": "Directory replica", "patchCohort": "current", "logging": "full", "classification": "restricted" },
+    { "id": "nl-ca", "name": "Enrollment", "fqdn": "enroll.northline.lab", "ip": "10.16.3.20", "zone": "identity", "ownerPersona": "owen", "purpose": "Certificate enrollment stand-in", "patchCohort": "lagging", "logging": "full", "classification": "restricted" },
+    { "id": "nl-idp", "name": "Identity portal", "fqdn": "idp.northline.lab", "ip": "10.16.3.30", "zone": "identity", "ownerPersona": "priya", "purpose": "Staff identity portal", "patchCohort": "current", "logging": "full", "classification": "internal" },
+    { "id": "nl-jump", "name": "Jump host", "fqdn": "jump.northline.lab", "ip": "10.16.16.10", "zone": "management", "ownerPersona": "owen", "purpose": "Admin jump host", "patchCohort": "current", "logging": "full", "classification": "management" },
+    { "id": "nl-siem", "name": "Log stack", "fqdn": "siem.northline.lab", "ip": "10.16.16.20", "zone": "management", "ownerPersona": "owen", "purpose": "Log collection", "patchCohort": "current", "logging": "full", "classification": "management" },
+    { "id": "nl-mgmt-backup", "name": "Management backup", "fqdn": "mgmt-backup.northline.lab", "ip": "10.16.16.30", "zone": "management", "ownerPersona": "owen", "purpose": "Management backup", "patchCohort": "current", "logging": "full", "classification": "management" },
+    { "id": "nl-offline-pki", "name": "Offline PKI", "fqdn": "offline-pki.northline.lab", "ip": "10.16.16.40", "zone": "management", "ownerPersona": "owen", "purpose": "Offline issuing stand-in", "patchCohort": "frozen", "logging": "full", "classification": "management" }
+  ]
+}
