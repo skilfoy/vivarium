@@ -64,4 +64,8 @@ try {
   rmSync(dir, { recursive: true, force: true });
 }
 
+const poisoned = structuredClone(catalog);
+poisoned.habitat.alwaysDeny.push({ cidr: "0.0.0.0/0", reason: "fixture" });
+assert.ok(validateCatalog(poisoned).some((error) => error.includes("default route")));
+
 console.log("ok");
