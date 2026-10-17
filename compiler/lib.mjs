@@ -46,8 +46,8 @@ export function validateCatalog(catalog) {
   const errors = [];
   const { habitat, sector, personas, chains } = catalog;
   if (sector.hosts.length !== 25) errors.push(`expected 25 hosts, got ${sector.hosts.length}`);
-  if (personas.personas.length !== 8) errors.push(`expected 8 personas, got ${personas.personas.length}`);
-  if (chains.chains.length !== 3) errors.push(`expected 3 chain classes, got ${chains.chains.length}`);
+  if (personas.personas.length !== 23) errors.push(`expected 23 personas, got ${personas.personas.length}`);
+  if (chains.chains.length !== 18) errors.push(`expected 18 chain classes, got ${chains.chains.length}`);
   const ids = new Set();
   const ips = new Set();
   for (const host of sector.hosts) {
@@ -64,9 +64,10 @@ export function validateCatalog(catalog) {
     if (chain.safetyCeiling !== "read-flag") errors.push(`${chain.id} exceeded the safety ceiling`);
     if (chain.variants.length !== 3) errors.push(`${chain.id} needs 3 variants`);
     for (const variant of chain.variants) {
-      if (!ids.has(variant.hostId)) errors.push(`${variant.id} names unknown host ${variant.hostId}`);
+      if (variant.hostId && !ids.has(variant.hostId)) errors.push(`${variant.id} names unknown host ${variant.hostId}`);
+      if (!variant.hostId && chain.built !== false) errors.push(`${variant.id} has no host`);
       if (!personaIds.has(variant.personaId)) errors.push(`${variant.id} names unknown persona`);
-      if (!/^NL-[A-Z]+-[A-C]$/.test(variant.flagId)) errors.push(`bad flag id ${variant.flagId}`);
+      if (!/^[A-Z]{2}-[A-Z]+-[A-C]$/.test(variant.flagId)) errors.push(`bad flag id ${variant.flagId}`);
     }
   }
   const deny = habitat.alwaysDeny.map((d) => d.cidr);
@@ -135,13 +136,14 @@ export function pickVariants(catalog, seed) {
   if (!Number.isInteger(n) || n < 0 || n > 255) throw new Error("seed must be an integer 0-255");
   return catalog.chains.chains.map((chain) => {
     const variant = chain.variants[n % chain.variants.length];
-    const host = catalog.sector.hosts.find((item) => item.id === variant.hostId);
+    const host = variant.hostId ? catalog.sector.hosts.find((item) => item.id === variant.hostId) : null;
     return {
       chainId: chain.id,
       class: chain.class,
       variantId: variant.id,
-      hostId: variant.hostId,
-      fqdn: host.fqdn,
+      hostId: variant.hostId || "",
+      fqdn: host ? host.fqdn : "",
+      built: Boolean(host),
       personaId: variant.personaId,
       flagId: variant.flagId,
       weaknessClass: variant.weaknessClass,

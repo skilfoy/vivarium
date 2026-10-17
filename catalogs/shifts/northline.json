@@ -15,7 +15,22 @@
     "helen": { "shift": "day", "night": "No vendor mail until morning.", "day": "Sends the Monday loss run." },
     "jonah": { "shift": "day", "night": "Gone. The unapproved wiki stays up.", "day": "On the forge." },
     "adele": { "shift": "day", "night": "Gone.", "day": "On the build workers." },
-    "chris": { "shift": "night", "night": "Runs the premium wire batch.", "day": "Off the desk." }
+    "chris": { "shift": "night", "night": "Runs the premium wire batch.", "day": "Off the desk." },
+    "nora": { "shift": "day", "night": "Off the desk. Renewal worksheets stay on the share.", "day": "In underwriting." },
+    "samir": { "shift": "day", "night": "Off the desk.", "day": "On the claims database." },
+    "lila": { "shift": "night", "night": "On the backup desk.", "day": "Off the desk." },
+    "evan": { "shift": "day", "night": "On call for remote access, not at the desk.", "day": "On the concentrator." },
+    "grace": { "shift": "day", "night": "Gone. The contractor profile stays.", "day": "On a forge ticket." },
+    "tomas": { "shift": "night", "night": "On the mail queues.", "day": "Off the desk." },
+    "june": { "shift": "day", "night": "Off the desk.", "day": "In treasury." },
+    "wes": { "shift": "day", "night": "Off the desk. Build-log review waits for morning.", "day": "Reading the night's tickets." },
+    "mara": { "shift": "day", "night": "Off. Indemnity is dark.", "day": "On the treaty desk." },
+    "luis": { "shift": "day", "night": "Off. The field laptop is in the truck.", "day": "On a premises job." },
+    "anita": { "shift": "night", "night": "On call for Calder. The console stays up.", "day": "Off the desk." },
+    "ellis": { "shift": "night", "night": "On the treatment shift.", "day": "Off the desk." },
+    "naomi": { "shift": "day", "night": "Off. Device exports stay where she left them.", "day": "In the lab." },
+    "andre": { "shift": "day", "night": "The gate is on a smaller crew.", "day": "On the yard desk." },
+    "imani": { "shift": "night", "night": "On the dispatch desk.", "day": "Off the desk." }
   },
   "janitor": {
     "controller": "10.16.16.50",

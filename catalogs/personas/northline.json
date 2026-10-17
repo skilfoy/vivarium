@@ -1,13 +1,28 @@
 {
   "org": "northline",
   "personas": [
-    { "id": "ruth", "name": "Ruth Ellison", "role": "clerk", "team": "Claims", "habit": "Leaves claim packets on the shared printer when the queue jams." },
-    { "id": "martin", "name": "Martin Cho", "role": "careless executive", "team": "Office of the president", "habit": "Forwards board drafts to his personal notes page, then forgets the page exists." },
-    { "id": "priya", "name": "Priya Shah", "role": "helpdesk", "team": "Workplace", "habit": "Keeps a helpdesk role that can see every ticket queue, not just the one she works." },
-    { "id": "owen", "name": "Owen Blake", "role": "SOC analyst", "team": "Security", "habit": "Watches the log stack and is not supposed to be a target." },
-    { "id": "helen", "name": "Helen Voss", "role": "vendor", "team": "Lane and Pike, actuarial", "habit": "Sends loss-run spreadsheets through the mail gateway every Monday." },
-    { "id": "jonah", "name": "Jonah Ibarra", "role": "developer", "team": "Forge", "habit": "Keeps a second wiki because the approved one asks for a change ticket." },
-    { "id": "adele", "name": "Adele Okonkwo", "role": "developer", "team": "Forge", "habit": "Leaves build artifacts on her workstation between reviews." },
-    { "id": "chris", "name": "Chris Navarro", "role": "wire operator", "team": "Treasury", "habit": "Puts the wire batch id in the directory description so the night desk can find it." }
+    { "id": "ruth", "name": "Ruth Ellison", "org": "northline", "role": "clerk", "team": "Claims", "habit": "Leaves claim packets on the shared printer when the queue jams." },
+    { "id": "martin", "name": "Martin Cho", "org": "northline", "role": "careless executive", "team": "Office of the president", "habit": "Forwards board drafts to his personal notes page, then forgets the page exists." },
+    { "id": "priya", "name": "Priya Shah", "org": "northline", "role": "helpdesk", "team": "Workplace", "habit": "Keeps a helpdesk role that can see every ticket queue, not just the one she works." },
+    { "id": "owen", "name": "Owen Blake", "org": "northline", "role": "SOC analyst", "team": "Security", "habit": "Watches the log stack and is not supposed to be a target." },
+    { "id": "helen", "name": "Helen Voss", "org": "northline", "role": "vendor", "team": "Lane and Pike, actuarial", "habit": "Sends loss-run spreadsheets through the mail gateway every Monday." },
+    { "id": "jonah", "name": "Jonah Ibarra", "org": "northline", "role": "developer", "team": "Forge", "habit": "Keeps a second wiki because the approved one asks for a change ticket." },
+    { "id": "adele", "name": "Adele Okonkwo", "org": "northline", "role": "developer", "team": "Forge", "habit": "Leaves build artifacts on her workstation between reviews." },
+    { "id": "chris", "name": "Chris Navarro", "org": "northline", "role": "wire operator", "team": "Treasury", "habit": "Puts the wire batch id in the directory description so the night desk can find it." },
+    { "id": "nora", "name": "Nora Keene", "org": "northline", "role": "underwriter", "team": "Personal lines", "habit": "Keeps renewal worksheets on the department share past the decision." },
+    { "id": "samir", "name": "Samir Dalal", "org": "northline", "role": "database admin", "team": "Platform", "habit": "Dumps the claims database to the backup target before a schema change." },
+    { "id": "lila", "name": "Lila Brooks", "org": "northline", "role": "backup operator", "team": "Platform", "habit": "Leaves the restore share mounted after a drill so the night desk can check it." },
+    { "id": "evan", "name": "Evan Park", "org": "northline", "role": "network engineer", "team": "Workplace", "habit": "Widens a remote-access group to finish a ticket, then does not narrow it." },
+    { "id": "grace", "name": "Grace Muller", "org": "northline", "role": "contractor", "team": "Forge", "habit": "Still has a forge login and a VPN profile from an engagement that ended." },
+    { "id": "tomas", "name": "Tomas Reyes", "org": "northline", "role": "mail admin", "team": "Workplace", "habit": "Creates shared mailboxes and does not assign an owner." },
+    { "id": "june", "name": "June Aldrich", "org": "northline", "role": "finance analyst", "team": "Treasury", "habit": "Copies the wire folder to a working directory the whole floor can open." },
+    { "id": "wes", "name": "Wes Harland", "org": "northline", "role": "security engineer", "team": "Security", "habit": "Reviews build logs for secret-shaped text and files the ticket for morning." },
+    { "id": "mara", "name": "Mara Quinn", "org": "indemnity", "role": "treaty clerk", "team": "Ceded reinsurance", "habit": "Sends bordereaux to the broker desk as spreadsheets." },
+    { "id": "luis", "name": "Luis Ortega", "org": "hearthline", "role": "field tech", "team": "Outside plant", "habit": "Keeps customer-premises notes on the laptop between jobs." },
+    { "id": "anita", "name": "Anita Berg", "org": "calder", "role": "on-call operator", "team": "Balancing authority", "habit": "Acknowledges alarms from a console the day shift also uses." },
+    { "id": "ellis", "name": "Ellis Ward", "org": "brinewater", "role": "plant operator", "team": "Treatment", "habit": "Logs chemical draws in a workbook the office can edit." },
+    { "id": "naomi", "name": "Naomi Feld", "org": "mercy", "role": "lab tech", "team": "Biomedical", "habit": "Parks device exports on a share the care team can also open." },
+    { "id": "andre", "name": "Andre Pelletier", "org": "glassport", "role": "yard lead", "team": "Gate", "habit": "Exports the gate log when a broker asks, and leaves the file." },
+    { "id": "imani", "name": "Imani Cole", "org": "kindling", "role": "night dispatcher", "team": "Public works", "habit": "Posts the after-hours roster where every desk can read it." }
   ]
 }
