@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { variantIndex } from "./variant.mjs";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -131,11 +132,15 @@ export function decide(scope, ip) {
   return { decision: "deny", rule: "default", reason: "default deny" };
 }
 
-export function pickVariants(catalog, seed) {
+export function pickVariants(catalog, seed, pins = {}) {
   const n = Number(seed);
   if (!Number.isInteger(n) || n < 0 || n > 255) throw new Error("seed must be an integer 0-255");
   return catalog.chains.chains.map((chain) => {
-    const variant = chain.variants[n % chain.variants.length];
+    const pinned = pins[chain.id];
+    const variant = pinned
+      ? chain.variants.find((item) => item.id === pinned)
+      : chain.variants[variantIndex(n, chain.id, chain.variants.length)];
+    if (!variant) throw new Error(`unknown variant ${pinned} on ${chain.id}`);
     const host = variant.hostId ? catalog.sector.hosts.find((item) => item.id === variant.hostId) : null;
     return {
       chainId: chain.id,

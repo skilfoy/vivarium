@@ -6,18 +6,18 @@ const claims = [
   { id: "c-088", owner: "helen", title: "Loss run request", note: "Synthetic packet. Vendor copy." },
 ];
 
-function live(seed) {
-  return Object.fromEntries(pickVariants(loadCatalog(), seed).map((item) => [item.variantId, item]));
+function live(seed, pins) {
+  return Object.fromEntries(pickVariants(loadCatalog(), seed, pins).map((item) => [item.variantId, item]));
 }
 
 function marker(vaultKey, seed, variant) {
   return flagValue(vaultKey, variant.flagId, seed);
 }
 
-export function handle({ method, url, headers, seed, vaultKey }) {
+export function handle({ method, url, headers, seed, vaultKey, pins }) {
   if (method !== "GET") return { status: 405, body: { error: "method" } };
   const path = url.split("?")[0];
-  const picked = live(seed);
+  const picked = live(seed, pins || {});
   const authed = Boolean(headers.authorization);
 
   if (path === "/") {

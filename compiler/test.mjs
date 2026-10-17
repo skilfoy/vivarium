@@ -46,6 +46,17 @@ assert.equal(decide(scope, "10.18.0.10").decision, "deny");
 const a = pickVariants(catalog, 0).map((item) => item.variantId);
 const b = pickVariants(catalog, 1).map((item) => item.variantId);
 assert.notDeepEqual(a, b);
+const indexes = (seed) =>
+  pickVariants(catalog, seed).map((item) => {
+    const chain = catalog.chains.chains.find((row) => row.id === item.chainId);
+    return chain.variants.findIndex((variant) => variant.id === item.variantId);
+  });
+assert.equal(indexes(0).every((index) => index === 0), false);
+assert.notDeepEqual(indexes(0), indexes(1));
+assert.notDeepEqual(indexes(1), indexes(2));
+const pinned = pickVariants(catalog, 0, { "external-web": "ext-c" });
+assert.equal(pinned.find((item) => item.chainId === "external-web").variantId, "ext-c");
+assert.throws(() => pickVariants(catalog, 0, { "external-web": "nope" }));
 assert.equal(pickVariants(catalog, 0)[0].safetyCeiling, "read-flag");
 assert.throws(() => pickVariants(catalog, 256));
 
