@@ -1,0 +1,11 @@
+{
+  "name": "free",
+  "substrate": "gcp",
+  "budget": "free",
+  "windows": "none",
+  "density": "smoke",
+  "orgs": ["northline"],
+  "identity": ["record", "samba-ad", "keycloak"],
+  "detection": ["zeek", "wazuh", "sigma"],
+  "noise": []
+}

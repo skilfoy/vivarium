@@ -11,7 +11,7 @@ resource "terraform_data" "refused" {
   lifecycle {
     precondition {
       condition     = var.allow_apply
-      error_message = "Proxmox apply is disabled until the hardware decision in the decision log is closed."
+      error_message = "Apply stays off until you pass -var allow_apply=true on a machine you own."
     }
   }
 }

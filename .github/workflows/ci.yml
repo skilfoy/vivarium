@@ -28,6 +28,12 @@ jobs:
           terraform -chdir=terraform/stacks/proxmox validate
           terraform -chdir=terraform/stacks/aws-isolated init -backend=false
           terraform -chdir=terraform/stacks/aws-isolated validate
+          terraform -chdir=terraform/stacks/gcp-isolated init -backend=false
+          terraform -chdir=terraform/stacks/gcp-isolated validate
+          terraform -chdir=terraform/stacks/azure-isolated init -backend=false
+          terraform -chdir=terraform/stacks/azure-isolated validate
+          terraform -chdir=terraform/stacks/oracle-isolated init -backend=false
+          terraform -chdir=terraform/stacks/oracle-isolated validate
           for module in fabric workload scope identity; do
             terraform -chdir=terraform/modules/$module init -backend=false
             terraform -chdir=terraform/modules/$module validate
@@ -38,6 +44,6 @@ jobs:
           fi
       - name: Reject secret-shaped text and a default route
         run: |
-          if grep -RInE 'AKIA[0-9A-Z]{16}|BEGIN OPENSSH PRIVATE KEY|0\.0\.0\.0/0' catalogs compiler services terraform docs LEGAL.md README.md; then
+          if grep -RInE 'AKIA[0-9A-Z]{16}|BEGIN OPENSSH PRIVATE KEY|0\.0\.0\.0/0' catalogs profiles compiler services terraform docs LEGAL.md README.md; then
             exit 1
           fi

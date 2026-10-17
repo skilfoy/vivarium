@@ -1,0 +1,11 @@
+{
+  "name": "standard",
+  "substrate": "aws",
+  "budget": "standard",
+  "windows": "none",
+  "density": "living",
+  "orgs": ["northline", "indemnity"],
+  "identity": ["record", "samba-ad", "keycloak", "step-ca", "partner-broker"],
+  "detection": ["zeek", "suricata", "wazuh", "elastic", "thehive", "misp", "sigma"],
+  "noise": ["caldera-floor", "openaev"]
+}

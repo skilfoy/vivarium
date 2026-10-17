@@ -1,0 +1,11 @@
+{
+  "name": "lab",
+  "substrate": "proxmox",
+  "budget": "lab",
+  "windows": "evaluation",
+  "density": "living",
+  "orgs": ["northline"],
+  "identity": ["record", "windows-ad", "ad-cs", "laps-gap", "keycloak", "freeipa"],
+  "detection": ["zeek", "suricata", "wazuh", "opensearch", "velociraptor", "sigma"],
+  "noise": ["caldera-floor"]
+}

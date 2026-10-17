@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { spawnSync } from "node:child_process";
+import { resolvePlan } from "./plan.mjs";
 import {
   decide,
   emitScope,
@@ -11,6 +12,7 @@ import {
   loadCatalog,
   personaOnDesk,
   pickVariants,
+  repoRoot,
   scopeHash,
   urlInRange,
   validateCatalog,
@@ -85,5 +87,21 @@ assert.equal(personaOnDesk(catalog.shifts, "chris", 22), true);
 assert.equal(personaOnDesk(catalog.shifts, "jonah", 22), false);
 assert.equal(scopeText.includes("bench.northline.lab"), false);
 assert.equal(scopeText.includes(catalog.shifts.janitor.controller), false);
+
+const planes = JSON.parse(readFileSync(join(repoRoot(), "catalogs/planes.json"), "utf8"));
+const orgs = catalog.habitat.orgs;
+for (const name of ["operator", "free", "lab", "standard", "unlimited"]) {
+  const profile = JSON.parse(readFileSync(join(repoRoot(), "profiles", `${name}.json`), "utf8"));
+  const plan = resolvePlan(profile, planes, orgs);
+  assert.equal(plan.ok, true, `${name}: ${plan.errors.join("; ")}`);
+  assert.equal(JSON.stringify(plan).includes("0.0.0.0/0"), false);
+}
+const tooMuch = resolvePlan(
+  { substrate: "aws", budget: "free", windows: "licensed", density: "federation", orgs: ["hearthline"], identity: ["elastic"], detection: ["arkime"], noise: ["caldera-floor"] },
+  planes,
+  orgs,
+);
+assert.equal(tooMuch.ok, false);
+assert.equal(tooMuch.errors.length > 3, true);
 
 console.log("ok");

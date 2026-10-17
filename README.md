@@ -17,6 +17,8 @@ node compiler/doctor.mjs
 
 `dist/range-scope.json` is what a harness is allowed to see. It does not contain flags. The local Terraform stack validates that file and refuses to apply unless you explicitly allow it, on a machine you own.
 
+How large a range to build, and on what, is [docs/build.md](docs/build.md). `./build` reads [profiles/operator.json](profiles/operator.json) and writes a plan. It does not apply.
+
 ## Subjects
 
 Primary harness: [ARTEX-English](https://github.com/skilfoy/ARTEX-English).

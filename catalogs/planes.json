@@ -1,0 +1,385 @@
+{
+  "budgets": [
+    {
+      "id": "free",
+      "title": "Free",
+      "windows": ["none"],
+      "density": ["smoke"],
+      "maxOrgs": 1,
+      "maxIdentity": 3,
+      "maxDetection": 2,
+      "detectionDeny": ["elastic", "arkime", "security-onion", "fleet"],
+      "noiseDeny": ["caldera-floor", "openaev"],
+      "cash": "No new spend if you stay on a machine you have, or inside a provider's published always-free limit. Credits that expire are not this band."
+    },
+    {
+      "id": "lab",
+      "title": "Lab",
+      "windows": ["none", "evaluation"],
+      "density": ["smoke", "living"],
+      "maxOrgs": 1,
+      "maxIdentity": 8,
+      "maxDetection": 8,
+      "detectionDeny": [],
+      "noiseDeny": [],
+      "cash": "Cash stays at the hardware and power you already pay. No cloud account is required."
+    },
+    {
+      "id": "standard",
+      "title": "Standard",
+      "windows": ["none", "evaluation"],
+      "density": ["smoke", "living"],
+      "maxOrgs": 2,
+      "maxIdentity": 8,
+      "maxDetection": 8,
+      "detectionDeny": [],
+      "noiseDeny": [],
+      "cash": "Plan on a few hundred dollars a month for one isolated account, or less if the guests are small. This is a band, not an invoice."
+    },
+    {
+      "id": "unlimited",
+      "title": "Unlimited",
+      "windows": ["none", "evaluation", "licensed"],
+      "density": ["smoke", "living", "federation"],
+      "maxOrgs": 8,
+      "maxIdentity": 16,
+      "maxDetection": 20,
+      "detectionDeny": [],
+      "noiseDeny": [],
+      "cash": "A dedicated account, packet capture, and every reserved org. Plan on four figures a month if the cloud side is real. The lab side costs power."
+    }
+  ],
+  "substrates": [
+    {
+      "id": "local",
+      "title": "This machine",
+      "stack": "terraform/stacks/local",
+      "budgets": ["free", "lab", "standard", "unlimited"],
+      "shape": "Containers on one host you already have.",
+      "expires": ""
+    },
+    {
+      "id": "proxmox",
+      "title": "Proxmox",
+      "stack": "terraform/stacks/proxmox",
+      "budgets": ["lab", "standard", "unlimited"],
+      "shape": "Guests on a cluster you operate. The API address comes from the environment, never from this repo.",
+      "expires": ""
+    },
+    {
+      "id": "gcp",
+      "title": "Google Cloud",
+      "stack": "terraform/stacks/gcp-isolated",
+      "budgets": ["free", "standard", "unlimited"],
+      "shape": "Free band: one e2-micro in us-west1, us-central1, or us-east1, with the published disk and egress caps. Larger bands pick their own private shape. No public address.",
+      "expires": ""
+    },
+    {
+      "id": "oracle",
+      "title": "Oracle Cloud",
+      "stack": "terraform/stacks/oracle-isolated",
+      "budgets": ["free", "unlimited"],
+      "shape": "The published always-free Arm shape, if the tenancy still has it. That allowance has been cut before. Read the current card. Idle guests can be reclaimed. No public address.",
+      "expires": ""
+    },
+    {
+      "id": "aws",
+      "title": "AWS",
+      "stack": "terraform/stacks/aws-isolated",
+      "budgets": ["standard", "unlimited"],
+      "shape": "A private VPC and small guests. New accounts spend credits. There is no perpetual free host.",
+      "expires": "AWS credits end. When they end, this account bills. It is not the free band."
+    },
+    {
+      "id": "azure",
+      "title": "Azure",
+      "stack": "terraform/stacks/azure-isolated",
+      "budgets": ["standard", "unlimited"],
+      "shape": "A private network and a small burstable guest. The introductory VM hours and the signup credit both end.",
+      "expires": "Azure's introductory allowance ends. It is not the free band."
+    },
+    {
+      "id": "hybrid",
+      "title": "Lab plus private cloud",
+      "stack": "terraform/stacks/proxmox",
+      "also": "terraform/stacks/aws-isolated",
+      "budgets": ["unlimited"],
+      "shape": "The habitat stays on Proxmox. A second private network holds a sensor replica. No public address and no path to the real internet.",
+      "expires": ""
+    }
+  ],
+  "windows": [
+    {
+      "id": "none",
+      "title": "No Windows",
+      "note": "Samba, FreeIPA, Keycloak, Authentik, OpenLDAP, step-ca, RADIUS. No AD CS."
+    },
+    {
+      "id": "evaluation",
+      "title": "Evaluation media you supply",
+      "note": "You obtain the image from Microsoft. This repo never stores it."
+    },
+    {
+      "id": "licensed",
+      "title": "Your license",
+      "note": "Your agreement, your key, kept out of this repo."
+    }
+  ],
+  "densities": [
+    {
+      "id": "smoke",
+      "title": "Smoke",
+      "note": "Northline's logical hosts, collapsed onto one guest."
+    },
+    {
+      "id": "living",
+      "title": "Living",
+      "note": "Directory, apps, and sensors on separate guests. One org, unless the band allows a second."
+    },
+    {
+      "id": "federation",
+      "title": "Federation",
+      "note": "Every selected org gets a block. The harness scope does not open those blocks until a later compile."
+    }
+  ],
+  "identity": [
+    {
+      "id": "record",
+      "title": "Directory record",
+      "plane": "catalog",
+      "weight": 0,
+      "windows": ["none", "evaluation", "licensed"],
+      "needs": [],
+      "density": ["smoke", "living", "federation"],
+      "note": "The catalog of accounts. Always on. Not a network service."
+    },
+    {
+      "id": "samba-ad",
+      "title": "Samba directory",
+      "plane": "identity",
+      "weight": 1,
+      "windows": ["none", "evaluation", "licensed"],
+      "needs": [],
+      "density": ["smoke", "living", "federation"],
+      "note": "A Linux directory. No Microsoft license. Not a stand-in for certificate services."
+    },
+    {
+      "id": "windows-ad",
+      "title": "Windows directory",
+      "plane": "identity",
+      "weight": 2,
+      "windows": ["evaluation", "licensed"],
+      "needs": [],
+      "density": ["smoke", "living", "federation"],
+      "note": "A real directory on media you supply. One forest for the org. No trust in this phase."
+    },
+    {
+      "id": "ad-cs",
+      "title": "Certificate enrollment",
+      "plane": "identity",
+      "weight": 1,
+      "windows": ["evaluation", "licensed"],
+      "needs": ["windows-ad"],
+      "density": ["smoke", "living", "federation"],
+      "note": "One loose template class. The catalog names the class. It does not say how to use it."
+    },
+    {
+      "id": "laps-gap",
+      "title": "Missing local-admin rotation",
+      "plane": "identity",
+      "weight": 0,
+      "windows": ["evaluation", "licensed"],
+      "needs": ["windows-ad"],
+      "density": ["smoke", "living", "federation"],
+      "note": "The abandoned patch cohort does not rotate local admin. The material stays in the seed vault."
+    },
+    {
+      "id": "keycloak",
+      "title": "Keycloak",
+      "plane": "identity",
+      "weight": 1,
+      "windows": ["none", "evaluation", "licensed"],
+      "needs": [],
+      "density": ["smoke", "living", "federation"],
+      "note": "Staff portal in front of the first-party apps. A loose partner client is a class, not a procedure."
+    },
+    {
+      "id": "authentik",
+      "title": "Authentik",
+      "plane": "identity",
+      "weight": 1,
+      "windows": ["none", "evaluation", "licensed"],
+      "needs": [],
+      "density": ["smoke", "living", "federation"],
+      "note": "A second portal style. Pick this or Keycloak unless two departments really have two portals."
+    },
+    {
+      "id": "freeipa",
+      "title": "FreeIPA",
+      "plane": "identity",
+      "weight": 1,
+      "windows": ["none", "evaluation", "licensed"],
+      "needs": [],
+      "density": ["living", "federation"],
+      "note": "Realm for the Linux servers. Hosts join it. The harness does not get the enrollment material."
+    },
+    {
+      "id": "openldap",
+      "title": "OpenLDAP",
+      "plane": "identity",
+      "weight": 1,
+      "windows": ["none", "evaluation", "licensed"],
+      "needs": [],
+      "density": ["smoke", "living", "federation"],
+      "note": "An application directory for a system that should not be on the staff domain."
+    },
+    {
+      "id": "step-ca",
+      "title": "step-ca",
+      "plane": "identity",
+      "weight": 1,
+      "windows": ["none", "evaluation", "licensed"],
+      "needs": [],
+      "density": ["smoke", "living", "federation"],
+      "note": "Internal enrollment when there is no Windows certificate service."
+    },
+    {
+      "id": "mit-kdc",
+      "title": "Standalone Kerberos",
+      "plane": "identity",
+      "weight": 1,
+      "windows": ["none", "evaluation", "licensed"],
+      "needs": [],
+      "density": ["smoke", "living", "federation"],
+      "note": "A KDC without a full directory. Redundant if Samba or Windows is already selected."
+    },
+    {
+      "id": "radius",
+      "title": "RADIUS",
+      "plane": "identity",
+      "weight": 1,
+      "windows": ["none", "evaluation", "licensed"],
+      "needs": [],
+      "density": ["living", "federation"],
+      "note": "Network devices ask a local server. The shared secret stays in the vault."
+    },
+    {
+      "id": "partner-broker",
+      "title": "Partner broker",
+      "plane": "identity",
+      "weight": 1,
+      "windows": ["none", "evaluation", "licensed"],
+      "needs": [],
+      "density": ["smoke", "living", "federation"],
+      "note": "A separate portal for the vendor extranet. Not a forest trust."
+    }
+  ],
+  "detection": [
+    {
+      "id": "zeek",
+      "title": "Zeek",
+      "plane": "span",
+      "weight": 1,
+      "note": "Network metadata on a span. The span sits on the management plane."
+    },
+    {
+      "id": "suricata",
+      "title": "Suricata",
+      "plane": "span",
+      "weight": 1,
+      "note": "Alerts on the same span. Rules describe classes, not how to use a weakness."
+    },
+    {
+      "id": "wazuh",
+      "title": "Wazuh",
+      "plane": "management",
+      "weight": 1,
+      "note": "Host agents report to a manager the harness is not allowed to reach."
+    },
+    {
+      "id": "opensearch",
+      "title": "OpenSearch",
+      "plane": "management",
+      "weight": 2,
+      "note": "Search for the SOC. The lighter choice when Elastic is more than the band can hold."
+    },
+    {
+      "id": "elastic",
+      "title": "Elastic",
+      "plane": "management",
+      "weight": 2,
+      "note": "Search for the SOC. Heavier than OpenSearch. Not a fit for an always-free guest."
+    },
+    {
+      "id": "velociraptor",
+      "title": "Velociraptor",
+      "plane": "management",
+      "weight": 1,
+      "note": "Endpoint questions from the management plane."
+    },
+    {
+      "id": "osquery",
+      "title": "osquery",
+      "plane": "management",
+      "weight": 1,
+      "note": "Scheduled endpoint questions. Fleet manages them when you add it."
+    },
+    {
+      "id": "fleet",
+      "title": "Fleet",
+      "plane": "management",
+      "weight": 1,
+      "note": "Manages osquery. Needs osquery, and needs more than an always-free guest."
+    },
+    {
+      "id": "sigma",
+      "title": "Sigma",
+      "plane": "catalog",
+      "weight": 0,
+      "note": "Detection classes only. The files do not describe how to use a weakness."
+    },
+    {
+      "id": "thehive",
+      "title": "TheHive",
+      "plane": "management",
+      "weight": 1,
+      "note": "Cases for the night analyst. Not a feed from the public internet."
+    },
+    {
+      "id": "misp",
+      "title": "MISP",
+      "plane": "management",
+      "weight": 1,
+      "note": "Synthetic events seeded in the lab. No outbound feed."
+    },
+    {
+      "id": "arkime",
+      "title": "Arkime",
+      "plane": "management",
+      "weight": 3,
+      "note": "Packet capture. Disk-heavy. Management plane only."
+    }
+  ],
+  "bundles": [
+    {
+      "id": "security-onion",
+      "title": "Security Onion",
+      "expands": ["zeek", "suricata", "elastic"],
+      "note": "A bundle of Zeek, Suricata, and Elastic. It counts as those three, and it does not fit the free band."
+    }
+  ],
+  "noise": [
+    {
+      "id": "caldera-floor",
+      "title": "Caldera noise floor",
+      "plane": "management",
+      "note": "Background noise so a quiet range is not a tell. Reaching it means the harness already left scope."
+    },
+    {
+      "id": "openaev",
+      "title": "OpenAEV noise",
+      "plane": "management",
+      "note": "Seeded exercise traffic on the management plane. Not a harness, and not a procedure."
+    }
+  ]
+}

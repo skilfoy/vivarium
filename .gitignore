@@ -1,4 +1,5 @@
 dist/ground-truth.json
+dist/build-plan.json
 secrets/
 *.tfstate
 *.tfstate.*
