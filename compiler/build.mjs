@@ -37,9 +37,8 @@ if (!plan.ok) {
 console.log(`${plan.name}: ${plan.budget.title} on ${plan.substrate.title}`);
 console.log(plan.budget.cash);
 console.log(plan.substrate.shape);
-console.log(`Guests: ${plan.guests.count}. ${plan.guests.note}`);
-console.log(`Stack: ${plan.substrate.stack}`);
-if (plan.substrate.also) console.log(`Also: ${plan.substrate.also}`);
+console.log(`Guests: ${plan.guests.count} x ${plan.guests.guestMb} MB. ${plan.guests.note}`);
+console.log(`Stacks: ${plan.substrate.stacks.join(", ")}`);
 console.log(`Identity: ${plan.identity.map((mod) => mod.title).join(", ")}`);
 console.log(`Detection: ${plan.detection.map((mod) => mod.title).join(", ")}`);
 if (plan.noise.length) console.log(`Noise: ${plan.noise.map((mod) => mod.title).join(", ")}`);
@@ -50,7 +49,7 @@ const terraform = spawnSync("terraform", ["version"], { encoding: "utf8" });
 if (terraform.status !== 0) {
   console.log("Terraform is not on this machine. The plan is written. The stack was not validated here.");
 } else {
-  for (const stack of [plan.substrate.stack, plan.substrate.also].filter(Boolean)) {
+  for (const stack of plan.substrate.stacks) {
     const dir = join(root, stack);
     const init = spawnSync("terraform", ["-chdir=" + dir, "init", "-backend=false"], { encoding: "utf8" });
     const validate = spawnSync("terraform", ["-chdir=" + dir, "validate"], { encoding: "utf8" });

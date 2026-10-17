@@ -3,108 +3,113 @@
     {
       "id": "free",
       "title": "Free",
-      "windows": ["none"],
-      "density": ["smoke"],
-      "maxOrgs": 1,
-      "maxIdentity": 3,
-      "maxDetection": 2,
-      "detectionDeny": ["elastic", "arkime", "security-onion", "fleet"],
-      "noiseDeny": ["caldera-floor", "openaev"],
-      "cash": "No new spend if you stay on a machine you have, or inside a provider's published always-free limit. Credits that expire are not this band."
+      "windows": ["none", "evaluation", "licensed"],
+      "density": ["smoke", "living", "federation"],
+      "guestMb": 1024,
+      "cash": "The architecture does not shrink because the guests are free-tier sized. Each role gets its own 1 GB guest, and a heavier role gets several. Zero cash holds only while those guests sit inside published allowances. Spread them across providers instead of cutting orgs."
     },
     {
       "id": "lab",
       "title": "Lab",
-      "windows": ["none", "evaluation"],
-      "density": ["smoke", "living"],
-      "maxOrgs": 1,
-      "maxIdentity": 8,
-      "maxDetection": 8,
-      "detectionDeny": [],
-      "noiseDeny": [],
-      "cash": "Cash stays at the hardware and power you already pay. No cloud account is required."
+      "windows": ["none", "evaluation", "licensed"],
+      "density": ["smoke", "living", "federation"],
+      "guestMb": 4096,
+      "cash": "Same full habitat as the other bands. Guests are 4 GB on hardware you already run. Cash cost is power."
     },
     {
       "id": "standard",
       "title": "Standard",
-      "windows": ["none", "evaluation"],
-      "density": ["smoke", "living"],
-      "maxOrgs": 2,
-      "maxIdentity": 8,
-      "maxDetection": 8,
-      "detectionDeny": [],
-      "noiseDeny": [],
-      "cash": "Plan on a few hundred dollars a month for one isolated account, or less if the guests are small. This is a band, not an invoice."
+      "windows": ["none", "evaluation", "licensed"],
+      "density": ["smoke", "living", "federation"],
+      "guestMb": 4096,
+      "cash": "Same full habitat. Guests are 4 GB in an isolated account. Plan on a few hundred dollars a month and up, depending on how many you leave selected. This is a band, not an invoice."
     },
     {
       "id": "unlimited",
       "title": "Unlimited",
       "windows": ["none", "evaluation", "licensed"],
       "density": ["smoke", "living", "federation"],
-      "maxOrgs": 8,
-      "maxIdentity": 16,
-      "maxDetection": 20,
-      "detectionDeny": [],
-      "noiseDeny": [],
-      "cash": "A dedicated account, packet capture, and every reserved org. Plan on four figures a month if the cloud side is real. The lab side costs power."
+      "guestMb": 8192,
+      "cash": "Same full habitat, with 8 GB guests and room to add more. Plan on four figures a month when the cloud side is real."
     }
   ],
   "substrates": [
     {
+      "id": "free-fleet",
+      "title": "Free-tier fleet",
+      "stack": "terraform/stacks/oracle-isolated",
+      "stacks": [
+        "terraform/stacks/oracle-isolated",
+        "terraform/stacks/gcp-isolated",
+        "terraform/stacks/aws-isolated",
+        "terraform/stacks/azure-isolated",
+        "terraform/stacks/local"
+      ],
+      "budgets": ["free", "lab", "standard", "unlimited"],
+      "shape": "One role per 1 GB guest when the band is free, more RAM per guest on the other bands. Roll out as many guests as the plan names. Place the bulk on Oracle always-free, then GCP's always-free micro, then AWS and Azure introductory allowances, then a machine you already have. No public address.",
+      "expires": "AWS and Azure allowances end. Oracle and GCP always-free do not, and neither covers this many guests alone. Use more than one provider before you drop a role."
+    },
+    {
       "id": "local",
       "title": "This machine",
       "stack": "terraform/stacks/local",
+      "stacks": ["terraform/stacks/local"],
       "budgets": ["free", "lab", "standard", "unlimited"],
-      "shape": "Containers on one host you already have.",
+      "shape": "One container per role on a machine you already have. The guest count does not collapse onto one box's single service.",
       "expires": ""
     },
     {
       "id": "proxmox",
       "title": "Proxmox",
       "stack": "terraform/stacks/proxmox",
-      "budgets": ["lab", "standard", "unlimited"],
-      "shape": "Guests on a cluster you operate. The API address comes from the environment, never from this repo.",
+      "stacks": ["terraform/stacks/proxmox"],
+      "budgets": ["free", "lab", "standard", "unlimited"],
+      "shape": "One guest per role on a cluster you operate. The API address comes from the environment, never from this repo.",
       "expires": ""
     },
     {
       "id": "gcp",
       "title": "Google Cloud",
       "stack": "terraform/stacks/gcp-isolated",
-      "budgets": ["free", "standard", "unlimited"],
-      "shape": "Free band: one e2-micro in us-west1, us-central1, or us-east1, with the published disk and egress caps. Larger bands pick their own private shape. No public address.",
+      "stacks": ["terraform/stacks/gcp-isolated"],
+      "budgets": ["free", "lab", "standard", "unlimited"],
+      "shape": "e2-micro guests in us-west1, us-central1, or us-east1 for the free allowance, private shapes otherwise. The published always-free tier covers one micro. The rest of a full habitat needs the fleet substrate. No public address.",
       "expires": ""
     },
     {
       "id": "oracle",
       "title": "Oracle Cloud",
       "stack": "terraform/stacks/oracle-isolated",
-      "budgets": ["free", "unlimited"],
-      "shape": "The published always-free Arm shape, if the tenancy still has it. That allowance has been cut before. Read the current card. Idle guests can be reclaimed. No public address.",
+      "stacks": ["terraform/stacks/oracle-isolated"],
+      "budgets": ["free", "lab", "standard", "unlimited"],
+      "shape": "Always-free Arm and micro guests, as many as the current tenancy allowance allows. Confirm the card. Idle guests can be reclaimed. No public address.",
       "expires": ""
     },
     {
       "id": "aws",
       "title": "AWS",
       "stack": "terraform/stacks/aws-isolated",
-      "budgets": ["standard", "unlimited"],
-      "shape": "A private VPC and small guests. New accounts spend credits. There is no perpetual free host.",
-      "expires": "AWS credits end. When they end, this account bills. It is not the free band."
+      "stacks": ["terraform/stacks/aws-isolated"],
+      "budgets": ["free", "lab", "standard", "unlimited"],
+      "shape": "Private guests. New accounts spend credits on the free band. There is no perpetual free fleet here, so a full habitat also uses the other providers.",
+      "expires": "AWS credits end. When they end, this account bills."
     },
     {
       "id": "azure",
       "title": "Azure",
       "stack": "terraform/stacks/azure-isolated",
-      "budgets": ["standard", "unlimited"],
-      "shape": "A private network and a small burstable guest. The introductory VM hours and the signup credit both end.",
-      "expires": "Azure's introductory allowance ends. It is not the free band."
+      "stacks": ["terraform/stacks/azure-isolated"],
+      "budgets": ["free", "lab", "standard", "unlimited"],
+      "shape": "Private burstable guests, including Windows when you supply media. The introductory hours and the signup credit both end.",
+      "expires": "Azure's introductory allowance ends."
     },
     {
       "id": "hybrid",
       "title": "Lab plus private cloud",
       "stack": "terraform/stacks/proxmox",
-      "also": "terraform/stacks/aws-isolated",
-      "budgets": ["unlimited"],
-      "shape": "The habitat stays on Proxmox. A second private network holds a sensor replica. No public address and no path to the real internet.",
+      "stacks": ["terraform/stacks/proxmox", "terraform/stacks/aws-isolated", "terraform/stacks/gcp-isolated", "terraform/stacks/azure-isolated", "terraform/stacks/oracle-isolated"],
+      "budgets": ["free", "lab", "standard", "unlimited"],
+      "shape": "The same full habitat, split between a cluster you operate and private cloud guests. No public address and no path to the real internet.",
       "expires": ""
     }
   ],
@@ -220,7 +225,7 @@
       "weight": 1,
       "windows": ["none", "evaluation", "licensed"],
       "needs": [],
-      "density": ["living", "federation"],
+      "density": ["smoke", "living", "federation"],
       "note": "Realm for the Linux servers. Hosts join it. The harness does not get the enrollment material."
     },
     {
@@ -260,7 +265,7 @@
       "weight": 1,
       "windows": ["none", "evaluation", "licensed"],
       "needs": [],
-      "density": ["living", "federation"],
+      "density": ["smoke", "living", "federation"],
       "note": "Network devices ask a local server. The shared secret stays in the vault."
     },
     {

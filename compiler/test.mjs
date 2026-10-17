@@ -96,12 +96,20 @@ for (const name of ["operator", "free", "lab", "standard", "unlimited"]) {
   assert.equal(plan.ok, true, `${name}: ${plan.errors.join("; ")}`);
   assert.equal(JSON.stringify(plan).includes("0.0.0.0/0"), false);
 }
-const tooMuch = resolvePlan(
-  { substrate: "aws", budget: "free", windows: "licensed", density: "federation", orgs: ["hearthline"], identity: ["elastic"], detection: ["arkime"], noise: ["caldera-floor"] },
+const free = JSON.parse(readFileSync(join(repoRoot(), "profiles/free.json"), "utf8"));
+const freePlan = resolvePlan(free, planes, orgs);
+assert.equal(freePlan.orgs.length, 8);
+assert.equal(freePlan.guests.count, 143);
+assert.equal(freePlan.guests.guestMb, 1024);
+assert.ok(freePlan.detection.some((mod) => mod.id === "elastic"));
+assert.ok(freePlan.detection.some((mod) => mod.id === "arkime"));
+const lab = JSON.parse(readFileSync(join(repoRoot(), "profiles/lab.json"), "utf8"));
+assert.equal(resolvePlan(lab, planes, orgs).guests.count, 131);
+const broken = resolvePlan(
+  { substrate: "nope", budget: "free", windows: "none", density: "federation", orgs: [], identity: ["not-a-module"], detection: [], noise: [] },
   planes,
   orgs,
 );
-assert.equal(tooMuch.ok, false);
-assert.equal(tooMuch.errors.length > 3, true);
+assert.equal(broken.ok, false);
 
 console.log("ok");

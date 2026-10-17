@@ -3,16 +3,23 @@ function findRow(id, rows) {
   return rows.find((row) => row.id === id);
 }
 
-function sketch(density, identityGuests, detectionGuests, orgCount) {
-  if (density === "smoke") {
-    return { count: 1, note: "One guest. Services are containers." };
-  }
-  const sensors = Math.max(1, Math.ceil(detectionGuests / 2));
-  const extraOrgs = Math.max(0, orgCount - 1) * 4;
-  const count = 1 + identityGuests + sensors + extraOrgs;
+function units(mod, budgetId) {
+  if (!mod.weight) return 0;
+  if (budgetId === "free") return Math.max(1, mod.weight);
+  return 1;
+}
+
+function sketch(budget, identity, detection, noise, orgCount) {
+  const perOrg = identity.filter((mod) => mod.id !== "record" && mod.id !== "laps-gap");
+  const span = detection.filter((mod) => mod.plane === "span");
+  const shared = detection.filter((mod) => mod.plane !== "span");
+  const perOrgUnits = perOrg.reduce((sum, mod) => sum + units(mod, budget.id), 0) + span.reduce((sum, mod) => sum + units(mod, budget.id), 0) + 2;
+  const sharedUnits = shared.reduce((sum, mod) => sum + units(mod, budget.id), 0) + noise.length;
+  const count = orgCount * perOrgUnits + sharedUnits;
   return {
     count,
-    note: "Sketch, not a quote. Sensors share a guest in pairs. Each extra org is a block of four guests.",
+    guestMb: budget.guestMb,
+    note: `${budget.guestMb} MB each. One role per guest, and a heavier role gets several guests instead of being dropped. Each selected org keeps a full block: directory, apps, workstations, and a span where you selected one.`,
   };
 }
 
@@ -42,7 +49,7 @@ export function resolvePlan(profile, planes, orgs) {
     errors.push(`${windows.title} is not available on the ${budget.title} band.`);
   }
   if (!budget.density.includes(density.id)) {
-    errors.push(`${density.title} is bigger than the ${budget.title} band allows.`);
+    errors.push(`${density.title} is not available on the ${budget.title} band.`);
   }
 
   const known = new Set(orgs.map((org) => org.id));
@@ -50,12 +57,6 @@ export function resolvePlan(profile, planes, orgs) {
   if (!selectedOrgs.includes("northline")) errors.push("Northline stays in every profile.");
   for (const id of selectedOrgs) {
     if (!known.has(id)) errors.push(`Unknown org ${id}.`);
-  }
-  if (selectedOrgs.length > budget.maxOrgs) {
-    errors.push(`${budget.title} allows ${budget.maxOrgs} org(s).`);
-  }
-  if (density.id === "smoke" && selectedOrgs.length > 1) {
-    errors.push("Smoke density is one org.");
   }
   if (selectedOrgs.length > 1 && density.id !== "federation") {
     warnings.push("More than one org is the federation shape. The scope file still denies every org but Northline.");
@@ -81,9 +82,6 @@ export function resolvePlan(profile, planes, orgs) {
     }
     identity.push(mod);
   }
-  if (identity.length > budget.maxIdentity) {
-    errors.push(`${budget.title} allows ${budget.maxIdentity} identity modules, including the record.`);
-  }
   if (identityIds.includes("keycloak") && identityIds.includes("authentik")) {
     warnings.push("Two staff portals. Keep both only if two departments actually have two.");
   }
@@ -101,9 +99,6 @@ export function resolvePlan(profile, planes, orgs) {
   for (const id of [...detectionIds]) {
     const bundle = findRow(id, planes.bundles);
     if (!bundle) continue;
-    if (budget.detectionDeny.includes(id)) {
-      errors.push(`${bundle.title} does not fit the ${budget.title} band.`);
-    }
     for (const part of bundle.expands) {
       if (!detectionIds.includes(part)) {
         detectionIds.push(part);
@@ -119,21 +114,12 @@ export function resolvePlan(profile, planes, orgs) {
       errors.push(`Unknown detection module ${id}.`);
       continue;
     }
-    if (budget.detectionDeny.includes(id)) {
-      errors.push(`${mod.title} does not fit the ${budget.title} band.`);
-    }
     detection.push(mod);
   }
   if (detectionIds.includes("fleet") && !detectionIds.includes("osquery")) {
     errors.push("Fleet needs osquery.");
   }
   const heavy = detection.filter((mod) => mod.weight > 0);
-  if (heavy.length > budget.maxDetection) {
-    errors.push(`${budget.title} allows ${budget.maxDetection} detection guests. Sigma does not count.`);
-  }
-  if (budget.id === "free" && detectionIds.includes("opensearch")) {
-    warnings.push("A search node beside the range is cramped on a 1 GB guest. Prefer Zeek and Wazuh until you have RAM.");
-  }
 
   const noise = [];
   for (const id of [...new Set(profile.noise || [])]) {
@@ -142,7 +128,6 @@ export function resolvePlan(profile, planes, orgs) {
       errors.push(`Unknown noise module ${id}.`);
       continue;
     }
-    if (budget.noiseDeny.includes(id)) errors.push(`${mod.title} does not fit the ${budget.title} band.`);
     noise.push(mod);
   }
 
@@ -169,7 +154,7 @@ export function resolvePlan(profile, planes, orgs) {
       id: substrate.id,
       title: substrate.title,
       stack: substrate.stack,
-      also: substrate.also || "",
+      stacks: substrate.stacks || [substrate.stack],
       shape: substrate.shape,
     },
     windows: { id: windows.id, title: windows.title, note: windows.note },
@@ -178,12 +163,7 @@ export function resolvePlan(profile, planes, orgs) {
     identity: identity.map(present),
     detection: detection.map(present),
     noise: noise.map(present),
-    guests: sketch(
-      density.id,
-      identity.filter((mod) => mod.weight > 0).length,
-      heavy.length,
-      selectedOrgs.length,
-    ),
+    guests: sketch(budget, identity, heavy, noise, selectedOrgs.length),
     checklist,
     scopeNote:
       "A profile does not change range-scope.json. Other orgs, the management plane, and the noise tools stay denied until a later compile says otherwise.",

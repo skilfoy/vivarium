@@ -5,7 +5,7 @@
   "windows": "licensed",
   "density": "federation",
   "orgs": ["northline", "indemnity", "hearthline", "calder", "brinewater", "mercy", "glassport", "kindling"],
-  "identity": ["record", "windows-ad", "ad-cs", "laps-gap", "keycloak", "freeipa", "radius", "partner-broker"],
-  "detection": ["security-onion", "wazuh", "velociraptor", "osquery", "fleet", "sigma", "thehive", "misp", "arkime"],
+  "identity": ["record", "samba-ad", "windows-ad", "ad-cs", "laps-gap", "keycloak", "authentik", "freeipa", "openldap", "step-ca", "mit-kdc", "radius", "partner-broker"],
+  "detection": ["zeek", "suricata", "wazuh", "opensearch", "elastic", "velociraptor", "osquery", "fleet", "sigma", "thehive", "misp", "arkime", "security-onion"],
   "noise": ["caldera-floor", "openaev"]
 }

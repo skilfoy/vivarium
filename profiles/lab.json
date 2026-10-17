@@ -3,9 +3,9 @@
   "substrate": "proxmox",
   "budget": "lab",
   "windows": "evaluation",
-  "density": "living",
-  "orgs": ["northline"],
-  "identity": ["record", "windows-ad", "ad-cs", "laps-gap", "keycloak", "freeipa"],
-  "detection": ["zeek", "suricata", "wazuh", "opensearch", "velociraptor", "sigma"],
-  "noise": ["caldera-floor"]
+  "density": "federation",
+  "orgs": ["northline", "indemnity", "hearthline", "calder", "brinewater", "mercy", "glassport", "kindling"],
+  "identity": ["record", "samba-ad", "windows-ad", "ad-cs", "laps-gap", "keycloak", "authentik", "freeipa", "openldap", "step-ca", "mit-kdc", "radius", "partner-broker"],
+  "detection": ["zeek", "suricata", "wazuh", "opensearch", "elastic", "velociraptor", "osquery", "fleet", "sigma", "thehive", "misp", "arkime", "security-onion"],
+  "noise": ["caldera-floor", "openaev"]
 }

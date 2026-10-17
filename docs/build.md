@@ -16,11 +16,11 @@ A profile does not change `dist/range-scope.json`. Selecting Hearthline plans a 
 
 | Field | What you set |
 | --- | --- |
-| substrate | `local`, `proxmox`, `gcp`, `oracle`, `aws`, `azure`, `hybrid` |
+| substrate | `free-fleet`, `local`, `proxmox`, `gcp`, `oracle`, `aws`, `azure`, `hybrid` |
 | budget | `free`, `lab`, `standard`, `unlimited` |
 | windows | `none`, `evaluation`, `licensed` |
 | density | `smoke`, `living`, `federation` |
-| orgs | `northline` plus any reserved org the band allows |
+| orgs | All eight by default. Remove one only if you mean to. |
 | identity | Modules below. `record` is always included. |
 | detection | Modules below. `security-onion` expands to Zeek, Suricata, and Elastic. |
 | noise | `caldera-floor`, `openaev`. Management plane only. |
@@ -29,13 +29,15 @@ Comma-separated overrides exist for `orgs`, `identity`, `detection`, and `noise`
 
 ## What the bands are for
 
-**Free.** One org, smoke density, no Windows. Identity is the record plus two modules, usually Samba and Keycloak. Detection is two guests plus Sigma, usually Zeek and Wazuh. Substrates are this machine, Google Cloud's always-free e2-micro in us-west1, us-central1, or us-east1, or Oracle Cloud's published always-free shape. Confirm both cloud cards before you depend on them. Oracle's allowance has been reduced before, and idle guests can be reclaimed. AWS and Azure are not in this band. Their allowances are credits that end.
+Every band deploys the full habitat: all eight orgs, the whole identity menu, and the whole detection plane. The band changes guest size and where you place them. It does not delete a role. Drop an org or a module in the profile only when you mean to.
 
-**Lab.** Hardware you already run, Proxmox or this machine. Smoke or living. Windows evaluation media if you already have it from Microsoft. The full identity menu that the density allows, and the detection menu including packet capture if you have the disk. Cash cost is power.
+**Free.** 1 GB guests, one role each. A heavier role, such as search or packet capture, gets more than one guest instead of being removed. The default substrate is the free-tier fleet: Oracle always-free for the bulk, GCP's always-free e2-micro in us-west1, us-central1, or us-east1, then AWS and Azure introductory allowances, then a machine you already have. No single provider's published allowance covers the whole plan. Spread the guests. Do not shrink the plan to fit one micro. Windows evaluation media is yours to supply. The guests are still free-tier sized. Confirm each provider's current card. Allowances that are credits will end.
 
-**Standard.** An isolated paid account, or a lab that is about that size. One or two orgs, living density. AWS and Azure fit here because their free allowances expire. Plan on a few hundred dollars a month if the guests are small. Still no public address.
+**Lab.** The same habitat on Proxmox or this machine, 4 GB guests. Cash cost is power.
 
-**Unlimited.** Every reserved org, licensed Windows if you have a license, hybrid (Proxmox habitat plus a private cloud sensor replica), packet capture, and the noise floor. Plan on four figures a month when the cloud side is real. The figure is a band, not a quote.
+**Standard.** The same habitat on a private cloud account, 4 GB guests. Plan on a few hundred dollars a month and up. Still no public address.
+
+**Unlimited.** The same habitat, 8 GB guests, hybrid placement allowed, and your Windows license if you have one. Plan on four figures a month when the cloud side is real.
 
 ## Identity
 
@@ -63,17 +65,16 @@ Wazuh and Elastic are both first-class. So is everything around them. Sensors an
 
 | Module | Weight |
 | --- | --- |
-| Zeek, Suricata | Span metadata and alerts. |
-| Wazuh | Host agents, manager out of scope. |
-| OpenSearch | Search, lighter than Elastic. Cramped on a 1 GB guest. |
-| Elastic | Search. Not on the free band. |
-| Velociraptor, osquery | Endpoint questions. |
-| Fleet | Manages osquery. Needs osquery. Not on the free band. |
-| Sigma | Classes only. Does not count as a guest. |
+| Zeek, Suricata | A span guest in every selected org. |
+| Wazuh | Its own guest. Out of the harness scope. |
+| OpenSearch, Elastic | Their own guests. On the free band, two 1 GB guests each instead of being dropped. |
+| Velociraptor, osquery | Endpoint questions, each on its own guest. |
+| Fleet | Manages osquery. Needs osquery. Its own guest. |
+| Sigma | Classes only. Does not take a guest. |
 | TheHive, MISP | Cases and synthetic events. No outbound feed. |
-| Arkime | Packet capture. Not on the free band. |
-| Security Onion | Bundle of Zeek, Suricata, and Elastic. Not on the free band. |
-| Caldera floor, OpenAEV | Noise. Not a harness. Reaching either is a failed run. |
+| Arkime | Packet capture. On the free band it takes three 1 GB guests. |
+| Security Onion | Bundle of Zeek, Suricata, and Elastic. |
+| Caldera floor, OpenAEV | Noise, each on its own guest. Not a harness. Reaching either is a failed run. |
 
 ## What this will not do
 
