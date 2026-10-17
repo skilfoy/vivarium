@@ -31,20 +31,23 @@ export function resolvePlan(profile, planes, orgs) {
   const errors = [];
   const warnings = [];
   const budget = findRow(profile.budget, planes.budgets);
-  const substrate = findRow(profile.substrate, planes.substrates);
   const windows = findRow(profile.windows, planes.windows);
   const density = findRow(profile.density, planes.densities);
+  const providerIds = [...new Set(profile.providers || [])];
   if (!budget) errors.push(`Unknown budget ${profile.budget}.`);
-  if (!substrate) errors.push(`Unknown substrate ${profile.substrate}.`);
   if (!windows) errors.push(`Unknown Windows choice ${profile.windows}.`);
   if (!density) errors.push(`Unknown density ${profile.density}.`);
-  if (!budget || !substrate || !windows || !density) {
+  if (providerIds.length === 0) errors.push("Pick at least one provider.");
+  const providers = [];
+  for (const id of providerIds) {
+    const provider = findRow(id, planes.providers);
+    if (!provider) errors.push(`Unknown provider ${id}.`);
+    else providers.push(provider);
+  }
+  if (!budget || !windows || !density || providers.length === 0) {
     return { ok: false, errors, warnings, checklist: [] };
   }
 
-  if (!substrate.budgets.includes(budget.id)) {
-    errors.push(`${substrate.title} is not in the ${budget.title} band.`);
-  }
   if (!budget.windows.includes(windows.id)) {
     errors.push(`${windows.title} is not available on the ${budget.title} band.`);
   }
@@ -131,7 +134,26 @@ export function resolvePlan(profile, planes, orgs) {
     noise.push(mod);
   }
 
-  if (substrate.expires) warnings.push(substrate.expires);
+  if (budget.id === "free") {
+    for (const provider of providers) {
+      if (provider.expires) warnings.push(`${provider.title}: ${provider.expires}`);
+    }
+  }
+
+  const guests = sketch(budget, identity, heavy, noise, selectedOrgs.length);
+  const base = Math.floor(guests.count / providers.length);
+  let extra = guests.count % providers.length;
+  const placed = providers.map((provider) => {
+    const share = base + (extra > 0 ? 1 : 0);
+    if (extra > 0) extra -= 1;
+    return {
+      id: provider.id,
+      title: provider.title,
+      guests: share,
+      stack: provider.stack,
+      note: provider.note,
+    };
+  });
 
   const checklist = [
     "Snapshot the host before you change it.",
@@ -150,20 +172,15 @@ export function resolvePlan(profile, planes, orgs) {
     warnings,
     name: profile.name || "operator",
     budget: { id: budget.id, title: budget.title, cash: budget.cash },
-    substrate: {
-      id: substrate.id,
-      title: substrate.title,
-      stack: substrate.stack,
-      stacks: substrate.stacks || [substrate.stack],
-      shape: substrate.shape,
-    },
+    providers: placed,
+    stacks: placed.map((provider) => provider.stack),
     windows: { id: windows.id, title: windows.title, note: windows.note },
     density: { id: density.id, title: density.title, note: density.note },
     orgs: orgs.filter((org) => selectedOrgs.includes(org.id)),
     identity: identity.map(present),
     detection: detection.map(present),
     noise: noise.map(present),
-    guests: sketch(budget, identity, heavy, noise, selectedOrgs.length),
+    guests,
     checklist,
     scopeNote:
       "A profile does not change range-scope.json. Other orgs, the management plane, and the noise tools stay denied until a later compile says otherwise.",

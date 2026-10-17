@@ -101,12 +101,14 @@ const freePlan = resolvePlan(free, planes, orgs);
 assert.equal(freePlan.orgs.length, 8);
 assert.equal(freePlan.guests.count, 143);
 assert.equal(freePlan.guests.guestMb, 1024);
+assert.equal(freePlan.providers.length, 4);
+assert.equal(freePlan.providers.reduce((sum, provider) => sum + provider.guests, 0), 143);
 assert.ok(freePlan.detection.some((mod) => mod.id === "elastic"));
 assert.ok(freePlan.detection.some((mod) => mod.id === "arkime"));
 const lab = JSON.parse(readFileSync(join(repoRoot(), "profiles/lab.json"), "utf8"));
 assert.equal(resolvePlan(lab, planes, orgs).guests.count, 131);
 const broken = resolvePlan(
-  { substrate: "nope", budget: "free", windows: "none", density: "federation", orgs: [], identity: ["not-a-module"], detection: [], noise: [] },
+  { providers: ["nope"], budget: "free", windows: "none", density: "federation", orgs: [], identity: ["not-a-module"], detection: [], noise: [] },
   planes,
   orgs,
 );

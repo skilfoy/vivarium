@@ -1,6 +1,6 @@
 {
   "name": "standard",
-  "substrate": "aws",
+  "providers": ["aws"],
   "budget": "standard",
   "windows": "evaluation",
   "density": "federation",

@@ -1,6 +1,6 @@
 {
   "name": "unlimited",
-  "substrate": "hybrid",
+  "providers": ["proxmox", "oracle", "gcp", "aws", "azure"],
   "budget": "unlimited",
   "windows": "licensed",
   "density": "federation",

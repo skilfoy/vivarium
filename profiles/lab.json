@@ -1,6 +1,6 @@
 {
   "name": "lab",
-  "substrate": "proxmox",
+  "providers": ["proxmox"],
   "budget": "lab",
   "windows": "evaluation",
   "density": "federation",

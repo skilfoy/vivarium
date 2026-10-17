@@ -33,84 +33,48 @@
       "cash": "Same full habitat, with 8 GB guests and room to add more. Plan on four figures a month when the cloud side is real."
     }
   ],
-  "substrates": [
-    {
-      "id": "free-fleet",
-      "title": "Free-tier fleet",
-      "stack": "terraform/stacks/oracle-isolated",
-      "stacks": [
-        "terraform/stacks/oracle-isolated",
-        "terraform/stacks/gcp-isolated",
-        "terraform/stacks/aws-isolated",
-        "terraform/stacks/azure-isolated",
-        "terraform/stacks/local"
-      ],
-      "budgets": ["free", "lab", "standard", "unlimited"],
-      "shape": "One role per 1 GB guest when the band is free, more RAM per guest on the other bands. Roll out as many guests as the plan names. Place the bulk on Oracle always-free, then GCP's always-free micro, then AWS and Azure introductory allowances, then a machine you already have. No public address.",
-      "expires": "AWS and Azure allowances end. Oracle and GCP always-free do not, and neither covers this many guests alone. Use more than one provider before you drop a role."
-    },
+  "providers": [
     {
       "id": "local",
       "title": "This machine",
       "stack": "terraform/stacks/local",
-      "stacks": ["terraform/stacks/local"],
-      "budgets": ["free", "lab", "standard", "unlimited"],
-      "shape": "One container per role on a machine you already have. The guest count does not collapse onto one box's single service.",
+      "note": "Containers on a machine you already have. One container per role.",
       "expires": ""
     },
     {
       "id": "proxmox",
       "title": "Proxmox",
       "stack": "terraform/stacks/proxmox",
-      "stacks": ["terraform/stacks/proxmox"],
-      "budgets": ["free", "lab", "standard", "unlimited"],
-      "shape": "One guest per role on a cluster you operate. The API address comes from the environment, never from this repo.",
+      "note": "Guests on a cluster you operate. The API address comes from the environment, never from this repo.",
       "expires": ""
     },
     {
       "id": "gcp",
       "title": "Google Cloud",
       "stack": "terraform/stacks/gcp-isolated",
-      "stacks": ["terraform/stacks/gcp-isolated"],
-      "budgets": ["free", "lab", "standard", "unlimited"],
-      "shape": "e2-micro guests in us-west1, us-central1, or us-east1 for the free allowance, private shapes otherwise. The published always-free tier covers one micro. The rest of a full habitat needs the fleet substrate. No public address.",
+      "note": "A private network in your project. The published always-free shape is one e2-micro in us-west1, us-central1, or us-east1.",
       "expires": ""
     },
     {
       "id": "oracle",
       "title": "Oracle Cloud",
       "stack": "terraform/stacks/oracle-isolated",
-      "stacks": ["terraform/stacks/oracle-isolated"],
-      "budgets": ["free", "lab", "standard", "unlimited"],
-      "shape": "Always-free Arm and micro guests, as many as the current tenancy allowance allows. Confirm the card. Idle guests can be reclaimed. No public address.",
+      "note": "A private network in your tenancy. Always-free Arm and micro guests, as many as the current allowance allows. Idle guests can be reclaimed.",
       "expires": ""
     },
     {
       "id": "aws",
       "title": "AWS",
       "stack": "terraform/stacks/aws-isolated",
-      "stacks": ["terraform/stacks/aws-isolated"],
-      "budgets": ["free", "lab", "standard", "unlimited"],
-      "shape": "Private guests. New accounts spend credits on the free band. There is no perpetual free fleet here, so a full habitat also uses the other providers.",
+      "note": "A private VPC in your account. No public address.",
       "expires": "AWS credits end. When they end, this account bills."
     },
     {
       "id": "azure",
       "title": "Azure",
       "stack": "terraform/stacks/azure-isolated",
-      "stacks": ["terraform/stacks/azure-isolated"],
-      "budgets": ["free", "lab", "standard", "unlimited"],
-      "shape": "Private burstable guests, including Windows when you supply media. The introductory hours and the signup credit both end.",
+      "note": "A private network in your subscription. Windows runs here when you supply media.",
       "expires": "Azure's introductory allowance ends."
-    },
-    {
-      "id": "hybrid",
-      "title": "Lab plus private cloud",
-      "stack": "terraform/stacks/proxmox",
-      "stacks": ["terraform/stacks/proxmox", "terraform/stacks/aws-isolated", "terraform/stacks/gcp-isolated", "terraform/stacks/azure-isolated", "terraform/stacks/oracle-isolated"],
-      "budgets": ["free", "lab", "standard", "unlimited"],
-      "shape": "The same full habitat, split between a cluster you operate and private cloud guests. No public address and no path to the real internet.",
-      "expires": ""
     }
   ],
   "windows": [

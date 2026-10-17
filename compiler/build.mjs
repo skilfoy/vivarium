@@ -13,10 +13,12 @@ function arg(name) {
 
 const profilePath = resolve(root, arg("--profile") || "profiles/operator.json");
 const profile = JSON.parse(readFileSync(profilePath, "utf8"));
-for (const key of ["substrate", "budget", "windows", "density"]) {
+for (const key of ["budget", "windows", "density"]) {
   const value = arg(`--${key}`);
   if (value) profile[key] = value;
 }
+const providers = arg("--providers") || arg("--substrate");
+if (providers) profile.providers = providers.split(",").filter(Boolean);
 for (const key of ["orgs", "identity", "detection", "noise"]) {
   const value = arg(`--${key}`);
   if (value) profile[key] = value.split(",").filter(Boolean);
@@ -34,11 +36,11 @@ if (!plan.ok) {
   process.exit(1);
 }
 
-console.log(`${plan.name}: ${plan.budget.title} on ${plan.substrate.title}`);
+console.log(`${plan.name}: ${plan.budget.title} on ${plan.providers.map((provider) => provider.title).join(", ")}`);
 console.log(plan.budget.cash);
-console.log(plan.substrate.shape);
+for (const provider of plan.providers) console.log(`${provider.title}: ${provider.guests} guests. ${provider.note}`);
 console.log(`Guests: ${plan.guests.count} x ${plan.guests.guestMb} MB. ${plan.guests.note}`);
-console.log(`Stacks: ${plan.substrate.stacks.join(", ")}`);
+console.log(`Stacks: ${plan.stacks.join(", ")}`);
 console.log(`Identity: ${plan.identity.map((mod) => mod.title).join(", ")}`);
 console.log(`Detection: ${plan.detection.map((mod) => mod.title).join(", ")}`);
 if (plan.noise.length) console.log(`Noise: ${plan.noise.map((mod) => mod.title).join(", ")}`);
@@ -49,7 +51,7 @@ const terraform = spawnSync("terraform", ["version"], { encoding: "utf8" });
 if (terraform.status !== 0) {
   console.log("Terraform is not on this machine. The plan is written. The stack was not validated here.");
 } else {
-  for (const stack of plan.substrate.stacks) {
+  for (const stack of plan.stacks) {
     const dir = join(root, stack);
     const init = spawnSync("terraform", ["-chdir=" + dir, "init", "-backend=false"], { encoding: "utf8" });
     const validate = spawnSync("terraform", ["-chdir=" + dir, "validate"], { encoding: "utf8" });

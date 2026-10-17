@@ -1,6 +1,6 @@
 {
   "name": "free",
-  "substrate": "free-fleet",
+  "providers": ["oracle", "gcp", "aws", "azure"],
   "budget": "free",
   "windows": "evaluation",
   "density": "federation",
