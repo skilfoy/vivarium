@@ -28,4 +28,14 @@ assert.equal(typeof opened.body.description, "string");
 
 const dumped = JSON.stringify(open.body) + JSON.stringify(opened.body);
 assert.equal(dumped.includes("password"), false);
+
+const backup = handle({ ...base, url: "/backup/catalog", seed: 3, pins: { backup: "bk-a" } });
+assert.equal(typeof backup.body.marker, "string");
+const quietBackup = handle({ ...base, url: "/backup/catalog", seed: 3, pins: { backup: "bk-b" } });
+assert.equal(quietBackup.body.marker, undefined);
+const lockedToken = handle({ ...base, url: "/ci/tokens", seed: 3 });
+assert.equal(lockedToken.status, 401);
+const otherOrg = handle({ ...base, url: "/treaty", seed: 3 });
+assert.equal(otherOrg.status, 404);
+
 console.log("smoke ok");

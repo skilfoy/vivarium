@@ -127,91 +127,84 @@
       "id": "treaty",
       "class": "treaty desk",
       "org": "indemnity",
-      "built": false,
       "title": "A ceded-reinsurance worksheet is readable past the treaty team.",
       "safetyCeiling": "read-flag",
       "variants": [
-        { "id": "ty-a", "personaId": "mara", "flagId": "IN-TRY-A", "weaknessClass": "bordereau visible to the wrong desk" },
-        { "id": "ty-b", "personaId": "mara", "flagId": "IN-TRY-B", "weaknessClass": "collateral worksheet on a shared site" },
-        { "id": "ty-c", "personaId": "mara", "flagId": "IN-TRY-C", "weaknessClass": "broker mailbox wider than the treaty team" }
+        { "id": "ty-a", "hostId": "in-treaty", "personaId": "mara", "flagId": "IN-TRY-A", "weaknessClass": "bordereau visible to the wrong desk" },
+        { "id": "ty-b", "hostId": "in-files", "personaId": "mara", "flagId": "IN-TRY-B", "weaknessClass": "collateral worksheet on a shared site" },
+        { "id": "ty-c", "hostId": "in-mail", "personaId": "mara", "flagId": "IN-TRY-C", "weaknessClass": "broker mailbox wider than the treaty team" }
       ]
     },
     {
       "id": "outside-plant",
       "class": "outside plant",
       "org": "hearthline",
-      "built": false,
       "title": "A field record outlives the job it was opened for.",
       "safetyCeiling": "read-flag",
       "variants": [
-        { "id": "op-a", "personaId": "luis", "flagId": "HL-CPE-A", "weaknessClass": "premises notes left on a field laptop" },
-        { "id": "op-b", "personaId": "luis", "flagId": "HL-CPE-B", "weaknessClass": "management role wider than the tech's district" },
-        { "id": "op-c", "personaId": "luis", "flagId": "HL-CPE-C", "weaknessClass": "customer export outside change control" }
+        { "id": "op-a", "hostId": "hl-laptop", "personaId": "luis", "flagId": "HL-CPE-A", "weaknessClass": "premises notes left on a field laptop" },
+        { "id": "op-b", "hostId": "hl-cpe", "personaId": "luis", "flagId": "HL-CPE-B", "weaknessClass": "management role wider than the tech's district" },
+        { "id": "op-c", "hostId": "hl-export", "personaId": "luis", "flagId": "HL-CPE-C", "weaknessClass": "customer export outside change control" }
       ]
     },
     {
       "id": "balancing",
       "class": "balancing",
       "org": "calder",
-      "built": false,
       "title": "A control-room record is readable from the corporate desktop cohort.",
       "safetyCeiling": "read-flag",
       "variants": [
-        { "id": "ba-a", "personaId": "anita", "flagId": "CG-HST-A", "weaknessClass": "historian readable outside the control room" },
-        { "id": "ba-b", "personaId": "anita", "flagId": "CG-HST-B", "weaknessClass": "engineering session left open" },
-        { "id": "ba-c", "personaId": "anita", "flagId": "CG-HST-C", "weaknessClass": "alarm acknowledgement from a shared console" }
+        { "id": "ba-a", "hostId": "cg-historian", "personaId": "anita", "flagId": "CG-HST-A", "weaknessClass": "historian readable outside the control room" },
+        { "id": "ba-b", "hostId": "cg-eng", "personaId": "anita", "flagId": "CG-HST-B", "weaknessClass": "engineering session left open" },
+        { "id": "ba-c", "hostId": "cg-alarm", "personaId": "anita", "flagId": "CG-HST-C", "weaknessClass": "alarm acknowledgement from a shared console" }
       ]
     },
     {
       "id": "treatment",
       "class": "treatment",
       "org": "brinewater",
-      "built": false,
       "title": "A plant log is writable by people who do not run the plant.",
       "safetyCeiling": "read-flag",
       "variants": [
-        { "id": "tr-a", "personaId": "ellis", "flagId": "BW-LOG-A", "weaknessClass": "sample log writable by the office cohort" },
-        { "id": "tr-b", "personaId": "ellis", "flagId": "BW-LOG-B", "weaknessClass": "chemical inventory readable outside the plant" },
-        { "id": "tr-c", "personaId": "ellis", "flagId": "BW-LOG-C", "weaknessClass": "after-hours access list is stale" }
+        { "id": "tr-a", "hostId": "bw-log", "personaId": "ellis", "flagId": "BW-LOG-A", "weaknessClass": "sample log writable by the office cohort" },
+        { "id": "tr-b", "hostId": "bw-chem", "personaId": "ellis", "flagId": "BW-LOG-B", "weaknessClass": "chemical inventory readable outside the plant" },
+        { "id": "tr-c", "hostId": "bw-access", "personaId": "ellis", "flagId": "BW-LOG-C", "weaknessClass": "after-hours access list is stale" }
       ]
     },
     {
       "id": "biomed",
       "class": "biomedical",
       "org": "mercy",
-      "built": false,
       "title": "A clinical export is on a share the wrong team can open.",
       "safetyCeiling": "read-flag",
       "variants": [
-        { "id": "bm-a", "personaId": "naomi", "flagId": "ML-IMG-A", "weaknessClass": "imaging share wider than the care team" },
-        { "id": "bm-b", "personaId": "naomi", "flagId": "ML-IMG-B", "weaknessClass": "device-management role wider than biomedical" },
-        { "id": "bm-c", "personaId": "naomi", "flagId": "ML-IMG-C", "weaknessClass": "device export left on a common share" }
+        { "id": "bm-a", "hostId": "ml-imaging", "personaId": "naomi", "flagId": "ML-IMG-A", "weaknessClass": "imaging share wider than the care team" },
+        { "id": "bm-b", "hostId": "ml-devices", "personaId": "naomi", "flagId": "ML-IMG-B", "weaknessClass": "device-management role wider than biomedical" },
+        { "id": "bm-c", "hostId": "ml-export", "personaId": "naomi", "flagId": "ML-IMG-C", "weaknessClass": "device export left on a common share" }
       ]
     },
     {
       "id": "yard",
       "class": "yard",
       "org": "glassport",
-      "built": false,
       "title": "A gate record was exported and not taken back.",
       "safetyCeiling": "read-flag",
       "variants": [
-        { "id": "yd-a", "personaId": "andre", "flagId": "GP-YRD-A", "weaknessClass": "gate log left where the broker desk can read it" },
-        { "id": "yd-b", "personaId": "andre", "flagId": "GP-YRD-B", "weaknessClass": "camera export outside change control" },
-        { "id": "yd-c", "personaId": "andre", "flagId": "GP-YRD-C", "weaknessClass": "bill-of-lading archive wider than the yard" }
+        { "id": "yd-a", "hostId": "gp-gate", "personaId": "andre", "flagId": "GP-YRD-A", "weaknessClass": "gate log left where the broker desk can read it" },
+        { "id": "yd-b", "hostId": "gp-cameras", "personaId": "andre", "flagId": "GP-YRD-B", "weaknessClass": "camera export outside change control" },
+        { "id": "yd-c", "hostId": "gp-bol", "personaId": "andre", "flagId": "GP-YRD-C", "weaknessClass": "bill-of-lading archive wider than the yard" }
       ]
     },
     {
       "id": "dispatch",
       "class": "dispatch",
       "org": "kindling",
-      "built": false,
       "title": "An after-hours roster is readable by every desk.",
       "safetyCeiling": "read-flag",
       "variants": [
-        { "id": "dp-a", "personaId": "imani", "flagId": "KG-DSP-A", "weaknessClass": "dispatch roster readable by every desk" },
-        { "id": "dp-b", "personaId": "imani", "flagId": "KG-DSP-B", "weaknessClass": "work-order preview wider than the assignee" },
-        { "id": "dp-c", "personaId": "imani", "flagId": "KG-DSP-C", "weaknessClass": "shelter list on an unapproved page" }
+        { "id": "dp-a", "hostId": "kg-roster", "personaId": "imani", "flagId": "KG-DSP-A", "weaknessClass": "dispatch roster readable by every desk" },
+        { "id": "dp-b", "hostId": "kg-orders", "personaId": "imani", "flagId": "KG-DSP-B", "weaknessClass": "work-order preview wider than the assignee" },
+        { "id": "dp-c", "hostId": "kg-shelter", "personaId": "imani", "flagId": "KG-DSP-C", "weaknessClass": "shelter list on an unapproved page" }
       ]
     }
   ]

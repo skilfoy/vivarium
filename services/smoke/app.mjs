@@ -80,5 +80,39 @@ export function handle({ method, url, headers, seed, vaultKey, pins }) {
     return { status: 200, body: { job: "8841", marker: marker(vaultKey, seed, picked["sh-c"]) } };
   }
 
+  const desk = {
+    "ra-a": { path: "/vpn/profiles/grace", body: { profile: "contractor", note: "Synthetic record." } },
+    "ra-b": { path: "/vpn/groups/staff", body: { group: "staff", note: "Synthetic record." } },
+    "ra-c": { path: "/vpn/enroll", auth: true, body: { queue: "devices", note: "Synthetic record." } },
+    "ml-a": { path: "/mail/shared/claims", body: { mailbox: "claims", note: "Synthetic record." } },
+    "ml-b": { path: "/mail/users/martin", body: { mailbox: "martin", note: "Synthetic record." } },
+    "ml-c": { path: "/mail/threads/vendor", body: { thread: "vendor", note: "Synthetic record." } },
+    "fs-a": { path: "/files/treasury/working", body: { folder: "treasury", note: "Synthetic record." } },
+    "fs-b": { path: "/files/underwriting/renewals", body: { folder: "renewals", note: "Synthetic record." } },
+    "fs-c": { path: "/files/finance", body: { folder: "finance", note: "Synthetic record." } },
+    "bk-a": { path: "/backup/catalog", body: { catalog: "nightly", note: "Synthetic record." } },
+    "bk-b": { path: "/backup/dumps/claims", body: { dump: "claims", note: "Synthetic record." } },
+    "bk-c": { path: "/backup/restore", body: { share: "restore", note: "Synthetic record." } },
+    "bd-a": { path: "/ci/jobs/night", body: { job: "night", note: "Synthetic record." } },
+    "bd-b": { path: "/ci/runners", body: { runners: ["forge"], note: "Synthetic record." } },
+    "bd-c": { path: "/ci/tokens", auth: true, body: { job: "night", note: "Synthetic record." } },
+    "sr-a": { path: "/git/projects/claims", body: { project: "claims", note: "Synthetic record." } },
+    "sr-b": { path: "/git/keys", body: { key: "deploy", note: "Synthetic record." } },
+    "sr-c": { path: "/git/projects/claims/members", body: { project: "claims", note: "Synthetic record." } },
+    "rp-a": { path: "/directory/replica/acls", auth: true, body: { replica: "dc2", note: "Synthetic record." } },
+    "rp-b": { path: "/directory/replica/sitelink", auth: true, body: { link: "branch", note: "Synthetic record." } },
+    "rp-c": { path: "/directory/replica/admins", auth: true, body: { replica: "dc2", note: "Synthetic record." } },
+    "pt-a": { path: "/idp/clients/lane-pike", auth: true, body: { client: "lane-pike", note: "Synthetic record." } },
+    "pt-b": { path: "/files/vendor/drop", body: { folder: "vendor", note: "Synthetic record." } },
+    "pt-c": { path: "/mail/preview/partner", body: { from: "partner", note: "Synthetic record." } },
+  };
+  for (const [id, route] of Object.entries(desk)) {
+    if (path !== route.path) continue;
+    if (route.auth && !authed) return { status: 401, body: { error: "sign-in" } };
+    const body = { ...route.body };
+    if (picked[id]) body.marker = marker(vaultKey, seed, picked[id]);
+    return { status: 200, body };
+  }
+
   return { status: 404, body: { error: "missing" } };
 }

@@ -1,0 +1,130 @@
+{
+  "id": "indemnity",
+  "name": "Northline Indemnity",
+  "prefix": "10.17.0.0/16",
+  "startingUrl": "http://edge.indemnity.lab/",
+  "zones": [
+    {
+      "id": "dmz",
+      "cidr": "10.17.0.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "servers",
+      "cidr": "10.17.1.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "identity",
+      "cidr": "10.17.3.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "management",
+      "cidr": "10.17.16.0/20",
+      "scope": "deny",
+      "denyReason": "management plane"
+    }
+  ],
+  "hosts": [
+    {
+      "id": "in-edge",
+      "name": "Edge",
+      "fqdn": "edge.indemnity.lab",
+      "ip": "10.17.0.1",
+      "zone": "dmz",
+      "ownerPersona": "mara",
+      "purpose": "Indemnity edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "in-treaty",
+      "name": "Treaty desk",
+      "fqdn": "treaty.indemnity.lab",
+      "ip": "10.17.0.20",
+      "zone": "dmz",
+      "ownerPersona": "mara",
+      "purpose": "Bordereau desk",
+      "patchCohort": "lagging",
+      "logging": "sample",
+      "classification": "restricted"
+    },
+    {
+      "id": "in-files",
+      "name": "Collateral share",
+      "fqdn": "files.indemnity.lab",
+      "ip": "10.17.1.30",
+      "zone": "servers",
+      "ownerPersona": "mara",
+      "purpose": "Collateral worksheets",
+      "patchCohort": "lagging",
+      "logging": "sample",
+      "classification": "internal"
+    },
+    {
+      "id": "in-mail",
+      "name": "Broker mail",
+      "fqdn": "mail.indemnity.lab",
+      "ip": "10.17.1.50",
+      "zone": "servers",
+      "ownerPersona": "mara",
+      "purpose": "Broker mailboxes",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "in-backup",
+      "name": "Backup",
+      "fqdn": "backup.indemnity.lab",
+      "ip": "10.17.1.70",
+      "zone": "servers",
+      "ownerPersona": "mara",
+      "purpose": "Nightly copy",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "in-dc",
+      "name": "Directory",
+      "fqdn": "dc.indemnity.lab",
+      "ip": "10.17.3.10",
+      "zone": "identity",
+      "ownerPersona": "mara",
+      "purpose": "Indemnity directory",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "in-idp",
+      "name": "Identity portal",
+      "fqdn": "idp.indemnity.lab",
+      "ip": "10.17.3.30",
+      "zone": "identity",
+      "ownerPersona": "mara",
+      "purpose": "Staff identity portal",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "in-jump",
+      "name": "Jump host",
+      "fqdn": "jump.indemnity.lab",
+      "ip": "10.17.16.10",
+      "zone": "management",
+      "ownerPersona": "mara",
+      "purpose": "Admin jump host",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "management"
+    }
+  ]
+}

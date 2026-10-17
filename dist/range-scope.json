@@ -51,31 +51,31 @@
     },
     {
       "cidr": "10.17.0.0/16",
-      "reason": "org not in this slice"
+      "reason": "denied until an operator opens this org"
     },
     {
       "cidr": "10.18.0.0/16",
-      "reason": "org not in this slice"
+      "reason": "denied until an operator opens this org"
     },
     {
       "cidr": "10.19.0.0/16",
-      "reason": "org not in this slice"
+      "reason": "denied until an operator opens this org"
     },
     {
       "cidr": "10.20.0.0/16",
-      "reason": "org not in this slice"
+      "reason": "denied until an operator opens this org"
     },
     {
       "cidr": "10.21.0.0/16",
-      "reason": "org not in this slice"
+      "reason": "denied until an operator opens this org"
     },
     {
       "cidr": "10.22.0.0/16",
-      "reason": "org not in this slice"
+      "reason": "denied until an operator opens this org"
     },
     {
       "cidr": "10.23.0.0/16",
-      "reason": "org not in this slice"
+      "reason": "denied until an operator opens this org"
     }
   ],
   "names": [
@@ -183,6 +183,368 @@
       "fqdn": "idp.northline.lab",
       "ip": "10.16.3.30",
       "zone": "identity"
+    }
+  ],
+  "deniedNames": [
+    {
+      "fqdn": "jump.northline.lab",
+      "ip": "10.16.16.10",
+      "zone": "management",
+      "org": "northline"
+    },
+    {
+      "fqdn": "siem.northline.lab",
+      "ip": "10.16.16.20",
+      "zone": "management",
+      "org": "northline"
+    },
+    {
+      "fqdn": "mgmt-backup.northline.lab",
+      "ip": "10.16.16.30",
+      "zone": "management",
+      "org": "northline"
+    },
+    {
+      "fqdn": "offline-pki.northline.lab",
+      "ip": "10.16.16.40",
+      "zone": "management",
+      "org": "northline"
+    },
+    {
+      "fqdn": "edge.indemnity.lab",
+      "ip": "10.17.0.1",
+      "zone": "dmz",
+      "org": "indemnity"
+    },
+    {
+      "fqdn": "treaty.indemnity.lab",
+      "ip": "10.17.0.20",
+      "zone": "dmz",
+      "org": "indemnity"
+    },
+    {
+      "fqdn": "files.indemnity.lab",
+      "ip": "10.17.1.30",
+      "zone": "servers",
+      "org": "indemnity"
+    },
+    {
+      "fqdn": "mail.indemnity.lab",
+      "ip": "10.17.1.50",
+      "zone": "servers",
+      "org": "indemnity"
+    },
+    {
+      "fqdn": "backup.indemnity.lab",
+      "ip": "10.17.1.70",
+      "zone": "servers",
+      "org": "indemnity"
+    },
+    {
+      "fqdn": "jump.indemnity.lab",
+      "ip": "10.17.16.10",
+      "zone": "management",
+      "org": "indemnity"
+    },
+    {
+      "fqdn": "dc.indemnity.lab",
+      "ip": "10.17.3.10",
+      "zone": "identity",
+      "org": "indemnity"
+    },
+    {
+      "fqdn": "idp.indemnity.lab",
+      "ip": "10.17.3.30",
+      "zone": "identity",
+      "org": "indemnity"
+    },
+    {
+      "fqdn": "edge.hearthline.lab",
+      "ip": "10.18.0.1",
+      "zone": "dmz",
+      "org": "hearthline"
+    },
+    {
+      "fqdn": "customers.hearthline.lab",
+      "ip": "10.18.0.20",
+      "zone": "dmz",
+      "org": "hearthline"
+    },
+    {
+      "fqdn": "cpe.hearthline.lab",
+      "ip": "10.18.1.20",
+      "zone": "servers",
+      "org": "hearthline"
+    },
+    {
+      "fqdn": "export.hearthline.lab",
+      "ip": "10.18.1.30",
+      "zone": "servers",
+      "org": "hearthline"
+    },
+    {
+      "fqdn": "laptop-luis.hearthline.lab",
+      "ip": "10.18.1.31",
+      "zone": "servers",
+      "org": "hearthline"
+    },
+    {
+      "fqdn": "jump.hearthline.lab",
+      "ip": "10.18.16.10",
+      "zone": "management",
+      "org": "hearthline"
+    },
+    {
+      "fqdn": "dc.hearthline.lab",
+      "ip": "10.18.3.10",
+      "zone": "identity",
+      "org": "hearthline"
+    },
+    {
+      "fqdn": "idp.hearthline.lab",
+      "ip": "10.18.3.30",
+      "zone": "identity",
+      "org": "hearthline"
+    },
+    {
+      "fqdn": "edge.calder.lab",
+      "ip": "10.19.0.1",
+      "zone": "dmz",
+      "org": "calder"
+    },
+    {
+      "fqdn": "historian.calder.lab",
+      "ip": "10.19.1.20",
+      "zone": "servers",
+      "org": "calder"
+    },
+    {
+      "fqdn": "engineering.calder.lab",
+      "ip": "10.19.1.30",
+      "zone": "servers",
+      "org": "calder"
+    },
+    {
+      "fqdn": "alarms.calder.lab",
+      "ip": "10.19.1.40",
+      "zone": "servers",
+      "org": "calder"
+    },
+    {
+      "fqdn": "files.calder.lab",
+      "ip": "10.19.1.50",
+      "zone": "servers",
+      "org": "calder"
+    },
+    {
+      "fqdn": "jump.calder.lab",
+      "ip": "10.19.16.10",
+      "zone": "management",
+      "org": "calder"
+    },
+    {
+      "fqdn": "dc.calder.lab",
+      "ip": "10.19.3.10",
+      "zone": "identity",
+      "org": "calder"
+    },
+    {
+      "fqdn": "idp.calder.lab",
+      "ip": "10.19.3.30",
+      "zone": "identity",
+      "org": "calder"
+    },
+    {
+      "fqdn": "edge.brinewater.lab",
+      "ip": "10.20.0.1",
+      "zone": "dmz",
+      "org": "brinewater"
+    },
+    {
+      "fqdn": "samples.brinewater.lab",
+      "ip": "10.20.1.20",
+      "zone": "servers",
+      "org": "brinewater"
+    },
+    {
+      "fqdn": "inventory.brinewater.lab",
+      "ip": "10.20.1.30",
+      "zone": "servers",
+      "org": "brinewater"
+    },
+    {
+      "fqdn": "access.brinewater.lab",
+      "ip": "10.20.1.40",
+      "zone": "servers",
+      "org": "brinewater"
+    },
+    {
+      "fqdn": "files.brinewater.lab",
+      "ip": "10.20.1.50",
+      "zone": "servers",
+      "org": "brinewater"
+    },
+    {
+      "fqdn": "jump.brinewater.lab",
+      "ip": "10.20.16.10",
+      "zone": "management",
+      "org": "brinewater"
+    },
+    {
+      "fqdn": "dc.brinewater.lab",
+      "ip": "10.20.3.10",
+      "zone": "identity",
+      "org": "brinewater"
+    },
+    {
+      "fqdn": "idp.brinewater.lab",
+      "ip": "10.20.3.30",
+      "zone": "identity",
+      "org": "brinewater"
+    },
+    {
+      "fqdn": "edge.mercy.lab",
+      "ip": "10.21.0.1",
+      "zone": "dmz",
+      "org": "mercy"
+    },
+    {
+      "fqdn": "imaging.mercy.lab",
+      "ip": "10.21.1.20",
+      "zone": "servers",
+      "org": "mercy"
+    },
+    {
+      "fqdn": "devices.mercy.lab",
+      "ip": "10.21.1.30",
+      "zone": "servers",
+      "org": "mercy"
+    },
+    {
+      "fqdn": "export.mercy.lab",
+      "ip": "10.21.1.40",
+      "zone": "servers",
+      "org": "mercy"
+    },
+    {
+      "fqdn": "files.mercy.lab",
+      "ip": "10.21.1.50",
+      "zone": "servers",
+      "org": "mercy"
+    },
+    {
+      "fqdn": "jump.mercy.lab",
+      "ip": "10.21.16.10",
+      "zone": "management",
+      "org": "mercy"
+    },
+    {
+      "fqdn": "dc.mercy.lab",
+      "ip": "10.21.3.10",
+      "zone": "identity",
+      "org": "mercy"
+    },
+    {
+      "fqdn": "idp.mercy.lab",
+      "ip": "10.21.3.30",
+      "zone": "identity",
+      "org": "mercy"
+    },
+    {
+      "fqdn": "edge.glassport.lab",
+      "ip": "10.22.0.1",
+      "zone": "dmz",
+      "org": "glassport"
+    },
+    {
+      "fqdn": "gate.glassport.lab",
+      "ip": "10.22.1.20",
+      "zone": "servers",
+      "org": "glassport"
+    },
+    {
+      "fqdn": "cameras.glassport.lab",
+      "ip": "10.22.1.30",
+      "zone": "servers",
+      "org": "glassport"
+    },
+    {
+      "fqdn": "bol.glassport.lab",
+      "ip": "10.22.1.40",
+      "zone": "servers",
+      "org": "glassport"
+    },
+    {
+      "fqdn": "files.glassport.lab",
+      "ip": "10.22.1.50",
+      "zone": "servers",
+      "org": "glassport"
+    },
+    {
+      "fqdn": "jump.glassport.lab",
+      "ip": "10.22.16.10",
+      "zone": "management",
+      "org": "glassport"
+    },
+    {
+      "fqdn": "dc.glassport.lab",
+      "ip": "10.22.3.10",
+      "zone": "identity",
+      "org": "glassport"
+    },
+    {
+      "fqdn": "idp.glassport.lab",
+      "ip": "10.22.3.30",
+      "zone": "identity",
+      "org": "glassport"
+    },
+    {
+      "fqdn": "edge.kindling.lab",
+      "ip": "10.23.0.1",
+      "zone": "dmz",
+      "org": "kindling"
+    },
+    {
+      "fqdn": "roster.kindling.lab",
+      "ip": "10.23.1.20",
+      "zone": "servers",
+      "org": "kindling"
+    },
+    {
+      "fqdn": "orders.kindling.lab",
+      "ip": "10.23.1.30",
+      "zone": "servers",
+      "org": "kindling"
+    },
+    {
+      "fqdn": "shelter.kindling.lab",
+      "ip": "10.23.1.40",
+      "zone": "servers",
+      "org": "kindling"
+    },
+    {
+      "fqdn": "files.kindling.lab",
+      "ip": "10.23.1.50",
+      "zone": "servers",
+      "org": "kindling"
+    },
+    {
+      "fqdn": "jump.kindling.lab",
+      "ip": "10.23.16.10",
+      "zone": "management",
+      "org": "kindling"
+    },
+    {
+      "fqdn": "dc.kindling.lab",
+      "ip": "10.23.3.10",
+      "zone": "identity",
+      "org": "kindling"
+    },
+    {
+      "fqdn": "idp.kindling.lab",
+      "ip": "10.23.3.30",
+      "zone": "identity",
+      "org": "kindling"
     }
   ]
 }

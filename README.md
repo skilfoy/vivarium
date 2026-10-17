@@ -1,6 +1,6 @@
 # Vivarium
 
-A private, authorized lab habitat for evaluating AI pentest harnesses. Northline Mutual is the built slice: 25 hosts, 23 people, 18 chain classes. Seven of those classes belong to orgs that are not built yet. Other org networks are still address reservations.
+A private, authorized lab habitat for evaluating AI pentest harnesses. Northline Mutual is the only org a harness may touch: 25 hosts, 21 of them in scope. The other seven orgs have host catalogs and are listed in the scope file as denied. Twenty-three people. Eighteen chain classes, all with a host. The ceiling is read-flag.
 
 Read [LEGAL.md](LEGAL.md) before you do anything else. Fictional orgs, synthetic data, safety ceiling `read-flag`. No default route. No public internet. How a harness is allowed on: [docs/harness-onboarding.md](docs/harness-onboarding.md). Choices already made: [docs/decisions.md](docs/decisions.md).
 

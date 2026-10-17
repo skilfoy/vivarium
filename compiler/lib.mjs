@@ -16,13 +16,14 @@ export function readJson(rel) {
 
 export function loadCatalog() {
   const habitat = readJson("catalogs/habitat.json");
-  const sector = readJson("catalogs/sectors/northline.json");
+  const sectors = habitat.orgs.map((org) => readJson(`catalogs/sectors/${org.id}.json`));
+  const sector = sectors.find((item) => item.id === "northline");
   const personas = readJson("catalogs/personas/northline.json");
   const chains = readJson("catalogs/chains/northline.json");
   const harnesses = readJson("catalogs/harnesses.json");
   const shifts = readJson("catalogs/shifts/northline.json");
   const timeline = readJson("ghosts/northline-night.json");
-  return { habitat, sector, personas, chains, harnesses, shifts, timeline };
+  return { habitat, sector, sectors, personas, chains, harnesses, shifts, timeline };
 }
 
 export function ipToInt(ip) {
@@ -45,28 +46,46 @@ export function inCidr(ip, cidr) {
 
 export function validateCatalog(catalog) {
   const errors = [];
-  const { habitat, sector, personas, chains } = catalog;
-  if (sector.hosts.length !== 25) errors.push(`expected 25 hosts, got ${sector.hosts.length}`);
+  const { habitat, sector, sectors, personas, chains } = catalog;
+  if (!sector || sector.hosts.length !== 25) errors.push(`expected 25 Northline hosts, got ${sector ? sector.hosts.length : 0}`);
+  if (sectors.length !== 8) errors.push(`expected 8 sectors, got ${sectors.length}`);
   if (personas.personas.length !== 23) errors.push(`expected 23 personas, got ${personas.personas.length}`);
   if (chains.chains.length !== 18) errors.push(`expected 18 chain classes, got ${chains.chains.length}`);
   const ids = new Set();
   const ips = new Set();
-  for (const host of sector.hosts) {
-    if (ids.has(host.id)) errors.push(`duplicate host ${host.id}`);
-    ids.add(host.id);
-    if (ips.has(host.ip)) errors.push(`duplicate ip ${host.ip}`);
-    ips.add(host.ip);
-    if (!host.ip.startsWith("10.16.")) errors.push(`${host.id} left the Northline prefix`);
-    ipToInt(host.ip);
+  const hosts = [];
+  for (const item of sectors) {
+    const org = habitat.orgs.find((row) => row.id === item.id);
+    if (!org) errors.push(`sector ${item.id} is not in the habitat`);
+    if (item.id !== "northline" && item.hosts.length !== 8) {
+      errors.push(`${item.id} expected 8 hosts, got ${item.hosts.length}`);
+    }
+    for (const host of item.hosts) {
+      if (ids.has(host.id)) errors.push(`duplicate host ${host.id}`);
+      ids.add(host.id);
+      if (ips.has(host.ip)) errors.push(`duplicate ip ${host.ip}`);
+      ips.add(host.ip);
+      if (org && !inCidr(host.ip, org.cidr)) errors.push(`${host.id} left ${org.cidr}`);
+      const zone = item.zones.find((row) => row.id === host.zone);
+      if (!zone) errors.push(`${host.id} has no zone`);
+      else if (!inCidr(host.ip, zone.cidr)) errors.push(`${host.id} left zone ${zone.id}`);
+      if (item.id !== "northline" && zone && zone.scope !== "deny") {
+        errors.push(`${item.id} ${zone.id} is not denied`);
+      }
+      hosts.push(host);
+    }
   }
   const personaIds = new Set(personas.personas.map((p) => p.id));
   if (personaIds.size !== personas.personas.length) errors.push("duplicate persona id");
   for (const chain of chains.chains) {
     if (chain.safetyCeiling !== "read-flag") errors.push(`${chain.id} exceeded the safety ceiling`);
     if (chain.variants.length !== 3) errors.push(`${chain.id} needs 3 variants`);
+    const orgId = chain.org || "northline";
+    const org = habitat.orgs.find((row) => row.id === orgId);
     for (const variant of chain.variants) {
-      if (variant.hostId && !ids.has(variant.hostId)) errors.push(`${variant.id} names unknown host ${variant.hostId}`);
-      if (!variant.hostId && chain.built !== false) errors.push(`${variant.id} has no host`);
+      const host = hosts.find((item) => item.id === variant.hostId);
+      if (!host) errors.push(`${variant.id} names unknown host ${variant.hostId}`);
+      else if (org && !inCidr(host.ip, org.cidr)) errors.push(`${variant.id} left ${org.name}`);
       if (!personaIds.has(variant.personaId)) errors.push(`${variant.id} names unknown persona`);
       if (!/^[A-Z]{2}-[A-Z]+-[A-C]$/.test(variant.flagId)) errors.push(`bad flag id ${variant.flagId}`);
     }
@@ -112,6 +131,16 @@ export function emitScope(catalog) {
     names: hosts
       .map((host) => ({ fqdn: host.fqdn, ip: host.ip, zone: host.zone }))
       .sort((a, b) => a.ip.localeCompare(b.ip, "en")),
+    deniedNames: (catalog.sectors || [])
+      .flatMap((item) =>
+        item.hosts
+          .filter((host) => {
+            const zone = item.zones.find((row) => row.id === host.zone);
+            return !zone || zone.scope !== "allow";
+          })
+          .map((host) => ({ fqdn: host.fqdn, ip: host.ip, zone: host.zone, org: item.id })),
+      )
+      .sort((a, b) => a.ip.localeCompare(b.ip, "en")),
   };
   const blob = JSON.stringify(scope);
   for (const forbidden of ["flagValue", "groundTruth", "password", "vault"]) {
@@ -141,7 +170,9 @@ export function pickVariants(catalog, seed, pins = {}) {
       ? chain.variants.find((item) => item.id === pinned)
       : chain.variants[variantIndex(n, chain.id, chain.variants.length)];
     if (!variant) throw new Error(`unknown variant ${pinned} on ${chain.id}`);
-    const host = variant.hostId ? catalog.sector.hosts.find((item) => item.id === variant.hostId) : null;
+    const host = variant.hostId
+      ? (catalog.sectors || [catalog.sector]).flatMap((item) => item.hosts).find((item) => item.id === variant.hostId)
+      : null;
     return {
       chainId: chain.id,
       class: chain.class,

@@ -25,11 +25,14 @@ assert.deepEqual(errors, [], errors.join("; "));
 
 const scope = emitScope(catalog);
 const scopeText = JSON.stringify(scope);
-for (const leaked of ["NL-EXT-A", "flagValue", "groundTruth", "weaknessClass", "password"]) {
+for (const leaked of ["NL-EXT-A", "IN-TRY-A", "flagValue", "groundTruth", "weaknessClass", "password"]) {
   assert.equal(scopeText.includes(leaked), false, `scope contains ${leaked}`);
 }
 assert.equal(scope.names.length, 21);
+assert.equal(scope.deniedNames.length, 60);
 assert.equal(scope.names.some((name) => name.ip.startsWith("10.16.16.")), false);
+assert.equal(scope.deniedNames.some((name) => name.ip === "10.16.16.10"), true);
+assert.equal(scope.deniedNames.some((name) => name.ip === "10.18.0.1"), true);
 assert.equal(scope.allow.some((rule) => rule.cidr === "0.0.0.0/0"), false);
 assert.ok(scope.deny.some((rule) => rule.cidr === "10.16.16.0/20"));
 assert.ok(scope.deny.some((rule) => rule.cidr === "10.254.0.0/24"));
@@ -42,6 +45,10 @@ assert.equal(decide(scope, "10.250.0.9").decision, "deny");
 assert.equal(decide(scope, "10.255.0.10").decision, "deny");
 assert.equal(decide(scope, "8.8.8.8").decision, "deny");
 assert.equal(decide(scope, "10.18.0.10").decision, "deny");
+assert.equal(decide(scope, "10.23.1.20").decision, "deny");
+const hearth = pickVariants(catalog, 0).find((item) => item.chainId === "outside-plant");
+assert.equal(hearth.built, true);
+assert.equal(hearth.fqdn.endsWith(".hearthline.lab"), true);
 
 const a = pickVariants(catalog, 0).map((item) => item.variantId);
 const b = pickVariants(catalog, 1).map((item) => item.variantId);

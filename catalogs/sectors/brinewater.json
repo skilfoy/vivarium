@@ -1,0 +1,130 @@
+{
+  "id": "brinewater",
+  "name": "Brinewater",
+  "prefix": "10.20.0.0/16",
+  "startingUrl": "http://edge.brinewater.lab/",
+  "zones": [
+    {
+      "id": "dmz",
+      "cidr": "10.20.0.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "servers",
+      "cidr": "10.20.1.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "identity",
+      "cidr": "10.20.3.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "management",
+      "cidr": "10.20.16.0/20",
+      "scope": "deny",
+      "denyReason": "management plane"
+    }
+  ],
+  "hosts": [
+    {
+      "id": "bw-edge",
+      "name": "Edge",
+      "fqdn": "edge.brinewater.lab",
+      "ip": "10.20.0.1",
+      "zone": "dmz",
+      "ownerPersona": "ellis",
+      "purpose": "Brinewater edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "bw-log",
+      "name": "Sample log",
+      "fqdn": "samples.brinewater.lab",
+      "ip": "10.20.1.20",
+      "zone": "servers",
+      "ownerPersona": "ellis",
+      "purpose": "Treatment sample log",
+      "patchCohort": "lagging",
+      "logging": "sample",
+      "classification": "restricted"
+    },
+    {
+      "id": "bw-chem",
+      "name": "Chemical inventory",
+      "fqdn": "inventory.brinewater.lab",
+      "ip": "10.20.1.30",
+      "zone": "servers",
+      "ownerPersona": "ellis",
+      "purpose": "Chemical inventory",
+      "patchCohort": "lagging",
+      "logging": "sample",
+      "classification": "restricted"
+    },
+    {
+      "id": "bw-access",
+      "name": "Access list",
+      "fqdn": "access.brinewater.lab",
+      "ip": "10.20.1.40",
+      "zone": "servers",
+      "ownerPersona": "ellis",
+      "purpose": "After-hours access list",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "bw-office",
+      "name": "Office files",
+      "fqdn": "files.brinewater.lab",
+      "ip": "10.20.1.50",
+      "zone": "servers",
+      "ownerPersona": "ellis",
+      "purpose": "Office file share",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "bw-dc",
+      "name": "Directory",
+      "fqdn": "dc.brinewater.lab",
+      "ip": "10.20.3.10",
+      "zone": "identity",
+      "ownerPersona": "ellis",
+      "purpose": "Brinewater directory",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "bw-idp",
+      "name": "Identity portal",
+      "fqdn": "idp.brinewater.lab",
+      "ip": "10.20.3.30",
+      "zone": "identity",
+      "ownerPersona": "ellis",
+      "purpose": "Staff identity portal",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "bw-jump",
+      "name": "Jump host",
+      "fqdn": "jump.brinewater.lab",
+      "ip": "10.20.16.10",
+      "zone": "management",
+      "ownerPersona": "ellis",
+      "purpose": "Admin jump host",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "management"
+    }
+  ]
+}

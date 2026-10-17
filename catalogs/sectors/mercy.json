@@ -1,0 +1,130 @@
+{
+  "id": "mercy",
+  "name": "Mercy Ledger",
+  "prefix": "10.21.0.0/16",
+  "startingUrl": "http://edge.mercy.lab/",
+  "zones": [
+    {
+      "id": "dmz",
+      "cidr": "10.21.0.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "servers",
+      "cidr": "10.21.1.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "identity",
+      "cidr": "10.21.3.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "management",
+      "cidr": "10.21.16.0/20",
+      "scope": "deny",
+      "denyReason": "management plane"
+    }
+  ],
+  "hosts": [
+    {
+      "id": "ml-edge",
+      "name": "Edge",
+      "fqdn": "edge.mercy.lab",
+      "ip": "10.21.0.1",
+      "zone": "dmz",
+      "ownerPersona": "naomi",
+      "purpose": "Mercy edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "ml-imaging",
+      "name": "Imaging share",
+      "fqdn": "imaging.mercy.lab",
+      "ip": "10.21.1.20",
+      "zone": "servers",
+      "ownerPersona": "naomi",
+      "purpose": "Imaging share",
+      "patchCohort": "lagging",
+      "logging": "sample",
+      "classification": "restricted"
+    },
+    {
+      "id": "ml-devices",
+      "name": "Device management",
+      "fqdn": "devices.mercy.lab",
+      "ip": "10.21.1.30",
+      "zone": "servers",
+      "ownerPersona": "naomi",
+      "purpose": "Device management",
+      "patchCohort": "lagging",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "ml-export",
+      "name": "Device export",
+      "fqdn": "export.mercy.lab",
+      "ip": "10.21.1.40",
+      "zone": "servers",
+      "ownerPersona": "naomi",
+      "purpose": "Device export share",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "restricted"
+    },
+    {
+      "id": "ml-files",
+      "name": "Lab files",
+      "fqdn": "files.mercy.lab",
+      "ip": "10.21.1.50",
+      "zone": "servers",
+      "ownerPersona": "naomi",
+      "purpose": "Lab file share",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "ml-dc",
+      "name": "Directory",
+      "fqdn": "dc.mercy.lab",
+      "ip": "10.21.3.10",
+      "zone": "identity",
+      "ownerPersona": "naomi",
+      "purpose": "Mercy directory",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "ml-idp",
+      "name": "Identity portal",
+      "fqdn": "idp.mercy.lab",
+      "ip": "10.21.3.30",
+      "zone": "identity",
+      "ownerPersona": "naomi",
+      "purpose": "Staff identity portal",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "ml-jump",
+      "name": "Jump host",
+      "fqdn": "jump.mercy.lab",
+      "ip": "10.21.16.10",
+      "zone": "management",
+      "ownerPersona": "naomi",
+      "purpose": "Admin jump host",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "management"
+    }
+  ]
+}

@@ -10,7 +10,7 @@ The file you edit is [profiles/operator.json](../profiles/operator.json). Preset
 node compiler/build.mjs --profile profiles/operator.json --providers proxmox --budget lab --windows evaluation
 ```
 
-A profile does not change `dist/range-scope.json`. Selecting Hearthline plans a block for it. The harness is still denied that prefix until a later compile opens it.
+A profile does not change `dist/range-scope.json`. Selecting Hearthline plans a block for it. Those hosts are already in the scope file under `deniedNames`. The harness is still denied that prefix until a later compile opens it.
 
 ## Fields
 

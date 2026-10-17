@@ -1,0 +1,130 @@
+{
+  "id": "kindling",
+  "name": "Kindling",
+  "prefix": "10.23.0.0/16",
+  "startingUrl": "http://edge.kindling.lab/",
+  "zones": [
+    {
+      "id": "dmz",
+      "cidr": "10.23.0.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "servers",
+      "cidr": "10.23.1.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "identity",
+      "cidr": "10.23.3.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "management",
+      "cidr": "10.23.16.0/20",
+      "scope": "deny",
+      "denyReason": "management plane"
+    }
+  ],
+  "hosts": [
+    {
+      "id": "kg-edge",
+      "name": "Edge",
+      "fqdn": "edge.kindling.lab",
+      "ip": "10.23.0.1",
+      "zone": "dmz",
+      "ownerPersona": "imani",
+      "purpose": "Kindling edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "kg-roster",
+      "name": "Dispatch roster",
+      "fqdn": "roster.kindling.lab",
+      "ip": "10.23.1.20",
+      "zone": "servers",
+      "ownerPersona": "imani",
+      "purpose": "After-hours roster",
+      "patchCohort": "lagging",
+      "logging": "sample",
+      "classification": "internal"
+    },
+    {
+      "id": "kg-orders",
+      "name": "Work orders",
+      "fqdn": "orders.kindling.lab",
+      "ip": "10.23.1.30",
+      "zone": "servers",
+      "ownerPersona": "imani",
+      "purpose": "Work-order desk",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "kg-shelter",
+      "name": "Shelter list",
+      "fqdn": "shelter.kindling.lab",
+      "ip": "10.23.1.40",
+      "zone": "servers",
+      "ownerPersona": "imani",
+      "purpose": "Unapproved shelter list",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "kg-files",
+      "name": "Works files",
+      "fqdn": "files.kindling.lab",
+      "ip": "10.23.1.50",
+      "zone": "servers",
+      "ownerPersona": "imani",
+      "purpose": "Public-works file share",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "kg-dc",
+      "name": "Directory",
+      "fqdn": "dc.kindling.lab",
+      "ip": "10.23.3.10",
+      "zone": "identity",
+      "ownerPersona": "imani",
+      "purpose": "Kindling directory",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "kg-idp",
+      "name": "Identity portal",
+      "fqdn": "idp.kindling.lab",
+      "ip": "10.23.3.30",
+      "zone": "identity",
+      "ownerPersona": "imani",
+      "purpose": "Staff identity portal",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "kg-jump",
+      "name": "Jump host",
+      "fqdn": "jump.kindling.lab",
+      "ip": "10.23.16.10",
+      "zone": "management",
+      "ownerPersona": "imani",
+      "purpose": "Admin jump host",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "management"
+    }
+  ]
+}

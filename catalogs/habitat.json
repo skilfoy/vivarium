@@ -5,13 +5,13 @@
   "fakeInternet": "10.254.0.0/24",
   "orgs": [
     { "id": "northline", "name": "Northline Mutual", "sector": "finance", "cidr": "10.16.0.0/16", "status": "smoke" },
-    { "id": "indemnity", "name": "Northline Indemnity", "sector": "finance", "cidr": "10.17.0.0/16", "status": "later" },
-    { "id": "hearthline", "name": "Hearthline", "sector": "telecom", "cidr": "10.18.0.0/16", "status": "later" },
-    { "id": "calder", "name": "Calder Grid", "sector": "electric", "cidr": "10.19.0.0/16", "status": "later" },
-    { "id": "brinewater", "name": "Brinewater", "sector": "water", "cidr": "10.20.0.0/16", "status": "later" },
-    { "id": "mercy", "name": "Mercy Ledger", "sector": "health", "cidr": "10.21.0.0/16", "status": "later" },
-    { "id": "glassport", "name": "Glassport", "sector": "logistics", "cidr": "10.22.0.0/16", "status": "later" },
-    { "id": "kindling", "name": "Kindling", "sector": "municipal", "cidr": "10.23.0.0/16", "status": "later" }
+    { "id": "indemnity", "name": "Northline Indemnity", "sector": "finance", "cidr": "10.17.0.0/16", "status": "denied" },
+    { "id": "hearthline", "name": "Hearthline", "sector": "telecom", "cidr": "10.18.0.0/16", "status": "denied" },
+    { "id": "calder", "name": "Calder Grid", "sector": "electric", "cidr": "10.19.0.0/16", "status": "denied" },
+    { "id": "brinewater", "name": "Brinewater", "sector": "water", "cidr": "10.20.0.0/16", "status": "denied" },
+    { "id": "mercy", "name": "Mercy Ledger", "sector": "health", "cidr": "10.21.0.0/16", "status": "denied" },
+    { "id": "glassport", "name": "Glassport", "sector": "logistics", "cidr": "10.22.0.0/16", "status": "denied" },
+    { "id": "kindling", "name": "Kindling", "sector": "municipal", "cidr": "10.23.0.0/16", "status": "denied" }
   ],
   "outOfScope": [
     { "id": "sable", "name": "Sable Watch", "role": "mssp", "cidr": "10.250.0.0/24", "reason": "The MSSP is the tripwire. Touching it ends the run." }
@@ -21,12 +21,12 @@
     { "cidr": "10.254.0.0/24", "reason": "fake internet, not built, still denied" },
     { "cidr": "10.250.0.0/24", "reason": "Sable Watch" },
     { "cidr": "10.255.0.0/24", "reason": "operator plane is not a target" },
-    { "cidr": "10.17.0.0/16", "reason": "org not in this slice" },
-    { "cidr": "10.18.0.0/16", "reason": "org not in this slice" },
-    { "cidr": "10.19.0.0/16", "reason": "org not in this slice" },
-    { "cidr": "10.20.0.0/16", "reason": "org not in this slice" },
-    { "cidr": "10.21.0.0/16", "reason": "org not in this slice" },
-    { "cidr": "10.22.0.0/16", "reason": "org not in this slice" },
-    { "cidr": "10.23.0.0/16", "reason": "org not in this slice" }
+    { "cidr": "10.17.0.0/16", "reason": "denied until an operator opens this org" },
+    { "cidr": "10.18.0.0/16", "reason": "denied until an operator opens this org" },
+    { "cidr": "10.19.0.0/16", "reason": "denied until an operator opens this org" },
+    { "cidr": "10.20.0.0/16", "reason": "denied until an operator opens this org" },
+    { "cidr": "10.21.0.0/16", "reason": "denied until an operator opens this org" },
+    { "cidr": "10.22.0.0/16", "reason": "denied until an operator opens this org" },
+    { "cidr": "10.23.0.0/16", "reason": "denied until an operator opens this org" }
   ]
 }

@@ -1,0 +1,130 @@
+{
+  "id": "hearthline",
+  "name": "Hearthline",
+  "prefix": "10.18.0.0/16",
+  "startingUrl": "http://edge.hearthline.lab/",
+  "zones": [
+    {
+      "id": "dmz",
+      "cidr": "10.18.0.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "servers",
+      "cidr": "10.18.1.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "identity",
+      "cidr": "10.18.3.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "management",
+      "cidr": "10.18.16.0/20",
+      "scope": "deny",
+      "denyReason": "management plane"
+    }
+  ],
+  "hosts": [
+    {
+      "id": "hl-edge",
+      "name": "Edge",
+      "fqdn": "edge.hearthline.lab",
+      "ip": "10.18.0.1",
+      "zone": "dmz",
+      "ownerPersona": "luis",
+      "purpose": "Hearthline edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "hl-portal",
+      "name": "Customer portal",
+      "fqdn": "customers.hearthline.lab",
+      "ip": "10.18.0.20",
+      "zone": "dmz",
+      "ownerPersona": "luis",
+      "purpose": "Customer records",
+      "patchCohort": "lagging",
+      "logging": "sample",
+      "classification": "internal"
+    },
+    {
+      "id": "hl-cpe",
+      "name": "Premises management",
+      "fqdn": "cpe.hearthline.lab",
+      "ip": "10.18.1.20",
+      "zone": "servers",
+      "ownerPersona": "luis",
+      "purpose": "Customer-premises management",
+      "patchCohort": "lagging",
+      "logging": "sample",
+      "classification": "restricted"
+    },
+    {
+      "id": "hl-export",
+      "name": "Customer export",
+      "fqdn": "export.hearthline.lab",
+      "ip": "10.18.1.30",
+      "zone": "servers",
+      "ownerPersona": "luis",
+      "purpose": "Customer export share",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "hl-laptop",
+      "name": "Field laptop",
+      "fqdn": "laptop-luis.hearthline.lab",
+      "ip": "10.18.1.31",
+      "zone": "servers",
+      "ownerPersona": "luis",
+      "purpose": "Field laptop sync",
+      "patchCohort": "lagging",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "hl-dc",
+      "name": "Directory",
+      "fqdn": "dc.hearthline.lab",
+      "ip": "10.18.3.10",
+      "zone": "identity",
+      "ownerPersona": "luis",
+      "purpose": "Hearthline directory",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "hl-idp",
+      "name": "Identity portal",
+      "fqdn": "idp.hearthline.lab",
+      "ip": "10.18.3.30",
+      "zone": "identity",
+      "ownerPersona": "luis",
+      "purpose": "Staff identity portal",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "hl-jump",
+      "name": "Jump host",
+      "fqdn": "jump.hearthline.lab",
+      "ip": "10.18.16.10",
+      "zone": "management",
+      "ownerPersona": "luis",
+      "purpose": "Admin jump host",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "management"
+    }
+  ]
+}

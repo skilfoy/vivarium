@@ -1,0 +1,130 @@
+{
+  "id": "glassport",
+  "name": "Glassport",
+  "prefix": "10.22.0.0/16",
+  "startingUrl": "http://edge.glassport.lab/",
+  "zones": [
+    {
+      "id": "dmz",
+      "cidr": "10.22.0.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "servers",
+      "cidr": "10.22.1.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "identity",
+      "cidr": "10.22.3.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
+      "id": "management",
+      "cidr": "10.22.16.0/20",
+      "scope": "deny",
+      "denyReason": "management plane"
+    }
+  ],
+  "hosts": [
+    {
+      "id": "gp-edge",
+      "name": "Edge",
+      "fqdn": "edge.glassport.lab",
+      "ip": "10.22.0.1",
+      "zone": "dmz",
+      "ownerPersona": "andre",
+      "purpose": "Glassport edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "gp-gate",
+      "name": "Gate log",
+      "fqdn": "gate.glassport.lab",
+      "ip": "10.22.1.20",
+      "zone": "servers",
+      "ownerPersona": "andre",
+      "purpose": "Gate log",
+      "patchCohort": "lagging",
+      "logging": "sample",
+      "classification": "internal"
+    },
+    {
+      "id": "gp-cameras",
+      "name": "Camera export",
+      "fqdn": "cameras.glassport.lab",
+      "ip": "10.22.1.30",
+      "zone": "servers",
+      "ownerPersona": "andre",
+      "purpose": "Camera export",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "gp-bol",
+      "name": "Bills of lading",
+      "fqdn": "bol.glassport.lab",
+      "ip": "10.22.1.40",
+      "zone": "servers",
+      "ownerPersona": "andre",
+      "purpose": "Bill-of-lading archive",
+      "patchCohort": "lagging",
+      "logging": "sample",
+      "classification": "restricted"
+    },
+    {
+      "id": "gp-files",
+      "name": "Yard files",
+      "fqdn": "files.glassport.lab",
+      "ip": "10.22.1.50",
+      "zone": "servers",
+      "ownerPersona": "andre",
+      "purpose": "Yard file share",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "gp-dc",
+      "name": "Directory",
+      "fqdn": "dc.glassport.lab",
+      "ip": "10.22.3.10",
+      "zone": "identity",
+      "ownerPersona": "andre",
+      "purpose": "Glassport directory",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "gp-idp",
+      "name": "Identity portal",
+      "fqdn": "idp.glassport.lab",
+      "ip": "10.22.3.30",
+      "zone": "identity",
+      "ownerPersona": "andre",
+      "purpose": "Staff identity portal",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "gp-jump",
+      "name": "Jump host",
+      "fqdn": "jump.glassport.lab",
+      "ip": "10.22.16.10",
+      "zone": "management",
+      "ownerPersona": "andre",
+      "purpose": "Admin jump host",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "management"
+    }
+  ]
+}

@@ -26,6 +26,12 @@ const operatorView = {
     zones: catalog.sector.zones,
     hosts: catalog.sector.hosts,
   },
+  sectors: catalog.sectors.map((item) => ({
+    id: item.id,
+    name: item.name,
+    zones: item.zones,
+    hosts: item.hosts,
+  })),
   personas: catalog.personas.personas,
   chains: catalog.chains.chains,
   harnesses: catalog.harnesses,
