@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { emitScope, loadCatalog, pickVariants, renderNft, repoRoot, scopeHash, validateCatalog, validateInhabitants } from "./lib.mjs";
 import { writeSnapshot } from "./snapshot.mjs";
+import { openPreview } from "./depth.mjs";
 
 const catalog = loadCatalog();
 const errors = [...validateCatalog(catalog), ...validateInhabitants(catalog)];
@@ -40,6 +41,8 @@ const operatorView = {
   shifts: catalog.shifts,
   timeline: catalog.timeline,
   noise: catalog.noise,
+  depth: catalog.depth,
+  previews: catalog.habitat.orgs.filter((org) => org.status === "denied").map((org) => openPreview(catalog, org.id)),
   scope,
   scopeHash: hash,
 };

@@ -17,6 +17,12 @@
       "denyReason": "denied until an operator opens this org"
     },
     {
+      "id": "dev",
+      "cidr": "10.17.2.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
       "id": "identity",
       "cidr": "10.17.3.0/24",
       "scope": "deny",
@@ -125,6 +131,102 @@
       "patchCohort": "current",
       "logging": "full",
       "classification": "management"
+    },
+    {
+      "id": "in-wiki",
+      "name": "Wiki",
+      "fqdn": "wiki.indemnity.lab",
+      "ip": "10.17.1.40",
+      "zone": "servers",
+      "ownerPersona": "nils",
+      "purpose": "Approved internal wiki",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "in-print",
+      "name": "Print",
+      "fqdn": "print.indemnity.lab",
+      "ip": "10.17.1.60",
+      "zone": "servers",
+      "ownerPersona": "rosa",
+      "purpose": "Print archive",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "in-sensor",
+      "name": "Edge span",
+      "fqdn": "sensor.indemnity.lab",
+      "ip": "10.17.0.15",
+      "zone": "dmz",
+      "ownerPersona": "mara",
+      "purpose": "Span on the edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "in-enroll",
+      "name": "Enrollment",
+      "fqdn": "enroll.indemnity.lab",
+      "ip": "10.17.3.20",
+      "zone": "identity",
+      "ownerPersona": "mara",
+      "purpose": "Certificate enrollment stand-in",
+      "patchCohort": "lagging",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "in-forge",
+      "name": "Forge",
+      "fqdn": "forge.indemnity.lab",
+      "ip": "10.17.2.10",
+      "zone": "dev",
+      "ownerPersona": "nils",
+      "purpose": "Source forge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "in-ci",
+      "name": "Build",
+      "fqdn": "ci.indemnity.lab",
+      "ip": "10.17.2.20",
+      "zone": "dev",
+      "ownerPersona": "rosa",
+      "purpose": "Build workers",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "in-ws",
+      "name": "Workstation",
+      "fqdn": "ws.indemnity.lab",
+      "ip": "10.17.2.30",
+      "zone": "dev",
+      "ownerPersona": "cole",
+      "purpose": "Contractor workstation",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "in-notes",
+      "name": "Notes",
+      "fqdn": "notes.indemnity.lab",
+      "ip": "10.17.2.50",
+      "zone": "dev",
+      "ownerPersona": "cole",
+      "purpose": "Unapproved notes",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
     }
   ]
 }

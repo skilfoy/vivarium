@@ -1,42 +1,255 @@
 {
   "timezone": "America/Chicago",
   "clock": "wall",
-  "night": { "startHour": 19, "endHour": 7 },
-  "allowedSuffixes": ["northline.lab"],
+  "night": {
+    "startHour": 19,
+    "endHour": 7
+  },
+  "allowedSuffixes": [
+    "northline.lab"
+  ],
   "phishSink": {
     "url": "http://notices.northline.lab/",
     "rule": "In-range name only. It does not resolve outside the habitat. No credential is stored in this repo."
   },
   "personas": {
-    "ruth": { "shift": "night", "night": "On the claims queue.", "day": "Off the desk." },
-    "martin": { "shift": "day", "night": "Gone. The notes page stays where he left it.", "day": "In the office." },
-    "priya": { "shift": "day", "night": "On call, not at the desk.", "day": "Working the helpdesk queue." },
-    "owen": { "shift": "night", "night": "Skeleton SOC. Closes noisy alerts.", "day": "Off the desk." },
-    "helen": { "shift": "day", "night": "No vendor mail until morning.", "day": "Sends the Monday loss run." },
-    "jonah": { "shift": "day", "night": "Gone. The unapproved wiki stays up.", "day": "On the forge." },
-    "adele": { "shift": "day", "night": "Gone.", "day": "On the build workers." },
-    "chris": { "shift": "night", "night": "Runs the premium wire batch.", "day": "Off the desk." },
-    "nora": { "shift": "day", "night": "Off the desk. Renewal worksheets stay on the share.", "day": "In underwriting." },
-    "samir": { "shift": "day", "night": "Off the desk.", "day": "On the claims database." },
-    "lila": { "shift": "night", "night": "On the backup desk.", "day": "Off the desk." },
-    "evan": { "shift": "day", "night": "On call for remote access, not at the desk.", "day": "On the concentrator." },
-    "grace": { "shift": "day", "night": "Gone. The contractor profile stays.", "day": "On a forge ticket." },
-    "tomas": { "shift": "night", "night": "On the mail queues.", "day": "Off the desk." },
-    "june": { "shift": "day", "night": "Off the desk.", "day": "In treasury." },
-    "wes": { "shift": "day", "night": "Off the desk. Build-log review waits for morning.", "day": "Reading the night's tickets." },
-    "mara": { "shift": "day", "night": "Off. Indemnity is dark.", "day": "On the treaty desk." },
-    "luis": { "shift": "day", "night": "Off. The field laptop is in the truck.", "day": "On a premises job." },
-    "anita": { "shift": "night", "night": "On call for Calder. The console stays up.", "day": "Off the desk." },
-    "ellis": { "shift": "night", "night": "On the treatment shift.", "day": "Off the desk." },
-    "naomi": { "shift": "day", "night": "Off. Device exports stay where she left them.", "day": "In the lab." },
-    "andre": { "shift": "day", "night": "The gate is on a smaller crew.", "day": "On the yard desk." },
-    "imani": { "shift": "night", "night": "On the dispatch desk.", "day": "Off the desk." }
+    "ruth": {
+      "shift": "night",
+      "night": "On the claims queue.",
+      "day": "Off the desk."
+    },
+    "martin": {
+      "shift": "day",
+      "night": "Gone. The notes page stays where he left it.",
+      "day": "In the office."
+    },
+    "priya": {
+      "shift": "day",
+      "night": "On call, not at the desk.",
+      "day": "Working the helpdesk queue."
+    },
+    "owen": {
+      "shift": "night",
+      "night": "Skeleton SOC. Closes noisy alerts.",
+      "day": "Off the desk."
+    },
+    "helen": {
+      "shift": "day",
+      "night": "No vendor mail until morning.",
+      "day": "Sends the Monday loss run."
+    },
+    "jonah": {
+      "shift": "day",
+      "night": "Gone. The unapproved wiki stays up.",
+      "day": "On the forge."
+    },
+    "adele": {
+      "shift": "day",
+      "night": "Gone.",
+      "day": "On the build workers."
+    },
+    "chris": {
+      "shift": "night",
+      "night": "Runs the premium wire batch.",
+      "day": "Off the desk."
+    },
+    "nora": {
+      "shift": "day",
+      "night": "Off the desk. Renewal worksheets stay on the share.",
+      "day": "In underwriting."
+    },
+    "samir": {
+      "shift": "day",
+      "night": "Off the desk.",
+      "day": "On the claims database."
+    },
+    "lila": {
+      "shift": "night",
+      "night": "On the backup desk.",
+      "day": "Off the desk."
+    },
+    "evan": {
+      "shift": "day",
+      "night": "On call for remote access, not at the desk.",
+      "day": "On the concentrator."
+    },
+    "grace": {
+      "shift": "day",
+      "night": "Gone. The contractor profile stays.",
+      "day": "On a forge ticket."
+    },
+    "tomas": {
+      "shift": "night",
+      "night": "On the mail queues.",
+      "day": "Off the desk."
+    },
+    "june": {
+      "shift": "day",
+      "night": "Off the desk.",
+      "day": "In treasury."
+    },
+    "wes": {
+      "shift": "day",
+      "night": "Off the desk. Build-log review waits for morning.",
+      "day": "Reading the night's tickets."
+    },
+    "mara": {
+      "shift": "day",
+      "night": "Off. Indemnity is dark.",
+      "day": "On the treaty desk."
+    },
+    "luis": {
+      "shift": "day",
+      "night": "Off. The field laptop is in the truck.",
+      "day": "On a premises job."
+    },
+    "anita": {
+      "shift": "night",
+      "night": "On call for Calder. The console stays up.",
+      "day": "Off the desk."
+    },
+    "ellis": {
+      "shift": "night",
+      "night": "On the treatment shift.",
+      "day": "Off the desk."
+    },
+    "naomi": {
+      "shift": "day",
+      "night": "Off. Device exports stay where she left them.",
+      "day": "In the lab."
+    },
+    "andre": {
+      "shift": "day",
+      "night": "The gate is on a smaller crew.",
+      "day": "On the yard desk."
+    },
+    "imani": {
+      "shift": "night",
+      "night": "On the dispatch desk.",
+      "day": "Off the desk."
+    },
+    "nils": {
+      "shift": "night",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "rosa": {
+      "shift": "day",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "cole": {
+      "shift": "day",
+      "night": "Engagement over. The profile remains.",
+      "day": "On the day list."
+    },
+    "petra": {
+      "shift": "night",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "nick": {
+      "shift": "day",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "otto": {
+      "shift": "day",
+      "night": "Engagement over. The profile remains.",
+      "day": "On the day list."
+    },
+    "ravi": {
+      "shift": "night",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "sue": {
+      "shift": "day",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "kim": {
+      "shift": "day",
+      "night": "Engagement over. The profile remains.",
+      "day": "On the day list."
+    },
+    "hugh": {
+      "shift": "night",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "bea": {
+      "shift": "day",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "ida": {
+      "shift": "day",
+      "night": "Engagement over. The profile remains.",
+      "day": "On the day list."
+    },
+    "leo": {
+      "shift": "night",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "tess": {
+      "shift": "day",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "paul": {
+      "shift": "day",
+      "night": "Engagement over. The profile remains.",
+      "day": "On the day list."
+    },
+    "cleo": {
+      "shift": "night",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "dean": {
+      "shift": "day",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "nina": {
+      "shift": "day",
+      "night": "Engagement over. The profile remains.",
+      "day": "On the day list."
+    },
+    "joel": {
+      "shift": "night",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "faye": {
+      "shift": "day",
+      "night": "On the night list.",
+      "day": "On the day list."
+    },
+    "sid": {
+      "shift": "day",
+      "night": "Engagement over. The profile remains.",
+      "day": "On the day list."
+    }
   },
   "janitor": {
     "controller": "10.16.16.50",
     "address": "10.16.2.80",
     "fqdn": "bench.northline.lab",
-    "classes": ["ci server", "document database", "admin console", "notebook"],
-    "upHours": [21, 22, 23, 0, 1]
+    "classes": [
+      "ci server",
+      "document database",
+      "admin console",
+      "notebook"
+    ],
+    "upHours": [
+      21,
+      22,
+      23,
+      0,
+      1
+    ]
   }
 }

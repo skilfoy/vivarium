@@ -17,6 +17,12 @@
       "denyReason": "denied until an operator opens this org"
     },
     {
+      "id": "dev",
+      "cidr": "10.23.2.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
       "id": "identity",
       "cidr": "10.23.3.0/24",
       "scope": "deny",
@@ -125,6 +131,102 @@
       "patchCohort": "current",
       "logging": "full",
       "classification": "management"
+    },
+    {
+      "id": "kg-wiki",
+      "name": "Wiki",
+      "fqdn": "wiki.kindling.lab",
+      "ip": "10.23.1.45",
+      "zone": "servers",
+      "ownerPersona": "joel",
+      "purpose": "Approved internal wiki",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "kg-print",
+      "name": "Print",
+      "fqdn": "print.kindling.lab",
+      "ip": "10.23.1.60",
+      "zone": "servers",
+      "ownerPersona": "faye",
+      "purpose": "Print archive",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "kg-sensor",
+      "name": "Edge span",
+      "fqdn": "sensor.kindling.lab",
+      "ip": "10.23.0.15",
+      "zone": "dmz",
+      "ownerPersona": "imani",
+      "purpose": "Span on the edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "kg-enroll",
+      "name": "Enrollment",
+      "fqdn": "enroll.kindling.lab",
+      "ip": "10.23.3.20",
+      "zone": "identity",
+      "ownerPersona": "imani",
+      "purpose": "Certificate enrollment stand-in",
+      "patchCohort": "lagging",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "kg-forge",
+      "name": "Forge",
+      "fqdn": "forge.kindling.lab",
+      "ip": "10.23.2.10",
+      "zone": "dev",
+      "ownerPersona": "joel",
+      "purpose": "Source forge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "kg-ci",
+      "name": "Build",
+      "fqdn": "ci.kindling.lab",
+      "ip": "10.23.2.20",
+      "zone": "dev",
+      "ownerPersona": "faye",
+      "purpose": "Build workers",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "kg-ws",
+      "name": "Workstation",
+      "fqdn": "ws.kindling.lab",
+      "ip": "10.23.2.30",
+      "zone": "dev",
+      "ownerPersona": "sid",
+      "purpose": "Contractor workstation",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "kg-notes",
+      "name": "Notes",
+      "fqdn": "notes.kindling.lab",
+      "ip": "10.23.2.50",
+      "zone": "dev",
+      "ownerPersona": "sid",
+      "purpose": "Unapproved notes",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
     }
   ]
 }

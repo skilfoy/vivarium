@@ -17,6 +17,12 @@
       "denyReason": "denied until an operator opens this org"
     },
     {
+      "id": "dev",
+      "cidr": "10.21.2.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
       "id": "identity",
       "cidr": "10.21.3.0/24",
       "scope": "deny",
@@ -125,6 +131,102 @@
       "patchCohort": "current",
       "logging": "full",
       "classification": "management"
+    },
+    {
+      "id": "ml-wiki",
+      "name": "Wiki",
+      "fqdn": "wiki.mercy.lab",
+      "ip": "10.21.1.45",
+      "zone": "servers",
+      "ownerPersona": "leo",
+      "purpose": "Approved internal wiki",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "ml-print",
+      "name": "Print",
+      "fqdn": "print.mercy.lab",
+      "ip": "10.21.1.60",
+      "zone": "servers",
+      "ownerPersona": "tess",
+      "purpose": "Print archive",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "ml-sensor",
+      "name": "Edge span",
+      "fqdn": "sensor.mercy.lab",
+      "ip": "10.21.0.15",
+      "zone": "dmz",
+      "ownerPersona": "naomi",
+      "purpose": "Span on the edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "ml-enroll",
+      "name": "Enrollment",
+      "fqdn": "enroll.mercy.lab",
+      "ip": "10.21.3.20",
+      "zone": "identity",
+      "ownerPersona": "naomi",
+      "purpose": "Certificate enrollment stand-in",
+      "patchCohort": "lagging",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "ml-forge",
+      "name": "Forge",
+      "fqdn": "forge.mercy.lab",
+      "ip": "10.21.2.10",
+      "zone": "dev",
+      "ownerPersona": "leo",
+      "purpose": "Source forge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "ml-ci",
+      "name": "Build",
+      "fqdn": "ci.mercy.lab",
+      "ip": "10.21.2.20",
+      "zone": "dev",
+      "ownerPersona": "tess",
+      "purpose": "Build workers",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "ml-ws",
+      "name": "Workstation",
+      "fqdn": "ws.mercy.lab",
+      "ip": "10.21.2.30",
+      "zone": "dev",
+      "ownerPersona": "paul",
+      "purpose": "Contractor workstation",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "ml-notes",
+      "name": "Notes",
+      "fqdn": "notes.mercy.lab",
+      "ip": "10.21.2.50",
+      "zone": "dev",
+      "ownerPersona": "paul",
+      "purpose": "Unapproved notes",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
     }
   ]
 }

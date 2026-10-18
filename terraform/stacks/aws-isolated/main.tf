@@ -12,18 +12,20 @@ locals {
   deny_cidrs  = [for rule in local.scope.deny : rule.cidr]
   allow_cidrs = [for rule in local.scope.allow : rule.cidr]
   forbidden   = contains(local.deny_cidrs, "0.0.0.0/0") || contains(local.allow_cidrs, "0.0.0.0/0")
+  accounts    = ["mgmt", "northline", "indemnity", "hearthline", "calder", "brinewater", "mercy", "glassport", "kindling", "sable"]
 }
 
 resource "terraform_data" "cage" {
   input = {
-    substrate = "aws"
+    substrate = "aws-free"
+    accounts  = local.accounts
     hash      = sha256(jsonencode(local.scope))
   }
 
   lifecycle {
     precondition {
       condition     = var.allow_apply
-      error_message = "Apply stays off until you pass -var allow_apply=true on a machine you own."
+      error_message = "Apply stays off. The preferred substrate is free-tier AWS, and this stack does not apply."
     }
     precondition {
       condition     = local.forbidden == false

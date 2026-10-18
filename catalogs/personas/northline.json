@@ -1,28 +1,365 @@
 {
   "org": "northline",
   "personas": [
-    { "id": "ruth", "name": "Ruth Ellison", "org": "northline", "role": "clerk", "team": "Claims", "habit": "Leaves claim packets on the shared printer when the queue jams." },
-    { "id": "martin", "name": "Martin Cho", "org": "northline", "role": "careless executive", "team": "Office of the president", "habit": "Forwards board drafts to his personal notes page, then forgets the page exists." },
-    { "id": "priya", "name": "Priya Shah", "org": "northline", "role": "helpdesk", "team": "Workplace", "habit": "Keeps a helpdesk role that can see every ticket queue, not just the one she works." },
-    { "id": "owen", "name": "Owen Blake", "org": "northline", "role": "SOC analyst", "team": "Security", "habit": "Watches the log stack and is not supposed to be a target." },
-    { "id": "helen", "name": "Helen Voss", "org": "northline", "role": "vendor", "team": "Lane and Pike, actuarial", "habit": "Sends loss-run spreadsheets through the mail gateway every Monday." },
-    { "id": "jonah", "name": "Jonah Ibarra", "org": "northline", "role": "developer", "team": "Forge", "habit": "Keeps a second wiki because the approved one asks for a change ticket." },
-    { "id": "adele", "name": "Adele Okonkwo", "org": "northline", "role": "developer", "team": "Forge", "habit": "Leaves build artifacts on her workstation between reviews." },
-    { "id": "chris", "name": "Chris Navarro", "org": "northline", "role": "wire operator", "team": "Treasury", "habit": "Puts the wire batch id in the directory description so the night desk can find it." },
-    { "id": "nora", "name": "Nora Keene", "org": "northline", "role": "underwriter", "team": "Personal lines", "habit": "Keeps renewal worksheets on the department share past the decision." },
-    { "id": "samir", "name": "Samir Dalal", "org": "northline", "role": "database admin", "team": "Platform", "habit": "Dumps the claims database to the backup target before a schema change." },
-    { "id": "lila", "name": "Lila Brooks", "org": "northline", "role": "backup operator", "team": "Platform", "habit": "Leaves the restore share mounted after a drill so the night desk can check it." },
-    { "id": "evan", "name": "Evan Park", "org": "northline", "role": "network engineer", "team": "Workplace", "habit": "Widens a remote-access group to finish a ticket, then does not narrow it." },
-    { "id": "grace", "name": "Grace Muller", "org": "northline", "role": "contractor", "team": "Forge", "habit": "Still has a forge login and a VPN profile from an engagement that ended." },
-    { "id": "tomas", "name": "Tomas Reyes", "org": "northline", "role": "mail admin", "team": "Workplace", "habit": "Creates shared mailboxes and does not assign an owner." },
-    { "id": "june", "name": "June Aldrich", "org": "northline", "role": "finance analyst", "team": "Treasury", "habit": "Copies the wire folder to a working directory the whole floor can open." },
-    { "id": "wes", "name": "Wes Harland", "org": "northline", "role": "security engineer", "team": "Security", "habit": "Reviews build logs for secret-shaped text and files the ticket for morning." },
-    { "id": "mara", "name": "Mara Quinn", "org": "indemnity", "role": "treaty clerk", "team": "Ceded reinsurance", "habit": "Sends bordereaux to the broker desk as spreadsheets." },
-    { "id": "luis", "name": "Luis Ortega", "org": "hearthline", "role": "field tech", "team": "Outside plant", "habit": "Keeps customer-premises notes on the laptop between jobs." },
-    { "id": "anita", "name": "Anita Berg", "org": "calder", "role": "on-call operator", "team": "Balancing authority", "habit": "Acknowledges alarms from a console the day shift also uses." },
-    { "id": "ellis", "name": "Ellis Ward", "org": "brinewater", "role": "plant operator", "team": "Treatment", "habit": "Logs chemical draws in a workbook the office can edit." },
-    { "id": "naomi", "name": "Naomi Feld", "org": "mercy", "role": "lab tech", "team": "Biomedical", "habit": "Parks device exports on a share the care team can also open." },
-    { "id": "andre", "name": "Andre Pelletier", "org": "glassport", "role": "yard lead", "team": "Gate", "habit": "Exports the gate log when a broker asks, and leaves the file." },
-    { "id": "imani", "name": "Imani Cole", "org": "kindling", "role": "night dispatcher", "team": "Public works", "habit": "Posts the after-hours roster where every desk can read it." }
+    {
+      "id": "ruth",
+      "name": "Ruth Ellison",
+      "org": "northline",
+      "role": "clerk",
+      "team": "Claims",
+      "habit": "Leaves claim packets on the shared printer when the queue jams."
+    },
+    {
+      "id": "martin",
+      "name": "Martin Cho",
+      "org": "northline",
+      "role": "careless executive",
+      "team": "Office of the president",
+      "habit": "Forwards board drafts to his personal notes page, then forgets the page exists."
+    },
+    {
+      "id": "priya",
+      "name": "Priya Shah",
+      "org": "northline",
+      "role": "helpdesk",
+      "team": "Workplace",
+      "habit": "Keeps a helpdesk role that can see every ticket queue, not just the one she works."
+    },
+    {
+      "id": "owen",
+      "name": "Owen Blake",
+      "org": "northline",
+      "role": "SOC analyst",
+      "team": "Security",
+      "habit": "Watches the log stack and is not supposed to be a target."
+    },
+    {
+      "id": "helen",
+      "name": "Helen Voss",
+      "org": "northline",
+      "role": "vendor",
+      "team": "Lane and Pike, actuarial",
+      "habit": "Sends loss-run spreadsheets through the mail gateway every Monday."
+    },
+    {
+      "id": "jonah",
+      "name": "Jonah Ibarra",
+      "org": "northline",
+      "role": "developer",
+      "team": "Forge",
+      "habit": "Keeps a second wiki because the approved one asks for a change ticket."
+    },
+    {
+      "id": "adele",
+      "name": "Adele Okonkwo",
+      "org": "northline",
+      "role": "developer",
+      "team": "Forge",
+      "habit": "Leaves build artifacts on her workstation between reviews."
+    },
+    {
+      "id": "chris",
+      "name": "Chris Navarro",
+      "org": "northline",
+      "role": "wire operator",
+      "team": "Treasury",
+      "habit": "Puts the wire batch id in the directory description so the night desk can find it."
+    },
+    {
+      "id": "nora",
+      "name": "Nora Keene",
+      "org": "northline",
+      "role": "underwriter",
+      "team": "Personal lines",
+      "habit": "Keeps renewal worksheets on the department share past the decision."
+    },
+    {
+      "id": "samir",
+      "name": "Samir Dalal",
+      "org": "northline",
+      "role": "database admin",
+      "team": "Platform",
+      "habit": "Dumps the claims database to the backup target before a schema change."
+    },
+    {
+      "id": "lila",
+      "name": "Lila Brooks",
+      "org": "northline",
+      "role": "backup operator",
+      "team": "Platform",
+      "habit": "Leaves the restore share mounted after a drill so the night desk can check it."
+    },
+    {
+      "id": "evan",
+      "name": "Evan Park",
+      "org": "northline",
+      "role": "network engineer",
+      "team": "Workplace",
+      "habit": "Widens a remote-access group to finish a ticket, then does not narrow it."
+    },
+    {
+      "id": "grace",
+      "name": "Grace Muller",
+      "org": "northline",
+      "role": "contractor",
+      "team": "Forge",
+      "habit": "Still has a forge login and a VPN profile from an engagement that ended.",
+      "engagementEnd": "2026-02-28"
+    },
+    {
+      "id": "tomas",
+      "name": "Tomas Reyes",
+      "org": "northline",
+      "role": "mail admin",
+      "team": "Workplace",
+      "habit": "Creates shared mailboxes and does not assign an owner."
+    },
+    {
+      "id": "june",
+      "name": "June Aldrich",
+      "org": "northline",
+      "role": "finance analyst",
+      "team": "Treasury",
+      "habit": "Copies the wire folder to a working directory the whole floor can open."
+    },
+    {
+      "id": "wes",
+      "name": "Wes Harland",
+      "org": "northline",
+      "role": "security engineer",
+      "team": "Security",
+      "habit": "Reviews build logs for secret-shaped text and files the ticket for morning."
+    },
+    {
+      "id": "mara",
+      "name": "Mara Quinn",
+      "org": "indemnity",
+      "role": "treaty clerk",
+      "team": "Ceded reinsurance",
+      "habit": "Sends bordereaux to the broker desk as spreadsheets."
+    },
+    {
+      "id": "luis",
+      "name": "Luis Ortega",
+      "org": "hearthline",
+      "role": "field tech",
+      "team": "Outside plant",
+      "habit": "Keeps customer-premises notes on the laptop between jobs."
+    },
+    {
+      "id": "anita",
+      "name": "Anita Berg",
+      "org": "calder",
+      "role": "on-call operator",
+      "team": "Balancing authority",
+      "habit": "Acknowledges alarms from a console the day shift also uses."
+    },
+    {
+      "id": "ellis",
+      "name": "Ellis Ward",
+      "org": "brinewater",
+      "role": "plant operator",
+      "team": "Treatment",
+      "habit": "Logs chemical draws in a workbook the office can edit."
+    },
+    {
+      "id": "naomi",
+      "name": "Naomi Feld",
+      "org": "mercy",
+      "role": "lab tech",
+      "team": "Biomedical",
+      "habit": "Parks device exports on a share the care team can also open."
+    },
+    {
+      "id": "andre",
+      "name": "Andre Pelletier",
+      "org": "glassport",
+      "role": "yard lead",
+      "team": "Gate",
+      "habit": "Exports the gate log when a broker asks, and leaves the file."
+    },
+    {
+      "id": "imani",
+      "name": "Imani Cole",
+      "org": "kindling",
+      "role": "night dispatcher",
+      "team": "Public works",
+      "habit": "Posts the after-hours roster where every desk can read it."
+    },
+    {
+      "id": "nils",
+      "name": "Nils Pender",
+      "org": "indemnity",
+      "role": "treaty accountant",
+      "team": "Ceded reinsurance",
+      "habit": "Keeps the bordereau workbook open after the broker call."
+    },
+    {
+      "id": "rosa",
+      "name": "Rosa Hale",
+      "org": "indemnity",
+      "role": "broker desk",
+      "team": "Ceded reinsurance",
+      "habit": "Leaves the collateral folder where the whole desk can read it."
+    },
+    {
+      "id": "cole",
+      "name": "Cole Varga",
+      "org": "indemnity",
+      "role": "contractor",
+      "team": "Broker advisory",
+      "habit": "The engagement ended. The portal profile did not.",
+      "engagementEnd": "2026-03-01"
+    },
+    {
+      "id": "petra",
+      "name": "Petra Lang",
+      "org": "hearthline",
+      "role": "dispatch",
+      "team": "Outside plant",
+      "habit": "Posts the night crew list where the day desk can still see it."
+    },
+    {
+      "id": "nick",
+      "name": "Nick Amano",
+      "org": "hearthline",
+      "role": "plant records",
+      "team": "Outside plant",
+      "habit": "Files the premises notes under last month's job."
+    },
+    {
+      "id": "otto",
+      "name": "Otto Brink",
+      "org": "hearthline",
+      "role": "contractor",
+      "team": "Field install",
+      "habit": "The install ended in January. The laptop profile is still there.",
+      "engagementEnd": "2026-01-15"
+    },
+    {
+      "id": "ravi",
+      "name": "Ravi Menon",
+      "org": "calder",
+      "role": "balancing operator",
+      "team": "Control room",
+      "habit": "Acknowledges the same alarm the day shift already closed."
+    },
+    {
+      "id": "sue",
+      "name": "Sue Harp",
+      "org": "calder",
+      "role": "control room",
+      "team": "Balancing authority",
+      "habit": "Leaves the engineering display signed in at shift change."
+    },
+    {
+      "id": "kim",
+      "name": "Kim Solt",
+      "org": "calder",
+      "role": "contractor",
+      "team": "Integrator",
+      "habit": "The integrator contract ended. The console account did not.",
+      "engagementEnd": "2025-11-02"
+    },
+    {
+      "id": "hugh",
+      "name": "Hugh Pell",
+      "org": "brinewater",
+      "role": "lab",
+      "team": "Treatment",
+      "habit": "Copies the sample log to the office share at the end of the shift."
+    },
+    {
+      "id": "bea",
+      "name": "Bea Crowe",
+      "org": "brinewater",
+      "role": "compliance",
+      "team": "Treatment",
+      "habit": "Reads the chemical workbook from the office, not the plant floor."
+    },
+    {
+      "id": "ida",
+      "name": "Ida Moss",
+      "org": "brinewater",
+      "role": "contractor",
+      "team": "Chemical supply",
+      "habit": "The supply contract ended. The plant login remains.",
+      "engagementEnd": "2026-02-11"
+    },
+    {
+      "id": "leo",
+      "name": "Leo Ishikawa",
+      "org": "mercy",
+      "role": "biomed",
+      "team": "Biomedical",
+      "habit": "Parks device exports on the care-team share."
+    },
+    {
+      "id": "tess",
+      "name": "Tess Nguyen",
+      "org": "mercy",
+      "role": "records",
+      "team": "Health information",
+      "habit": "The imaging folder is still open to records from last quarter."
+    },
+    {
+      "id": "paul",
+      "name": "Paul Adeyemi",
+      "org": "mercy",
+      "role": "contractor",
+      "team": "Device vendor",
+      "habit": "The device engagement ended. The imaging role remains.",
+      "engagementEnd": "2025-12-20"
+    },
+    {
+      "id": "cleo",
+      "name": "Cleo Martel",
+      "org": "glassport",
+      "role": "broker desk",
+      "team": "Gate",
+      "habit": "Reads the gate log when a broker asks, then leaves it open."
+    },
+    {
+      "id": "dean",
+      "name": "Dean Vos",
+      "org": "glassport",
+      "role": "yard systems",
+      "team": "Gate",
+      "habit": "Exports the camera file to the broker folder."
+    },
+    {
+      "id": "nina",
+      "name": "Nina Frost",
+      "org": "glassport",
+      "role": "contractor",
+      "team": "Camera vendor",
+      "habit": "The camera contract ended. The export account remains.",
+      "engagementEnd": "2026-04-04"
+    },
+    {
+      "id": "joel",
+      "name": "Joel Hart",
+      "org": "kindling",
+      "role": "streets",
+      "team": "Public works",
+      "habit": "Copies the night roster onto the day board."
+    },
+    {
+      "id": "faye",
+      "name": "Faye Okon",
+      "org": "kindling",
+      "role": "shelter desk",
+      "team": "Public works",
+      "habit": "The shelter list is on a page the change board never saw."
+    },
+    {
+      "id": "sid",
+      "name": "Sid Berger",
+      "org": "kindling",
+      "role": "contractor",
+      "team": "Radio vendor",
+      "habit": "The radio work ended. The dispatch login remains.",
+      "engagementEnd": "2026-05-09"
+    }
   ]
 }

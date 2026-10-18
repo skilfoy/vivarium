@@ -17,6 +17,12 @@
       "denyReason": "denied until an operator opens this org"
     },
     {
+      "id": "dev",
+      "cidr": "10.22.2.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
       "id": "identity",
       "cidr": "10.22.3.0/24",
       "scope": "deny",
@@ -125,6 +131,102 @@
       "patchCohort": "current",
       "logging": "full",
       "classification": "management"
+    },
+    {
+      "id": "gp-wiki",
+      "name": "Wiki",
+      "fqdn": "wiki.glassport.lab",
+      "ip": "10.22.1.45",
+      "zone": "servers",
+      "ownerPersona": "cleo",
+      "purpose": "Approved internal wiki",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "gp-print",
+      "name": "Print",
+      "fqdn": "print.glassport.lab",
+      "ip": "10.22.1.60",
+      "zone": "servers",
+      "ownerPersona": "dean",
+      "purpose": "Print archive",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "gp-sensor",
+      "name": "Edge span",
+      "fqdn": "sensor.glassport.lab",
+      "ip": "10.22.0.15",
+      "zone": "dmz",
+      "ownerPersona": "andre",
+      "purpose": "Span on the edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "gp-enroll",
+      "name": "Enrollment",
+      "fqdn": "enroll.glassport.lab",
+      "ip": "10.22.3.20",
+      "zone": "identity",
+      "ownerPersona": "andre",
+      "purpose": "Certificate enrollment stand-in",
+      "patchCohort": "lagging",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "gp-forge",
+      "name": "Forge",
+      "fqdn": "forge.glassport.lab",
+      "ip": "10.22.2.10",
+      "zone": "dev",
+      "ownerPersona": "cleo",
+      "purpose": "Source forge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "gp-ci",
+      "name": "Build",
+      "fqdn": "ci.glassport.lab",
+      "ip": "10.22.2.20",
+      "zone": "dev",
+      "ownerPersona": "dean",
+      "purpose": "Build workers",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "gp-ws",
+      "name": "Workstation",
+      "fqdn": "ws.glassport.lab",
+      "ip": "10.22.2.30",
+      "zone": "dev",
+      "ownerPersona": "nina",
+      "purpose": "Contractor workstation",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "gp-notes",
+      "name": "Notes",
+      "fqdn": "notes.glassport.lab",
+      "ip": "10.22.2.50",
+      "zone": "dev",
+      "ownerPersona": "nina",
+      "purpose": "Unapproved notes",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
     }
   ]
 }

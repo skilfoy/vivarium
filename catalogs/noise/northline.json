@@ -2,13 +2,53 @@
   "org": "northline",
   "note": "Background opens on allowed names. Not a point. Not a procedure.",
   "events": [
-    { "persona": "ruth", "ip": "10.16.0.20", "path": "/claims/c-100" },
-    { "persona": "martin", "ip": "10.16.0.10", "path": "/www/status" },
-    { "persona": "owen", "ip": "10.16.1.40", "path": "/wiki/company" },
-    { "persona": "chris", "ip": "10.16.1.20", "path": "/wire" },
-    { "persona": "tomas", "ip": "10.16.1.50", "path": "/mail/shared/claims" },
-    { "persona": "lila", "ip": "10.16.1.70", "path": "/backup/catalog" },
-    { "persona": "jonah", "ip": "10.16.2.10", "path": "/git/projects/claims" },
-    { "persona": "priya", "ip": "10.16.3.30", "path": "/idp" }
+    {
+      "persona": "ruth",
+      "ip": "10.16.0.20",
+      "path": "/claims/c-100",
+      "hour": 19
+    },
+    {
+      "persona": "martin",
+      "ip": "10.16.0.10",
+      "path": "/www/status",
+      "hour": 20
+    },
+    {
+      "persona": "owen",
+      "ip": "10.16.1.40",
+      "path": "/wiki/company",
+      "hour": 21
+    },
+    {
+      "persona": "chris",
+      "ip": "10.16.1.20",
+      "path": "/wire",
+      "hour": 22
+    },
+    {
+      "persona": "tomas",
+      "ip": "10.16.1.50",
+      "path": "/mail/shared/claims",
+      "hour": 23
+    },
+    {
+      "persona": "lila",
+      "ip": "10.16.1.70",
+      "path": "/backup/catalog",
+      "hour": 0
+    },
+    {
+      "persona": "jonah",
+      "ip": "10.16.2.10",
+      "path": "/git/projects/claims",
+      "hour": 1
+    },
+    {
+      "persona": "priya",
+      "ip": "10.16.3.30",
+      "path": "/idp",
+      "hour": 9
+    }
   ]
 }

@@ -17,6 +17,12 @@
       "denyReason": "denied until an operator opens this org"
     },
     {
+      "id": "dev",
+      "cidr": "10.18.2.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
       "id": "identity",
       "cidr": "10.18.3.0/24",
       "scope": "deny",
@@ -125,6 +131,102 @@
       "patchCohort": "current",
       "logging": "full",
       "classification": "management"
+    },
+    {
+      "id": "hl-wiki",
+      "name": "Wiki",
+      "fqdn": "wiki.hearthline.lab",
+      "ip": "10.18.1.40",
+      "zone": "servers",
+      "ownerPersona": "petra",
+      "purpose": "Approved internal wiki",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "hl-print",
+      "name": "Print",
+      "fqdn": "print.hearthline.lab",
+      "ip": "10.18.1.60",
+      "zone": "servers",
+      "ownerPersona": "nick",
+      "purpose": "Print archive",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "hl-sensor",
+      "name": "Edge span",
+      "fqdn": "sensor.hearthline.lab",
+      "ip": "10.18.0.15",
+      "zone": "dmz",
+      "ownerPersona": "luis",
+      "purpose": "Span on the edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "hl-enroll",
+      "name": "Enrollment",
+      "fqdn": "enroll.hearthline.lab",
+      "ip": "10.18.3.20",
+      "zone": "identity",
+      "ownerPersona": "luis",
+      "purpose": "Certificate enrollment stand-in",
+      "patchCohort": "lagging",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "hl-forge",
+      "name": "Forge",
+      "fqdn": "forge.hearthline.lab",
+      "ip": "10.18.2.10",
+      "zone": "dev",
+      "ownerPersona": "petra",
+      "purpose": "Source forge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "hl-ci",
+      "name": "Build",
+      "fqdn": "ci.hearthline.lab",
+      "ip": "10.18.2.20",
+      "zone": "dev",
+      "ownerPersona": "nick",
+      "purpose": "Build workers",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "hl-ws",
+      "name": "Workstation",
+      "fqdn": "ws.hearthline.lab",
+      "ip": "10.18.2.30",
+      "zone": "dev",
+      "ownerPersona": "otto",
+      "purpose": "Contractor workstation",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "hl-notes",
+      "name": "Notes",
+      "fqdn": "notes.hearthline.lab",
+      "ip": "10.18.2.50",
+      "zone": "dev",
+      "ownerPersona": "otto",
+      "purpose": "Unapproved notes",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
     }
   ]
 }

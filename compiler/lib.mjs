@@ -24,7 +24,8 @@ export function loadCatalog() {
   const shifts = readJson("catalogs/shifts/northline.json");
   const timeline = readJson("ghosts/northline-night.json");
   const noise = readJson("catalogs/noise/northline.json");
-  return { habitat, sector, sectors, personas, chains, harnesses, shifts, timeline, noise };
+  const depth = readJson("catalogs/depth.json");
+  return { habitat, sector, sectors, personas, chains, harnesses, shifts, timeline, noise, depth };
 }
 
 export function ipToInt(ip) {
@@ -50,16 +51,16 @@ export function validateCatalog(catalog) {
   const { habitat, sector, sectors, personas, chains } = catalog;
   if (!sector || sector.hosts.length !== 25) errors.push(`expected 25 Northline hosts, got ${sector ? sector.hosts.length : 0}`);
   if (sectors.length !== 8) errors.push(`expected 8 sectors, got ${sectors.length}`);
-  if (personas.personas.length !== 23) errors.push(`expected 23 personas, got ${personas.personas.length}`);
-  if (chains.chains.length !== 18) errors.push(`expected 18 chain classes, got ${chains.chains.length}`);
+  if (personas.personas.length !== 44) errors.push(`expected 44 personas, got ${personas.personas.length}`);
+  if (chains.chains.length !== 25) errors.push(`expected 25 chain classes, got ${chains.chains.length}`);
   const ids = new Set();
   const ips = new Set();
   const hosts = [];
   for (const item of sectors) {
     const org = habitat.orgs.find((row) => row.id === item.id);
     if (!org) errors.push(`sector ${item.id} is not in the habitat`);
-    if (item.id !== "northline" && item.hosts.length !== 8) {
-      errors.push(`${item.id} expected 8 hosts, got ${item.hosts.length}`);
+    if (item.id !== "northline" && item.hosts.length !== 16) {
+      errors.push(`${item.id} expected 16 hosts, got ${item.hosts.length}`);
     }
     for (const host of item.hosts) {
       if (ids.has(host.id)) errors.push(`duplicate host ${host.id}`);

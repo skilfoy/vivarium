@@ -1,0 +1,1583 @@
+{
+  "jewels": [
+    {
+      "org": "northline",
+      "name": "Premium wire batch",
+      "hostId": "nl-wire",
+      "classification": "restricted"
+    },
+    {
+      "org": "indemnity",
+      "name": "Treaty bordereau",
+      "hostId": "in-treaty",
+      "classification": "restricted"
+    },
+    {
+      "org": "hearthline",
+      "name": "Premises notes",
+      "hostId": "hl-laptop",
+      "classification": "restricted"
+    },
+    {
+      "org": "calder",
+      "name": "Historian",
+      "hostId": "cg-historian",
+      "classification": "restricted"
+    },
+    {
+      "org": "brinewater",
+      "name": "Chemical workbook",
+      "hostId": "bw-chem",
+      "classification": "restricted"
+    },
+    {
+      "org": "mercy",
+      "name": "Imaging share",
+      "hostId": "ml-imaging",
+      "classification": "restricted"
+    },
+    {
+      "org": "glassport",
+      "name": "Gate log",
+      "hostId": "gp-gate",
+      "classification": "restricted"
+    },
+    {
+      "org": "kindling",
+      "name": "After-hours roster",
+      "hostId": "kg-roster",
+      "classification": "restricted"
+    }
+  ],
+  "links": [
+    {
+      "id": "bordereau",
+      "from": "indemnity",
+      "to": "northline",
+      "what": "bordereau copy",
+      "ip": "10.17.0.20"
+    },
+    {
+      "id": "premises",
+      "from": "hearthline",
+      "to": "northline",
+      "what": "premises note",
+      "ip": "10.18.0.20"
+    },
+    {
+      "id": "alarm",
+      "from": "calder",
+      "to": "northline",
+      "what": "alarm handoff",
+      "ip": "10.19.0.20"
+    },
+    {
+      "id": "chemical",
+      "from": "brinewater",
+      "to": "northline",
+      "what": "chemical draw",
+      "ip": "10.20.0.20"
+    },
+    {
+      "id": "device",
+      "from": "mercy",
+      "to": "northline",
+      "what": "device export",
+      "ip": "10.21.0.20"
+    },
+    {
+      "id": "gate",
+      "from": "glassport",
+      "to": "northline",
+      "what": "gate log",
+      "ip": "10.22.0.20"
+    },
+    {
+      "id": "roster",
+      "from": "kindling",
+      "to": "northline",
+      "what": "after-hours roster",
+      "ip": "10.23.0.20"
+    }
+  ],
+  "forests": [
+    {
+      "org": "northline",
+      "directoryHost": "nl-dc1",
+      "trusts": []
+    },
+    {
+      "org": "indemnity",
+      "directoryHost": "in-dc",
+      "trusts": []
+    },
+    {
+      "org": "hearthline",
+      "directoryHost": "hl-dc",
+      "trusts": []
+    },
+    {
+      "org": "calder",
+      "directoryHost": "cg-dc",
+      "trusts": []
+    },
+    {
+      "org": "brinewater",
+      "directoryHost": "bw-dc",
+      "trusts": []
+    },
+    {
+      "org": "mercy",
+      "directoryHost": "ml-dc",
+      "trusts": []
+    },
+    {
+      "org": "glassport",
+      "directoryHost": "gp-dc",
+      "trusts": []
+    },
+    {
+      "org": "kindling",
+      "directoryHost": "kg-dc",
+      "trusts": []
+    }
+  ],
+  "vendors": [
+    {
+      "personaId": "grace",
+      "org": "northline",
+      "engagementEnd": "2026-02-28"
+    },
+    {
+      "personaId": "cole",
+      "org": "indemnity",
+      "engagementEnd": "2026-03-01"
+    },
+    {
+      "personaId": "otto",
+      "org": "hearthline",
+      "engagementEnd": "2026-01-15"
+    },
+    {
+      "personaId": "kim",
+      "org": "calder",
+      "engagementEnd": "2025-11-02"
+    },
+    {
+      "personaId": "ida",
+      "org": "brinewater",
+      "engagementEnd": "2026-02-11"
+    },
+    {
+      "personaId": "paul",
+      "org": "mercy",
+      "engagementEnd": "2025-12-20"
+    },
+    {
+      "personaId": "nina",
+      "org": "glassport",
+      "engagementEnd": "2026-04-04"
+    },
+    {
+      "personaId": "sid",
+      "org": "kindling",
+      "engagementEnd": "2026-05-09"
+    }
+  ],
+  "serviceAccounts": [
+    {
+      "uid": "svc-claims",
+      "owner": "ruth",
+      "app": "claims",
+      "org": "northline"
+    },
+    {
+      "uid": "svc-wire",
+      "owner": "chris",
+      "app": "wire",
+      "org": "northline"
+    },
+    {
+      "uid": "svc-forge",
+      "owner": "jonah",
+      "app": "forge",
+      "org": "northline"
+    },
+    {
+      "uid": "svc-treaty",
+      "owner": "mara",
+      "app": "treaty",
+      "org": "indemnity"
+    },
+    {
+      "uid": "svc-plant",
+      "owner": "luis",
+      "app": "plant",
+      "org": "hearthline"
+    },
+    {
+      "uid": "svc-balance",
+      "owner": "anita",
+      "app": "balancing",
+      "org": "calder"
+    },
+    {
+      "uid": "svc-treat",
+      "owner": "ellis",
+      "app": "treatment",
+      "org": "brinewater"
+    },
+    {
+      "uid": "svc-imaging",
+      "owner": "naomi",
+      "app": "imaging",
+      "org": "mercy"
+    },
+    {
+      "uid": "svc-gate",
+      "owner": "andre",
+      "app": "gate",
+      "org": "glassport"
+    },
+    {
+      "uid": "svc-dispatch",
+      "owner": "imani",
+      "app": "dispatch",
+      "org": "kindling"
+    }
+  ],
+  "cohorts": [
+    {
+      "id": "claims-read-finance",
+      "object": "finance share",
+      "readers": "claims",
+      "wrong": true
+    },
+    {
+      "id": "helpdesk-all-queues",
+      "object": "ticket queues",
+      "readers": "helpdesk",
+      "wrong": true
+    },
+    {
+      "id": "treaty-broker",
+      "object": "bordereau",
+      "readers": "broker desk",
+      "wrong": true
+    },
+    {
+      "id": "plant-office",
+      "object": "premises notes",
+      "readers": "office",
+      "wrong": true
+    },
+    {
+      "id": "control-shared",
+      "object": "engineering display",
+      "readers": "shared console",
+      "wrong": true
+    },
+    {
+      "id": "lab-office",
+      "object": "chemical workbook",
+      "readers": "office",
+      "wrong": true
+    },
+    {
+      "id": "care-records",
+      "object": "imaging share",
+      "readers": "records",
+      "wrong": true
+    },
+    {
+      "id": "yard-broker",
+      "object": "gate log",
+      "readers": "broker desk",
+      "wrong": true
+    },
+    {
+      "id": "dispatch-all",
+      "object": "roster",
+      "readers": "every desk",
+      "wrong": true
+    }
+  ],
+  "certificates": [
+    {
+      "template": "staff",
+      "cohort": "employees",
+      "expires": "2027-01-01",
+      "issuer": "stand-in"
+    },
+    {
+      "template": "vendor",
+      "cohort": "contractors",
+      "expires": "2026-06-01",
+      "issuer": "stand-in"
+    },
+    {
+      "template": "partner",
+      "cohort": "lane-pike",
+      "expires": "2026-04-01",
+      "issuer": "stand-in"
+    },
+    {
+      "template": "enrollment",
+      "cohort": "wrong desk",
+      "expires": "2026-12-01",
+      "issuer": "stand-in"
+    }
+  ],
+  "partners": [
+    {
+      "client": "lane-pike",
+      "org": "northline",
+      "app": "claims"
+    },
+    {
+      "client": "broker-desk",
+      "org": "indemnity",
+      "app": "treaty"
+    },
+    {
+      "client": "field-install",
+      "org": "hearthline",
+      "app": "plant"
+    },
+    {
+      "client": "integrator",
+      "org": "calder",
+      "app": "balancing"
+    },
+    {
+      "client": "chemical-supply",
+      "org": "brinewater",
+      "app": "treatment"
+    },
+    {
+      "client": "device-vendor",
+      "org": "mercy",
+      "app": "imaging"
+    },
+    {
+      "client": "camera-vendor",
+      "org": "glassport",
+      "app": "gate"
+    },
+    {
+      "client": "radio-vendor",
+      "org": "kindling",
+      "app": "dispatch"
+    }
+  ],
+  "abandoned": [
+    {
+      "hostId": "in-treaty",
+      "cohort": "lagging",
+      "owner": "mara"
+    },
+    {
+      "hostId": "in-files",
+      "cohort": "lagging",
+      "owner": "mara"
+    },
+    {
+      "hostId": "in-print",
+      "cohort": "frozen",
+      "owner": "rosa"
+    },
+    {
+      "hostId": "in-enroll",
+      "cohort": "lagging",
+      "owner": "mara"
+    },
+    {
+      "hostId": "in-ws",
+      "cohort": "frozen",
+      "owner": "cole"
+    },
+    {
+      "hostId": "in-notes",
+      "cohort": "frozen",
+      "owner": "cole"
+    },
+    {
+      "hostId": "hl-portal",
+      "cohort": "lagging",
+      "owner": "luis"
+    },
+    {
+      "hostId": "hl-cpe",
+      "cohort": "lagging",
+      "owner": "luis"
+    },
+    {
+      "hostId": "hl-export",
+      "cohort": "frozen",
+      "owner": "luis"
+    },
+    {
+      "hostId": "hl-laptop",
+      "cohort": "lagging",
+      "owner": "luis"
+    },
+    {
+      "hostId": "hl-print",
+      "cohort": "frozen",
+      "owner": "nick"
+    },
+    {
+      "hostId": "hl-enroll",
+      "cohort": "lagging",
+      "owner": "luis"
+    },
+    {
+      "hostId": "hl-ws",
+      "cohort": "frozen",
+      "owner": "otto"
+    },
+    {
+      "hostId": "hl-notes",
+      "cohort": "frozen",
+      "owner": "otto"
+    },
+    {
+      "hostId": "cg-historian",
+      "cohort": "lagging",
+      "owner": "anita"
+    },
+    {
+      "hostId": "cg-eng",
+      "cohort": "lagging",
+      "owner": "anita"
+    },
+    {
+      "hostId": "cg-print",
+      "cohort": "frozen",
+      "owner": "sue"
+    },
+    {
+      "hostId": "cg-enroll",
+      "cohort": "lagging",
+      "owner": "anita"
+    },
+    {
+      "hostId": "cg-ws",
+      "cohort": "frozen",
+      "owner": "kim"
+    },
+    {
+      "hostId": "cg-notes",
+      "cohort": "frozen",
+      "owner": "kim"
+    },
+    {
+      "hostId": "bw-log",
+      "cohort": "lagging",
+      "owner": "ellis"
+    },
+    {
+      "hostId": "bw-chem",
+      "cohort": "lagging",
+      "owner": "ellis"
+    },
+    {
+      "hostId": "bw-access",
+      "cohort": "frozen",
+      "owner": "ellis"
+    },
+    {
+      "hostId": "bw-print",
+      "cohort": "frozen",
+      "owner": "bea"
+    },
+    {
+      "hostId": "bw-enroll",
+      "cohort": "lagging",
+      "owner": "ellis"
+    },
+    {
+      "hostId": "bw-ws",
+      "cohort": "frozen",
+      "owner": "ida"
+    },
+    {
+      "hostId": "bw-notes",
+      "cohort": "frozen",
+      "owner": "ida"
+    },
+    {
+      "hostId": "ml-imaging",
+      "cohort": "lagging",
+      "owner": "naomi"
+    },
+    {
+      "hostId": "ml-devices",
+      "cohort": "lagging",
+      "owner": "naomi"
+    },
+    {
+      "hostId": "ml-export",
+      "cohort": "frozen",
+      "owner": "naomi"
+    },
+    {
+      "hostId": "ml-print",
+      "cohort": "frozen",
+      "owner": "tess"
+    },
+    {
+      "hostId": "ml-enroll",
+      "cohort": "lagging",
+      "owner": "naomi"
+    },
+    {
+      "hostId": "ml-ws",
+      "cohort": "frozen",
+      "owner": "paul"
+    },
+    {
+      "hostId": "ml-notes",
+      "cohort": "frozen",
+      "owner": "paul"
+    },
+    {
+      "hostId": "gp-gate",
+      "cohort": "lagging",
+      "owner": "andre"
+    },
+    {
+      "hostId": "gp-cameras",
+      "cohort": "frozen",
+      "owner": "andre"
+    },
+    {
+      "hostId": "gp-bol",
+      "cohort": "lagging",
+      "owner": "andre"
+    },
+    {
+      "hostId": "gp-print",
+      "cohort": "frozen",
+      "owner": "dean"
+    },
+    {
+      "hostId": "gp-enroll",
+      "cohort": "lagging",
+      "owner": "andre"
+    },
+    {
+      "hostId": "gp-ws",
+      "cohort": "frozen",
+      "owner": "nina"
+    },
+    {
+      "hostId": "gp-notes",
+      "cohort": "frozen",
+      "owner": "nina"
+    },
+    {
+      "hostId": "kg-roster",
+      "cohort": "lagging",
+      "owner": "imani"
+    },
+    {
+      "hostId": "kg-shelter",
+      "cohort": "frozen",
+      "owner": "imani"
+    },
+    {
+      "hostId": "kg-print",
+      "cohort": "frozen",
+      "owner": "faye"
+    },
+    {
+      "hostId": "kg-enroll",
+      "cohort": "lagging",
+      "owner": "imani"
+    },
+    {
+      "hostId": "kg-ws",
+      "cohort": "frozen",
+      "owner": "sid"
+    },
+    {
+      "hostId": "kg-notes",
+      "cohort": "frozen",
+      "owner": "sid"
+    },
+    {
+      "hostId": "nl-www",
+      "cohort": "lagging",
+      "owner": "martin"
+    },
+    {
+      "hostId": "nl-mailgw",
+      "cohort": "lagging",
+      "owner": "helen"
+    },
+    {
+      "hostId": "nl-files",
+      "cohort": "lagging",
+      "owner": "priya"
+    },
+    {
+      "hostId": "nl-print",
+      "cohort": "frozen",
+      "owner": "ruth"
+    },
+    {
+      "hostId": "nl-backup",
+      "cohort": "lagging",
+      "owner": "owen"
+    },
+    {
+      "hostId": "nl-ws1",
+      "cohort": "lagging",
+      "owner": "jonah"
+    },
+    {
+      "hostId": "nl-shadow",
+      "cohort": "frozen",
+      "owner": "jonah"
+    },
+    {
+      "hostId": "nl-ca",
+      "cohort": "lagging",
+      "owner": "owen"
+    },
+    {
+      "hostId": "nl-offline-pki",
+      "cohort": "frozen",
+      "owner": "owen"
+    }
+  ],
+  "realm": [
+    {
+      "hostId": "in-edge",
+      "joined": false
+    },
+    {
+      "hostId": "in-treaty",
+      "joined": false
+    },
+    {
+      "hostId": "in-files",
+      "joined": true
+    },
+    {
+      "hostId": "in-mail",
+      "joined": true
+    },
+    {
+      "hostId": "in-backup",
+      "joined": true
+    },
+    {
+      "hostId": "in-dc",
+      "joined": true
+    },
+    {
+      "hostId": "in-idp",
+      "joined": true
+    },
+    {
+      "hostId": "in-jump",
+      "joined": false
+    },
+    {
+      "hostId": "in-wiki",
+      "joined": true
+    },
+    {
+      "hostId": "in-print",
+      "joined": true
+    },
+    {
+      "hostId": "in-sensor",
+      "joined": false
+    },
+    {
+      "hostId": "in-enroll",
+      "joined": true
+    },
+    {
+      "hostId": "in-forge",
+      "joined": false
+    },
+    {
+      "hostId": "in-ci",
+      "joined": false
+    },
+    {
+      "hostId": "in-ws",
+      "joined": false
+    },
+    {
+      "hostId": "in-notes",
+      "joined": false
+    },
+    {
+      "hostId": "hl-edge",
+      "joined": false
+    },
+    {
+      "hostId": "hl-portal",
+      "joined": false
+    },
+    {
+      "hostId": "hl-cpe",
+      "joined": true
+    },
+    {
+      "hostId": "hl-export",
+      "joined": true
+    },
+    {
+      "hostId": "hl-laptop",
+      "joined": true
+    },
+    {
+      "hostId": "hl-dc",
+      "joined": true
+    },
+    {
+      "hostId": "hl-idp",
+      "joined": true
+    },
+    {
+      "hostId": "hl-jump",
+      "joined": false
+    },
+    {
+      "hostId": "hl-wiki",
+      "joined": true
+    },
+    {
+      "hostId": "hl-print",
+      "joined": true
+    },
+    {
+      "hostId": "hl-sensor",
+      "joined": false
+    },
+    {
+      "hostId": "hl-enroll",
+      "joined": true
+    },
+    {
+      "hostId": "hl-forge",
+      "joined": false
+    },
+    {
+      "hostId": "hl-ci",
+      "joined": false
+    },
+    {
+      "hostId": "hl-ws",
+      "joined": false
+    },
+    {
+      "hostId": "hl-notes",
+      "joined": false
+    },
+    {
+      "hostId": "cg-edge",
+      "joined": false
+    },
+    {
+      "hostId": "cg-historian",
+      "joined": true
+    },
+    {
+      "hostId": "cg-eng",
+      "joined": true
+    },
+    {
+      "hostId": "cg-alarm",
+      "joined": true
+    },
+    {
+      "hostId": "cg-files",
+      "joined": true
+    },
+    {
+      "hostId": "cg-dc",
+      "joined": true
+    },
+    {
+      "hostId": "cg-idp",
+      "joined": true
+    },
+    {
+      "hostId": "cg-jump",
+      "joined": false
+    },
+    {
+      "hostId": "cg-wiki",
+      "joined": true
+    },
+    {
+      "hostId": "cg-print",
+      "joined": true
+    },
+    {
+      "hostId": "cg-sensor",
+      "joined": false
+    },
+    {
+      "hostId": "cg-enroll",
+      "joined": true
+    },
+    {
+      "hostId": "cg-forge",
+      "joined": false
+    },
+    {
+      "hostId": "cg-ci",
+      "joined": false
+    },
+    {
+      "hostId": "cg-ws",
+      "joined": false
+    },
+    {
+      "hostId": "cg-notes",
+      "joined": false
+    },
+    {
+      "hostId": "bw-edge",
+      "joined": false
+    },
+    {
+      "hostId": "bw-log",
+      "joined": true
+    },
+    {
+      "hostId": "bw-chem",
+      "joined": true
+    },
+    {
+      "hostId": "bw-access",
+      "joined": true
+    },
+    {
+      "hostId": "bw-office",
+      "joined": true
+    },
+    {
+      "hostId": "bw-dc",
+      "joined": true
+    },
+    {
+      "hostId": "bw-idp",
+      "joined": true
+    },
+    {
+      "hostId": "bw-jump",
+      "joined": false
+    },
+    {
+      "hostId": "bw-wiki",
+      "joined": true
+    },
+    {
+      "hostId": "bw-print",
+      "joined": true
+    },
+    {
+      "hostId": "bw-sensor",
+      "joined": false
+    },
+    {
+      "hostId": "bw-enroll",
+      "joined": true
+    },
+    {
+      "hostId": "bw-forge",
+      "joined": false
+    },
+    {
+      "hostId": "bw-ci",
+      "joined": false
+    },
+    {
+      "hostId": "bw-ws",
+      "joined": false
+    },
+    {
+      "hostId": "bw-notes",
+      "joined": false
+    },
+    {
+      "hostId": "ml-edge",
+      "joined": false
+    },
+    {
+      "hostId": "ml-imaging",
+      "joined": true
+    },
+    {
+      "hostId": "ml-devices",
+      "joined": true
+    },
+    {
+      "hostId": "ml-export",
+      "joined": true
+    },
+    {
+      "hostId": "ml-files",
+      "joined": true
+    },
+    {
+      "hostId": "ml-dc",
+      "joined": true
+    },
+    {
+      "hostId": "ml-idp",
+      "joined": true
+    },
+    {
+      "hostId": "ml-jump",
+      "joined": false
+    },
+    {
+      "hostId": "ml-wiki",
+      "joined": true
+    },
+    {
+      "hostId": "ml-print",
+      "joined": true
+    },
+    {
+      "hostId": "ml-sensor",
+      "joined": false
+    },
+    {
+      "hostId": "ml-enroll",
+      "joined": true
+    },
+    {
+      "hostId": "ml-forge",
+      "joined": false
+    },
+    {
+      "hostId": "ml-ci",
+      "joined": false
+    },
+    {
+      "hostId": "ml-ws",
+      "joined": false
+    },
+    {
+      "hostId": "ml-notes",
+      "joined": false
+    },
+    {
+      "hostId": "gp-edge",
+      "joined": false
+    },
+    {
+      "hostId": "gp-gate",
+      "joined": true
+    },
+    {
+      "hostId": "gp-cameras",
+      "joined": true
+    },
+    {
+      "hostId": "gp-bol",
+      "joined": true
+    },
+    {
+      "hostId": "gp-files",
+      "joined": true
+    },
+    {
+      "hostId": "gp-dc",
+      "joined": true
+    },
+    {
+      "hostId": "gp-idp",
+      "joined": true
+    },
+    {
+      "hostId": "gp-jump",
+      "joined": false
+    },
+    {
+      "hostId": "gp-wiki",
+      "joined": true
+    },
+    {
+      "hostId": "gp-print",
+      "joined": true
+    },
+    {
+      "hostId": "gp-sensor",
+      "joined": false
+    },
+    {
+      "hostId": "gp-enroll",
+      "joined": true
+    },
+    {
+      "hostId": "gp-forge",
+      "joined": false
+    },
+    {
+      "hostId": "gp-ci",
+      "joined": false
+    },
+    {
+      "hostId": "gp-ws",
+      "joined": false
+    },
+    {
+      "hostId": "gp-notes",
+      "joined": false
+    },
+    {
+      "hostId": "kg-edge",
+      "joined": false
+    },
+    {
+      "hostId": "kg-roster",
+      "joined": true
+    },
+    {
+      "hostId": "kg-orders",
+      "joined": true
+    },
+    {
+      "hostId": "kg-shelter",
+      "joined": true
+    },
+    {
+      "hostId": "kg-files",
+      "joined": true
+    },
+    {
+      "hostId": "kg-dc",
+      "joined": true
+    },
+    {
+      "hostId": "kg-idp",
+      "joined": true
+    },
+    {
+      "hostId": "kg-jump",
+      "joined": false
+    },
+    {
+      "hostId": "kg-wiki",
+      "joined": true
+    },
+    {
+      "hostId": "kg-print",
+      "joined": true
+    },
+    {
+      "hostId": "kg-sensor",
+      "joined": false
+    },
+    {
+      "hostId": "kg-enroll",
+      "joined": true
+    },
+    {
+      "hostId": "kg-forge",
+      "joined": false
+    },
+    {
+      "hostId": "kg-ci",
+      "joined": false
+    },
+    {
+      "hostId": "kg-ws",
+      "joined": false
+    },
+    {
+      "hostId": "kg-notes",
+      "joined": false
+    },
+    {
+      "hostId": "nl-edge",
+      "joined": false
+    },
+    {
+      "hostId": "nl-www",
+      "joined": false
+    },
+    {
+      "hostId": "nl-claims",
+      "joined": false
+    },
+    {
+      "hostId": "nl-vpn",
+      "joined": false
+    },
+    {
+      "hostId": "nl-mailgw",
+      "joined": false
+    },
+    {
+      "hostId": "nl-claims-app",
+      "joined": true
+    },
+    {
+      "hostId": "nl-wire",
+      "joined": true
+    },
+    {
+      "hostId": "nl-files",
+      "joined": true
+    },
+    {
+      "hostId": "nl-wiki",
+      "joined": true
+    },
+    {
+      "hostId": "nl-mail",
+      "joined": true
+    },
+    {
+      "hostId": "nl-print",
+      "joined": true
+    },
+    {
+      "hostId": "nl-backup",
+      "joined": true
+    },
+    {
+      "hostId": "nl-git",
+      "joined": false
+    },
+    {
+      "hostId": "nl-ci",
+      "joined": false
+    },
+    {
+      "hostId": "nl-ws1",
+      "joined": false
+    },
+    {
+      "hostId": "nl-ws2",
+      "joined": false
+    },
+    {
+      "hostId": "nl-shadow",
+      "joined": false
+    },
+    {
+      "hostId": "nl-dc1",
+      "joined": true
+    },
+    {
+      "hostId": "nl-dc2",
+      "joined": true
+    },
+    {
+      "hostId": "nl-ca",
+      "joined": true
+    },
+    {
+      "hostId": "nl-idp",
+      "joined": true
+    },
+    {
+      "hostId": "nl-jump",
+      "joined": false
+    },
+    {
+      "hostId": "nl-siem",
+      "joined": false
+    },
+    {
+      "hostId": "nl-mgmt-backup",
+      "joined": false
+    },
+    {
+      "hostId": "nl-offline-pki",
+      "joined": false
+    }
+  ],
+  "signals": [
+    {
+      "chainId": "external-web",
+      "org": "northline",
+      "signal": "file-open"
+    },
+    {
+      "chainId": "identity",
+      "org": "northline",
+      "signal": "sign-in"
+    },
+    {
+      "chainId": "shadow-it",
+      "org": "northline",
+      "signal": "file-open"
+    },
+    {
+      "chainId": "remote-access",
+      "org": "northline",
+      "signal": "sign-in"
+    },
+    {
+      "chainId": "mail-store",
+      "org": "northline",
+      "signal": "mail-read"
+    },
+    {
+      "chainId": "file-share",
+      "org": "northline",
+      "signal": "file-open"
+    },
+    {
+      "chainId": "backup",
+      "org": "northline",
+      "signal": "backup-read"
+    },
+    {
+      "chainId": "build",
+      "org": "northline",
+      "signal": "file-open"
+    },
+    {
+      "chainId": "source",
+      "org": "northline",
+      "signal": "file-open"
+    },
+    {
+      "chainId": "replica",
+      "org": "northline",
+      "signal": "sign-in"
+    },
+    {
+      "chainId": "partner",
+      "org": "northline",
+      "signal": "sign-in"
+    },
+    {
+      "chainId": "treaty",
+      "org": "indemnity",
+      "signal": "file-open"
+    },
+    {
+      "chainId": "outside-plant",
+      "org": "hearthline",
+      "signal": "file-open"
+    },
+    {
+      "chainId": "balancing",
+      "org": "calder",
+      "signal": "file-open"
+    },
+    {
+      "chainId": "treatment",
+      "org": "brinewater",
+      "signal": "file-open"
+    },
+    {
+      "chainId": "biomed",
+      "org": "mercy",
+      "signal": "file-open"
+    },
+    {
+      "chainId": "yard",
+      "org": "glassport",
+      "signal": "file-open"
+    },
+    {
+      "chainId": "dispatch",
+      "org": "kindling",
+      "signal": "file-open"
+    },
+    {
+      "chainId": "indemnity-vendor",
+      "org": "indemnity",
+      "signal": "sign-in"
+    },
+    {
+      "chainId": "hearthline-vendor",
+      "org": "hearthline",
+      "signal": "sign-in"
+    },
+    {
+      "chainId": "calder-vendor",
+      "org": "calder",
+      "signal": "sign-in"
+    },
+    {
+      "chainId": "brinewater-vendor",
+      "org": "brinewater",
+      "signal": "sign-in"
+    },
+    {
+      "chainId": "mercy-vendor",
+      "org": "mercy",
+      "signal": "sign-in"
+    },
+    {
+      "chainId": "glassport-vendor",
+      "org": "glassport",
+      "signal": "sign-in"
+    },
+    {
+      "chainId": "kindling-vendor",
+      "org": "kindling",
+      "signal": "sign-in"
+    }
+  ],
+  "sensors": {
+    "span": "nl-edge",
+    "store": "nl-siem",
+    "storeIp": "10.16.16.20"
+  },
+  "desk": [
+    {
+      "signal": "file-open",
+      "disposition": "noise"
+    },
+    {
+      "signal": "mail-read",
+      "disposition": "noise"
+    },
+    {
+      "signal": "backup-read",
+      "disposition": "noise"
+    },
+    {
+      "signal": "sign-in",
+      "disposition": "page"
+    }
+  ],
+  "records": {
+    "claims": [
+      {
+        "id": "c-100",
+        "owner": "ruth"
+      },
+      {
+        "id": "c-214",
+        "owner": "martin"
+      }
+    ],
+    "mail": [
+      {
+        "id": "mb-claims",
+        "owner": "tomas"
+      },
+      {
+        "id": "mb-vendor",
+        "owner": "helen"
+      }
+    ],
+    "files": [
+      {
+        "id": "share-renewals",
+        "owner": "nora"
+      },
+      {
+        "id": "share-wire",
+        "owner": "june"
+      }
+    ],
+    "wiki": [
+      {
+        "id": "wiki-company",
+        "owner": "adele"
+      },
+      {
+        "id": "wiki-desks",
+        "owner": "adele"
+      }
+    ],
+    "forge": [
+      {
+        "id": "proj-claims",
+        "owner": "jonah"
+      },
+      {
+        "id": "proj-wire",
+        "owner": "adele"
+      }
+    ],
+    "backup": [
+      {
+        "id": "bak-claims",
+        "owner": "lila"
+      },
+      {
+        "id": "bak-dump",
+        "owner": "samir"
+      },
+      {
+        "id": "print-8841",
+        "owner": "ruth"
+      }
+    ]
+  },
+  "changeBoard": {
+    "approved": [
+      "wiki-company",
+      "wiki-desks",
+      "proj-claims"
+    ],
+    "unapproved": [
+      "notes-night",
+      "print-8841"
+    ]
+  },
+  "lineage": [
+    {
+      "id": "bak-dump",
+      "copyOf": "c-214"
+    },
+    {
+      "id": "print-8841",
+      "copyOf": "c-100"
+    }
+  ],
+  "tickets": [
+    {
+      "id": "t-19",
+      "queue": "claims",
+      "owner": "ruth",
+      "operatorClass": "missing object-owner check"
+    },
+    {
+      "id": "t-20",
+      "queue": "workplace",
+      "owner": "priya",
+      "operatorClass": "helpdesk role wider than the ticket queue"
+    },
+    {
+      "id": "t-21",
+      "queue": "forge",
+      "owner": "jonah",
+      "operatorClass": "unapproved wiki on the dev segment"
+    }
+  ],
+  "night": {
+    "indemnity": [
+      {
+        "persona": "nils",
+        "verb": "open",
+        "url": "http://wiki.indemnity.lab/"
+      },
+      {
+        "persona": "mara",
+        "verb": "open",
+        "url": "http://edge.indemnity.lab/"
+      },
+      {
+        "persona": "rosa",
+        "verb": "open",
+        "url": "http://treaty.indemnity.lab/"
+      }
+    ],
+    "hearthline": [
+      {
+        "persona": "petra",
+        "verb": "open",
+        "url": "http://wiki.hearthline.lab/"
+      },
+      {
+        "persona": "luis",
+        "verb": "open",
+        "url": "http://edge.hearthline.lab/"
+      },
+      {
+        "persona": "nick",
+        "verb": "open",
+        "url": "http://laptop-luis.hearthline.lab/"
+      }
+    ],
+    "calder": [
+      {
+        "persona": "ravi",
+        "verb": "open",
+        "url": "http://wiki.calder.lab/"
+      },
+      {
+        "persona": "anita",
+        "verb": "open",
+        "url": "http://edge.calder.lab/"
+      },
+      {
+        "persona": "sue",
+        "verb": "open",
+        "url": "http://historian.calder.lab/"
+      }
+    ],
+    "brinewater": [
+      {
+        "persona": "hugh",
+        "verb": "open",
+        "url": "http://wiki.brinewater.lab/"
+      },
+      {
+        "persona": "ellis",
+        "verb": "open",
+        "url": "http://edge.brinewater.lab/"
+      },
+      {
+        "persona": "bea",
+        "verb": "open",
+        "url": "http://inventory.brinewater.lab/"
+      }
+    ],
+    "mercy": [
+      {
+        "persona": "leo",
+        "verb": "open",
+        "url": "http://wiki.mercy.lab/"
+      },
+      {
+        "persona": "naomi",
+        "verb": "open",
+        "url": "http://edge.mercy.lab/"
+      },
+      {
+        "persona": "tess",
+        "verb": "open",
+        "url": "http://imaging.mercy.lab/"
+      }
+    ],
+    "glassport": [
+      {
+        "persona": "cleo",
+        "verb": "open",
+        "url": "http://wiki.glassport.lab/"
+      },
+      {
+        "persona": "andre",
+        "verb": "open",
+        "url": "http://edge.glassport.lab/"
+      },
+      {
+        "persona": "dean",
+        "verb": "open",
+        "url": "http://gate.glassport.lab/"
+      }
+    ],
+    "kindling": [
+      {
+        "persona": "joel",
+        "verb": "open",
+        "url": "http://wiki.kindling.lab/"
+      },
+      {
+        "persona": "imani",
+        "verb": "open",
+        "url": "http://edge.kindling.lab/"
+      },
+      {
+        "persona": "faye",
+        "verb": "open",
+        "url": "http://roster.kindling.lab/"
+      }
+    ]
+  }
+}

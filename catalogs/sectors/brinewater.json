@@ -17,6 +17,12 @@
       "denyReason": "denied until an operator opens this org"
     },
     {
+      "id": "dev",
+      "cidr": "10.20.2.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
       "id": "identity",
       "cidr": "10.20.3.0/24",
       "scope": "deny",
@@ -125,6 +131,102 @@
       "patchCohort": "current",
       "logging": "full",
       "classification": "management"
+    },
+    {
+      "id": "bw-wiki",
+      "name": "Wiki",
+      "fqdn": "wiki.brinewater.lab",
+      "ip": "10.20.1.45",
+      "zone": "servers",
+      "ownerPersona": "hugh",
+      "purpose": "Approved internal wiki",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "bw-print",
+      "name": "Print",
+      "fqdn": "print.brinewater.lab",
+      "ip": "10.20.1.60",
+      "zone": "servers",
+      "ownerPersona": "bea",
+      "purpose": "Print archive",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "bw-sensor",
+      "name": "Edge span",
+      "fqdn": "sensor.brinewater.lab",
+      "ip": "10.20.0.15",
+      "zone": "dmz",
+      "ownerPersona": "ellis",
+      "purpose": "Span on the edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "bw-enroll",
+      "name": "Enrollment",
+      "fqdn": "enroll.brinewater.lab",
+      "ip": "10.20.3.20",
+      "zone": "identity",
+      "ownerPersona": "ellis",
+      "purpose": "Certificate enrollment stand-in",
+      "patchCohort": "lagging",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "bw-forge",
+      "name": "Forge",
+      "fqdn": "forge.brinewater.lab",
+      "ip": "10.20.2.10",
+      "zone": "dev",
+      "ownerPersona": "hugh",
+      "purpose": "Source forge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "bw-ci",
+      "name": "Build",
+      "fqdn": "ci.brinewater.lab",
+      "ip": "10.20.2.20",
+      "zone": "dev",
+      "ownerPersona": "bea",
+      "purpose": "Build workers",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "bw-ws",
+      "name": "Workstation",
+      "fqdn": "ws.brinewater.lab",
+      "ip": "10.20.2.30",
+      "zone": "dev",
+      "ownerPersona": "ida",
+      "purpose": "Contractor workstation",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "bw-notes",
+      "name": "Notes",
+      "fqdn": "notes.brinewater.lab",
+      "ip": "10.20.2.50",
+      "zone": "dev",
+      "ownerPersona": "ida",
+      "purpose": "Unapproved notes",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
     }
   ]
 }

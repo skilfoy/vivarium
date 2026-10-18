@@ -27,6 +27,18 @@ function present(mod) {
   return { id: mod.id, title: mod.title, note: mod.note, plane: mod.plane };
 }
 
+export function profileDiff(left, right) {
+  const ids = (rows) => rows.map((row) => row.id);
+  const added = (before, after) => ids(after).filter((id) => !ids(before).includes(id));
+  return {
+    orgsAdded: added(left.orgs, right.orgs),
+    identityAdded: added(left.identity, right.identity),
+    detectionAdded: added(left.detection, right.detection),
+    guestDelta: right.guests.count - left.guests.count,
+    dropped: right.dropped,
+  };
+}
+
 export function resolvePlan(profile, planes, orgs) {
   const errors = [];
   const warnings = [];
@@ -160,11 +172,19 @@ export function resolvePlan(profile, planes, orgs) {
     "Confirm the provider's current limits. This plan is not a quote.",
     "Keep the harness on the operator plane and import range-scope.json.",
     "No model keys inside the habitat.",
-    "This plan does not apply. Apply is a separate step on a machine you own.",
+    "This plan does not apply. The preferred substrate is free-tier AWS, and apply stays off.",
   ];
   if (windows.id !== "none") {
     checklist.push("Windows media stays on your machine. Do not commit an image or a product key.");
   }
+
+  const store = detection.some((mod) => mod.id === "elastic")
+    ? "elastic"
+    : detection.some((mod) => mod.id === "opensearch")
+      ? "opensearch"
+      : detection.some((mod) => mod.id === "wazuh")
+        ? "wazuh"
+        : "none";
 
   return {
     ok: errors.length === 0,
@@ -181,6 +201,16 @@ export function resolvePlan(profile, planes, orgs) {
     detection: detection.map(present),
     noise: noise.map(present),
     guests,
+    dropped: [],
+    store,
+    aws: placed.some((provider) => provider.id === "aws")
+      ? {
+          shape: "t3.micro",
+          guests: guests.count,
+          dropped: [],
+          note: "One role per guest. Free-tier hours are a budget, not a reason to delete a role. Apply stays off.",
+        }
+      : null,
     checklist,
     scopeNote:
       "A profile does not change range-scope.json. Other orgs, the management plane, and the noise tools stay denied until a later compile says otherwise.",

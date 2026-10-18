@@ -18,7 +18,10 @@ function knownCaller(headers) {
   const staff = loadCatalog()
     .personas.personas.filter((person) => person.org === "northline")
     .map((person) => person.id);
-  return staff.includes(token) || token === "svc-claims";
+  const accounts = loadCatalog()
+    .depth.serviceAccounts.filter((account) => account.org === "northline")
+    .map((account) => account.uid);
+  return staff.includes(token) || accounts.includes(token);
 }
 
 export function handle(input) {
@@ -113,7 +116,11 @@ function respond({ method, url, headers, seed, vaultKey, pins }) {
     const people = loadCatalog()
       .personas.personas.filter((person) => person.org === "northline")
       .map((person) => ({ uid: person.id, role: person.role, team: person.team }));
-    people.push({ uid: "svc-claims", role: "service", team: "Claims" });
+    people.push(
+      ...loadCatalog()
+        .depth.serviceAccounts.filter((account) => account.org === "northline")
+        .map((account) => ({ uid: account.uid, role: "service", team: account.app })),
+    );
     if (path === "/directory") {
       return { status: 200, body: { primary: "dc1.northline.lab", replica: "dc2.northline.lab", users: people.length } };
     }
@@ -153,6 +160,25 @@ function respond({ method, url, headers, seed, vaultKey, pins }) {
         note: "The log store is on the management plane and is not a target.",
       },
     };
+  }
+
+  if (path.startsWith("/records/")) {
+    if (!authed) return { status: 401, body: { error: "sign-in" } };
+    const desk = path.slice("/records/".length);
+    const rows = loadCatalog().depth.records[desk];
+    if (!rows) return { status: 404, body: { error: "not found" } };
+    return { status: 200, body: { desk, records: rows } };
+  }
+
+  if (path === "/tickets") {
+    if (!authed) return { status: 401, body: { error: "sign-in" } };
+    const tickets = loadCatalog().depth.tickets.map((ticket) => ({ id: ticket.id, queue: ticket.queue, owner: ticket.owner }));
+    return { status: 200, body: { tickets } };
+  }
+
+  if (path === "/change-board") {
+    if (!authed) return { status: 401, body: { error: "sign-in" } };
+    return { status: 200, body: { approved: loadCatalog().depth.changeBoard.approved } };
   }
 
   if (path === "/notes/night" && picked["sh-a"]) {

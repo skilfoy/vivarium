@@ -17,6 +17,12 @@
       "denyReason": "denied until an operator opens this org"
     },
     {
+      "id": "dev",
+      "cidr": "10.19.2.0/24",
+      "scope": "deny",
+      "denyReason": "denied until an operator opens this org"
+    },
+    {
       "id": "identity",
       "cidr": "10.19.3.0/24",
       "scope": "deny",
@@ -125,6 +131,102 @@
       "patchCohort": "current",
       "logging": "full",
       "classification": "management"
+    },
+    {
+      "id": "cg-wiki",
+      "name": "Wiki",
+      "fqdn": "wiki.calder.lab",
+      "ip": "10.19.1.45",
+      "zone": "servers",
+      "ownerPersona": "ravi",
+      "purpose": "Approved internal wiki",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "cg-print",
+      "name": "Print",
+      "fqdn": "print.calder.lab",
+      "ip": "10.19.1.60",
+      "zone": "servers",
+      "ownerPersona": "sue",
+      "purpose": "Print archive",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "cg-sensor",
+      "name": "Edge span",
+      "fqdn": "sensor.calder.lab",
+      "ip": "10.19.0.15",
+      "zone": "dmz",
+      "ownerPersona": "anita",
+      "purpose": "Span on the edge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "cg-enroll",
+      "name": "Enrollment",
+      "fqdn": "enroll.calder.lab",
+      "ip": "10.19.3.20",
+      "zone": "identity",
+      "ownerPersona": "anita",
+      "purpose": "Certificate enrollment stand-in",
+      "patchCohort": "lagging",
+      "logging": "full",
+      "classification": "restricted"
+    },
+    {
+      "id": "cg-forge",
+      "name": "Forge",
+      "fqdn": "forge.calder.lab",
+      "ip": "10.19.2.10",
+      "zone": "dev",
+      "ownerPersona": "ravi",
+      "purpose": "Source forge",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "cg-ci",
+      "name": "Build",
+      "fqdn": "ci.calder.lab",
+      "ip": "10.19.2.20",
+      "zone": "dev",
+      "ownerPersona": "sue",
+      "purpose": "Build workers",
+      "patchCohort": "current",
+      "logging": "full",
+      "classification": "internal"
+    },
+    {
+      "id": "cg-ws",
+      "name": "Workstation",
+      "fqdn": "ws.calder.lab",
+      "ip": "10.19.2.30",
+      "zone": "dev",
+      "ownerPersona": "kim",
+      "purpose": "Contractor workstation",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
+    },
+    {
+      "id": "cg-notes",
+      "name": "Notes",
+      "fqdn": "notes.calder.lab",
+      "ip": "10.19.2.50",
+      "zone": "dev",
+      "ownerPersona": "kim",
+      "purpose": "Unapproved notes",
+      "patchCohort": "frozen",
+      "logging": "none",
+      "classification": "internal"
     }
   ]
 }

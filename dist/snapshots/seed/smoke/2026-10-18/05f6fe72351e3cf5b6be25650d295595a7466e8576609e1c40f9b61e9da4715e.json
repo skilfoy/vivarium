@@ -1,8 +1,8 @@
 {
-  "name": "seed/smoke/2026-10-18/f3324bdde72a7079cb733e47e302e8b843d28de3944f75060a7bc7c13579ee20",
+  "name": "seed/smoke/2026-10-18/05f6fe72351e3cf5b6be25650d295595a7466e8576609e1c40f9b61e9da4715e",
   "tier": "smoke",
   "date": "2026-10-18",
-  "scopeHash": "f3324bdde72a7079cb733e47e302e8b843d28de3944f75060a7bc7c13579ee20",
+  "scopeHash": "05f6fe72351e3cf5b6be25650d295595a7466e8576609e1c40f9b61e9da4715e",
   "seed": 0,
   "hosts": 21,
   "playable": [

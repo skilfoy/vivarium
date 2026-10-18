@@ -3,9 +3,10 @@ import { spawnSync } from "node:child_process";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { resolvePlan } from "./plan.mjs";
+import { resolvePlan, profileDiff } from "./plan.mjs";
 import { openRun, note } from "./judge.mjs";
 import { snapshotBody, snapshotProblems } from "./snapshot.mjs";
+import { accountLayout, clockFace, harnessTickets, linkFails, openPreview, packFor, scoreReport, validateDepth, viewLeak } from "./depth.mjs";
 import {
   decide,
   emitScope,
@@ -32,7 +33,7 @@ for (const leaked of ["NL-EXT-A", "IN-TRY-A", "flagValue", "groundTruth", "weakn
   assert.equal(scopeText.includes(leaked), false, `scope contains ${leaked}`);
 }
 assert.equal(scope.names.length, 21);
-assert.equal(scope.deniedNames.length, 60);
+assert.equal(scope.deniedNames.length, 116);
 assert.equal(scope.names.some((name) => name.ip.startsWith("10.16.16.")), false);
 assert.equal(scope.deniedNames.some((name) => name.ip === "10.16.16.10"), true);
 assert.equal(scope.deniedNames.some((name) => name.ip === "10.18.0.1"), true);
@@ -80,6 +81,34 @@ assert.equal(noisy.failed, false);
 assert.equal(noisy.events.filter((event) => event.result === "noise").length, catalog.noise.events.length);
 const loud = note(scope, run, { ip: "10.16.16.20", path: "/logs", noise: true });
 assert.equal(loud.failed, true);
+assert.deepEqual(validateDepth(catalog, scope), []);
+assert.equal(linkFails(scope, catalog.depth, "bordereau"), true);
+const before = scopeHash(scope);
+const preview = openPreview(catalog, "indemnity");
+assert.equal(preview.writes, false);
+assert.equal(scopeHash(emitScope(catalog)), before);
+assert.ok(preview.playableAdded.length > 0);
+assert.deepEqual(viewLeak(scope, catalog.depth, catalog.chains), []);
+assert.equal(JSON.stringify(harnessTickets(catalog.depth)).includes("missing object-owner"), false);
+const report = scoreReport({
+  harness: "fixture",
+  revision: "abc",
+  model: "none",
+  seed: 0,
+  scopeHash: before,
+  start: "2026-10-18T00:00:00Z",
+  stop: "2026-10-18T00:10:00Z",
+  score: 0,
+  possible: 11,
+  failed: false,
+  noise: 8,
+});
+assert.equal(report.harness, "fixture");
+assert.equal(packFor("shannon", scope).files.includes("dist/range-scope.json"), false);
+assert.equal(packFor("shannon", scope).vault, false);
+assert.equal(packFor("cai", scope).files[0], "dist/range-scope.json");
+assert.equal(clockFace(catalog, 22).noise, 1);
+assert.equal(accountLayout().apply, false);
 
 const a = pickVariants(catalog, 0).map((item) => item.variantId);
 const b = pickVariants(catalog, 1).map((item) => item.variantId);
@@ -149,6 +178,15 @@ const free = JSON.parse(readFileSync(join(repoRoot(), "profiles/free.json"), "ut
 const freePlan = resolvePlan(free, planes, orgs);
 assert.equal(freePlan.orgs.length, 8);
 assert.equal(freePlan.guests.count, 143);
+assert.equal(freePlan.dropped.length, 0);
+assert.equal(freePlan.orgs.length, 8);
+assert.equal(freePlan.aws.shape, "t3.micro");
+const zeekPlan = resolvePlan({ ...free, detection: ["zeek", "wazuh"], noise: [] }, planes, orgs);
+const elasticPlan = resolvePlan({ ...free, detection: ["elastic", "suricata"], noise: [] }, planes, orgs);
+assert.notEqual(zeekPlan.guests.count, elasticPlan.guests.count);
+assert.equal(zeekPlan.store, "wazuh");
+assert.equal(elasticPlan.store, "elastic");
+assert.notEqual(profileDiff(zeekPlan, elasticPlan).guestDelta, 0);
 assert.equal(freePlan.guests.guestMb, 1024);
 assert.equal(freePlan.providers.length, 4);
 assert.equal(freePlan.providers.reduce((sum, provider) => sum + provider.guests, 0), 143);
