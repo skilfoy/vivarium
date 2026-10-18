@@ -39,6 +39,7 @@ const operatorView = {
   harnesses: catalog.harnesses,
   shifts: catalog.shifts,
   timeline: catalog.timeline,
+  noise: catalog.noise,
   scope,
   scopeHash: hash,
 };

@@ -19,6 +19,7 @@ import {
   urlInRange,
   validateCatalog,
   validateInhabitants,
+  validateNoise,
 } from "./lib.mjs";
 
 const catalog = loadCatalog();
@@ -69,6 +70,16 @@ assert.deepEqual(snapshotProblems(snap, scopeHash(scope)), []);
 assert.equal(snap.hosts, 21);
 assert.equal(snap.playable.length, 11);
 assert.ok(snapshotProblems({ ...snap, scopeHash: "nope" }, scopeHash(scope)).length > 0);
+assert.deepEqual(validateNoise(catalog, scope), []);
+const noisy = catalog.noise.events.reduce(
+  (current, event) => note(scope, current, { ...event, noise: true }),
+  run,
+);
+assert.equal(noisy.score, 0);
+assert.equal(noisy.failed, false);
+assert.equal(noisy.events.filter((event) => event.result === "noise").length, catalog.noise.events.length);
+const loud = note(scope, run, { ip: "10.16.16.20", path: "/logs", noise: true });
+assert.equal(loud.failed, true);
 
 const a = pickVariants(catalog, 0).map((item) => item.variantId);
 const b = pickVariants(catalog, 1).map((item) => item.variantId);

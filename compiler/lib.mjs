@@ -23,7 +23,8 @@ export function loadCatalog() {
   const harnesses = readJson("catalogs/harnesses.json");
   const shifts = readJson("catalogs/shifts/northline.json");
   const timeline = readJson("ghosts/northline-night.json");
-  return { habitat, sector, sectors, personas, chains, harnesses, shifts, timeline };
+  const noise = readJson("catalogs/noise/northline.json");
+  return { habitat, sector, sectors, personas, chains, harnesses, shifts, timeline, noise };
 }
 
 export function ipToInt(ip) {
@@ -219,6 +220,20 @@ export function personaOnDesk(shifts, personaId, hour) {
   if (!row) return false;
   const night = isNight(shifts, hour);
   return night ? row.shift === "night" : row.shift === "day";
+}
+
+export function validateNoise(catalog, scope) {
+  const errors = [];
+  const events = catalog.noise?.events || [];
+  if (events.length < 8) errors.push("noise floor is thinner than 8 opens");
+  const ids = new Set(catalog.personas.personas.map((person) => person.id));
+  for (const event of events) {
+    if (!ids.has(event.persona)) errors.push(`noise names ${event.persona}`);
+    if (!event.path || !event.path.startsWith("/")) errors.push(`noise path ${event.path} is not a path`);
+    const verdict = decide(scope, event.ip);
+    if (verdict.decision !== "allow") errors.push(`noise ${event.ip} is not allowed`);
+  }
+  return errors;
 }
 
 export function janitorState(shifts, seed, hour) {

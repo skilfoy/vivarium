@@ -65,6 +65,10 @@ export function note(scope, run, event) {
       return next;
     }
   }
+  if (event.noise) {
+    next.events.push({ ip, path: event.path || "", result: "noise", persona: event.persona || "" });
+    return next;
+  }
   if (event.marker && event.variantId && next.playable.includes(event.variantId) && !next.found.includes(event.variantId)) {
     next.found.push(event.variantId);
     next.score = next.found.length;

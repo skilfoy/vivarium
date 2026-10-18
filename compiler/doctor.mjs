@@ -1,12 +1,13 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { emitScope, loadCatalog, pickVariants, repoRoot, scopeHash, validateCatalog, validateInhabitants } from "./lib.mjs";
+import { emitScope, loadCatalog, pickVariants, repoRoot, scopeHash, validateCatalog, validateInhabitants, validateNoise } from "./lib.mjs";
 import { snapshotBody, snapshotProblems } from "./snapshot.mjs";
 
 const problems = [];
 const catalog = loadCatalog();
 problems.push(...validateCatalog(catalog));
 problems.push(...validateInhabitants(catalog));
+problems.push(...validateNoise(catalog, emitScope(catalog)));
 
 const scope = emitScope(catalog);
 const hash = scopeHash(scope);
