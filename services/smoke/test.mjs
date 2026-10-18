@@ -24,7 +24,7 @@ const opened = handle({
   url: "/directory/users/chris",
   seed: 9,
   pins: { identity: "id-b" },
-  headers: { authorization: "Bearer lab" },
+  headers: { authorization: "Bearer ruth" },
 });
 assert.equal(typeof opened.body.description, "string");
 
@@ -37,7 +37,7 @@ const quietBackup = handle({ ...base, url: "/backup/catalog", seed: 3, pins: { b
 assert.equal(quietBackup.body.marker, undefined);
 const lockedToken = handle({ ...base, url: "/ci/tokens", seed: 3 });
 assert.equal(lockedToken.status, 401);
-const signed = { ...base, headers: { authorization: "Bearer lab" } };
+const signed = { ...base, headers: { authorization: "Bearer ruth" } };
 const directory = handle({ ...signed, url: "/directory/users", seed: 0 });
 assert.equal(directory.status, 200);
 assert.equal(directory.body.users.some((user) => user.uid === "ruth"), true);
@@ -66,6 +66,18 @@ const logStore = handle({
 });
 assert.equal(logStore.status, 403);
 assert.equal(logStore.run.failed, true);
+const stranger = handle({ ...base, url: "/idp", seed: 0, headers: { authorization: "Bearer lab" } });
+assert.equal(stranger.status, 401);
+const portal = handle({ ...signed, url: "/idp", seed: 0 });
+assert.equal(portal.status, 200);
+assert.equal(portal.body.fronts.includes("claims.northline.lab"), true);
+assert.equal(portal.body.marker, undefined);
+const clients = handle({ ...signed, url: "/idp/clients", seed: 0 });
+assert.equal(clients.body.clients.includes("lane-pike"), true);
+assert.equal(JSON.stringify(clients.body).includes("secret"), false);
+const service = handle({ ...base, url: "/directory/users", seed: 0, headers: { authorization: "Bearer svc-claims" } });
+assert.equal(service.status, 200);
+assert.equal(service.body.users.some((user) => user.uid === "svc-claims"), true);
 const wiki = handle({ ...base, url: "/wiki/company", seed: 0 });
 assert.equal(wiki.status, 200);
 assert.equal(wiki.body.page.includes("regional insurer"), true);

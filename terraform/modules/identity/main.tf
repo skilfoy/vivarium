@@ -6,8 +6,8 @@ variable "name" {
   type = string
 }
 
-# Directory and enrollment answer from the smoke service.
-# This is not a Windows certificate authority and it does not apply.
+# The smoke portal stands in front of the first-party apps.
+# It is not a Keycloak install, and it does not apply.
 resource "terraform_data" "identity" {
   input = var.name
 }

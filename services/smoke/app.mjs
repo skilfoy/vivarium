@@ -11,8 +11,14 @@ function live(seed, pins) {
   return Object.fromEntries(pickVariants(loadCatalog(), seed, pins).map((item) => [item.variantId, item]));
 }
 
-function marker(vaultKey, seed, variant) {
-  return flagValue(vaultKey, variant.flagId, seed);
+function knownCaller(headers) {
+  const header = headers.authorization || "";
+  const token = header.startsWith("Bearer ") ? header.slice("Bearer ".length) : "";
+  if (!token) return false;
+  const staff = loadCatalog()
+    .personas.personas.filter((person) => person.org === "northline")
+    .map((person) => person.id);
+  return staff.includes(token) || token === "svc-claims";
 }
 
 export function handle(input) {
@@ -42,11 +48,15 @@ export function handle(input) {
   return { ...result, run: next };
 }
 
+function marker(vaultKey, seed, variant) {
+  return flagValue(vaultKey, variant.flagId, seed);
+}
+
 function respond({ method, url, headers, seed, vaultKey, pins }) {
   if (method !== "GET") return { status: 405, body: { error: "method" } };
   const path = url.split("?")[0];
   const picked = live(seed, pins || {});
-  const authed = Boolean(headers.authorization);
+  const authed = knownCaller(headers);
 
   if (path === "/") {
     return {
@@ -75,6 +85,22 @@ function respond({ method, url, headers, seed, vaultKey, pins }) {
     return { status: 200, body: { from: "helen", marker: marker(vaultKey, seed, picked["ext-c"]) } };
   }
 
+  if (path === "/idp") {
+    if (!authed) return { status: 401, body: { error: "sign-in" } };
+    return {
+      status: 200,
+      body: {
+        portal: "idp.northline.lab",
+        fronts: ["claims.northline.lab", "wire.northline.lab", "forge.northline.lab"],
+      },
+    };
+  }
+
+  if (path === "/idp/clients") {
+    if (!authed) return { status: 401, body: { error: "sign-in" } };
+    return { status: 200, body: { clients: ["claims-portal", "wire-desk", "lane-pike"] } };
+  }
+
   if (path === "/idp/queues") {
     if (!authed) return { status: 401, body: { error: "sign-in" } };
     const body = { queues: ["claims", "treasury", "forge"] };
@@ -87,6 +113,7 @@ function respond({ method, url, headers, seed, vaultKey, pins }) {
     const people = loadCatalog()
       .personas.personas.filter((person) => person.org === "northline")
       .map((person) => ({ uid: person.id, role: person.role, team: person.team }));
+    people.push({ uid: "svc-claims", role: "service", team: "Claims" });
     if (path === "/directory") {
       return { status: 200, body: { primary: "dc1.northline.lab", replica: "dc2.northline.lab", users: people.length } };
     }
