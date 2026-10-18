@@ -1,7 +1,10 @@
 # Northline Mutual
 
-Northline Mutual is a regional insurer that still runs a night desk. Claims come in through the public portal. Premium wires leave through a separate desk. The forge team is two people, and one of them keeps notes somewhere the change board has never seen.
+Northline Mutual is a regional insurer. Claims arrive on the public portal. Premium wires leave from a separate desk. Underwriting keeps renewal worksheets on the department share. The forge is two people, Jonah and Adele, and the approved wiki asks for a change ticket.
 
-Northline Indemnity is an affiliate with its own directory. It is not in the smoke slice. Sable Watch watches the logs from outside the prefix, and a packet that reaches Sable is the end of the exercise.
+The night desk runs from 19:00 to 07:00 America/Chicago. Claims, wires, mail, and backup stay staffed. Day people leave their pages where they were.
+
+Northline Indemnity is an affiliate with its own directory. That prefix is in the scope file and denied. Sable Watch sits outside the company. A packet that reaches it ends the run.
 
 Nothing here is a real company. The people in the persona file are not real.
+

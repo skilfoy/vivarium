@@ -52,6 +52,21 @@ resource "terraform_data" "cage" {
   }
 }
 
+module "pool" {
+  source      = "../../modules/compute-pool"
+  allow_apply = var.allow_apply
+  hosts = [
+    for name in local.scope.names : {
+      fqdn = name.fqdn
+      ip   = name.ip
+    }
+  ]
+}
+
+output "pool_guests" {
+  value = module.pool.guest_count
+}
+
 output "scope_hash" {
   value = local.scope_id
 }

@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { emitScope, loadCatalog, repoRoot, scopeHash, validateCatalog, validateInhabitants } from "./lib.mjs";
+import { emitScope, loadCatalog, pickVariants, repoRoot, scopeHash, validateCatalog, validateInhabitants } from "./lib.mjs";
+import { snapshotBody, snapshotProblems } from "./snapshot.mjs";
 
 const problems = [];
 const catalog = loadCatalog();
@@ -19,6 +20,11 @@ if (!existsSync(scopePath) || !existsSync(hashPath)) {
   if (onDisk !== hash) problems.push("scope file drifted from the catalog");
   if (recorded !== hash) problems.push("scope hash drifted");
 }
+
+const snap = snapshotBody(scope, pickVariants(catalog, 0));
+const snapPath = join(repoRoot(), "dist", "snapshots", ...snap.name.split("/")) + ".json";
+if (!existsSync(snapPath)) problems.push("published snapshot missing. Run node compiler/compile.mjs");
+else problems.push(...snapshotProblems(JSON.parse(readFileSync(snapPath, "utf8")), hash));
 
 for (const rel of [
   "LEGAL.md",

@@ -2,12 +2,26 @@
   "org": "northline",
   "note": "Browse and open only. No path leaves northline.lab.",
   "actions": [
+    { "hour": 19, "persona": "ruth", "verb": "open", "url": "http://claims.northline.lab/" },
     { "hour": 19, "persona": "chris", "verb": "open", "url": "http://wire.northline.lab/" },
-    { "hour": 20, "persona": "ruth", "verb": "open", "url": "http://claims.northline.lab/" },
-    { "hour": 21, "persona": "owen", "verb": "open", "url": "http://wiki.northline.lab/" },
+    { "hour": 20, "persona": "owen", "verb": "open", "url": "http://idp.northline.lab/" },
+    { "hour": 20, "persona": "lila", "verb": "open", "url": "http://backup.northline.lab/" },
+    { "hour": 21, "persona": "tomas", "verb": "open", "url": "http://mail.northline.lab/" },
     { "hour": 22, "persona": "ruth", "verb": "open", "url": "http://notices.northline.lab/" },
     { "hour": 23, "persona": "chris", "verb": "open", "url": "http://files.northline.lab/" },
     { "hour": 0, "persona": "owen", "verb": "open", "url": "http://idp.northline.lab/" },
-    { "hour": 1, "persona": "ruth", "verb": "open", "url": "http://print.northline.lab/" }
+    { "hour": 1, "persona": "ruth", "verb": "open", "url": "http://print.northline.lab/" },
+    { "hour": 9, "persona": "martin", "verb": "open", "url": "http://notes.northline.lab/" },
+    { "hour": 9, "persona": "priya", "verb": "open", "url": "http://idp.northline.lab/" },
+    { "hour": 10, "persona": "helen", "verb": "open", "url": "http://mailgw.northline.lab/" },
+    { "hour": 10, "persona": "jonah", "verb": "open", "url": "http://forge.northline.lab/" },
+    { "hour": 11, "persona": "adele", "verb": "open", "url": "http://ci.northline.lab/" },
+    { "hour": 11, "persona": "nora", "verb": "open", "url": "http://files.northline.lab/" },
+    { "hour": 12, "persona": "samir", "verb": "open", "url": "http://claims-app.northline.lab/" },
+    { "hour": 13, "persona": "evan", "verb": "open", "url": "http://vpn.northline.lab/" },
+    { "hour": 13, "persona": "grace", "verb": "open", "url": "http://vpn.northline.lab/" },
+    { "hour": 14, "persona": "june", "verb": "open", "url": "http://files.northline.lab/" },
+    { "hour": 14, "persona": "wes", "verb": "open", "url": "http://ci.northline.lab/" },
+    { "hour": 15, "persona": "jonah", "verb": "open", "url": "http://wiki.northline.lab/" }
   ]
 }

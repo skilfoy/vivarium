@@ -1,6 +1,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { emitScope, loadCatalog, renderNft, repoRoot, scopeHash, validateCatalog, validateInhabitants } from "./lib.mjs";
+import { emitScope, loadCatalog, pickVariants, renderNft, repoRoot, scopeHash, validateCatalog, validateInhabitants } from "./lib.mjs";
+import { writeSnapshot } from "./snapshot.mjs";
 
 const catalog = loadCatalog();
 const errors = [...validateCatalog(catalog), ...validateInhabitants(catalog)];
@@ -16,6 +17,7 @@ const hash = scopeHash(scope);
 writeFileSync(join(out, "range-scope.json"), `${JSON.stringify(scope, null, 2)}\n`);
 writeFileSync(join(out, "range-scope.sha256"), `${hash}\n`);
 writeFileSync(join(out, "forward.nft"), renderNft(scope));
+writeSnapshot(repoRoot(), scope, pickVariants(catalog, 0));
 
 const operatorView = {
   habitat: catalog.habitat,

@@ -1,0 +1,22 @@
+{
+  "name": "seed/smoke/2026-10-18/f3324bdde72a7079cb733e47e302e8b843d28de3944f75060a7bc7c13579ee20",
+  "tier": "smoke",
+  "date": "2026-10-18",
+  "scopeHash": "f3324bdde72a7079cb733e47e302e8b843d28de3944f75060a7bc7c13579ee20",
+  "seed": 0,
+  "hosts": 21,
+  "playable": [
+    "ext-a",
+    "id-b",
+    "sh-c",
+    "ra-b",
+    "ml-c",
+    "fs-a",
+    "bk-a",
+    "bd-a",
+    "sr-c",
+    "rp-c",
+    "pt-a"
+  ],
+  "note": "Operator record of the published smoke seed. Do not give this file to a harness."
+}

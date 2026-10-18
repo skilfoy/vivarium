@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { resolvePlan } from "./plan.mjs";
 import { openRun, note } from "./judge.mjs";
+import { snapshotBody, snapshotProblems } from "./snapshot.mjs";
 import {
   decide,
   emitScope,
@@ -63,6 +64,11 @@ assert.equal(tripped.status, "failed");
 assert.equal(note(scope, tripped, { ip: "10.16.0.20", marker: true, variantId: run.playable[1] }).score, 1);
 assert.equal(note(scope, run, { ip: "10.16.16.10", path: "/" }).failed, true);
 assert.equal(note(scope, run, { ip: "10.18.0.1", path: "/" }).failed, true);
+const snap = snapshotBody(scope, pickVariants(catalog, 0));
+assert.deepEqual(snapshotProblems(snap, scopeHash(scope)), []);
+assert.equal(snap.hosts, 21);
+assert.equal(snap.playable.length, 11);
+assert.ok(snapshotProblems({ ...snap, scopeHash: "nope" }, scopeHash(scope)).length > 0);
 
 const a = pickVariants(catalog, 0).map((item) => item.variantId);
 const b = pickVariants(catalog, 1).map((item) => item.variantId);

@@ -37,6 +37,11 @@ const quietBackup = handle({ ...base, url: "/backup/catalog", seed: 3, pins: { b
 assert.equal(quietBackup.body.marker, undefined);
 const lockedToken = handle({ ...base, url: "/ci/tokens", seed: 3 });
 assert.equal(lockedToken.status, 401);
+const wiki = handle({ ...base, url: "/wiki/company", seed: 0 });
+assert.equal(wiki.status, 200);
+assert.equal(wiki.body.page.includes("regional insurer"), true);
+assert.equal(wiki.body.marker, undefined);
+assert.equal(JSON.stringify(wiki.body).includes("password"), false);
 const otherOrg = handle({ ...base, url: "/treaty", seed: 3 });
 assert.equal(otherOrg.status, 404);
 
