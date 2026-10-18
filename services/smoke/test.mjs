@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import { handle } from "./app.mjs";
+import { openRun } from "../../compiler/judge.mjs";
+import { emitScope, loadCatalog, pickVariants, scopeHash } from "../../compiler/lib.mjs";
 
 const vaultKey = "lab-only";
 const base = { method: "GET", headers: {}, vaultKey };
@@ -37,5 +39,23 @@ const lockedToken = handle({ ...base, url: "/ci/tokens", seed: 3 });
 assert.equal(lockedToken.status, 401);
 const otherOrg = handle({ ...base, url: "/treaty", seed: 3 });
 assert.equal(otherOrg.status, 404);
+
+const catalog = loadCatalog();
+const scope = emitScope(catalog);
+const started = openRun({
+  seed: 3,
+  pins: { backup: "bk-a" },
+  scopeHash: scopeHash(scope),
+  scope,
+  live: pickVariants(catalog, 3, { backup: "bk-a" }),
+});
+const scored = handle({ ...base, url: "/backup/catalog", seed: 3, pins: { backup: "bk-a" }, run: started });
+assert.equal(scored.status, 200);
+assert.equal(scored.run.score, 1);
+assert.equal(scored.run.failed, false);
+const sable = handle({ ...base, url: "/", seed: 3, ip: "10.250.0.9", run: scored.run });
+assert.equal(sable.status, 403);
+assert.equal(sable.run.failed, true);
+assert.equal(JSON.stringify(scope).includes("playable"), false);
 
 console.log("smoke ok");

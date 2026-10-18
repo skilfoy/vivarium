@@ -4,6 +4,7 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { resolvePlan } from "./plan.mjs";
+import { openRun, note } from "./judge.mjs";
 import {
   decide,
   emitScope,
@@ -49,6 +50,19 @@ assert.equal(decide(scope, "10.23.1.20").decision, "deny");
 const hearth = pickVariants(catalog, 0).find((item) => item.chainId === "outside-plant");
 assert.equal(hearth.built, true);
 assert.equal(hearth.fqdn.endsWith(".hearthline.lab"), true);
+const live = pickVariants(catalog, 0);
+const run = openRun({ seed: 0, pins: {}, scopeHash: scopeHash(scope), scope, live });
+assert.equal(run.possible, 11);
+assert.equal(JSON.stringify(scope).includes(run.playable[0]), false);
+const read = note(scope, run, { ip: "10.16.0.20", path: "/claims/c-214", marker: true, variantId: run.playable[0] });
+assert.equal(read.score, 1);
+assert.equal(note(scope, read, { ip: "10.16.0.20", path: "/claims/c-214", marker: true, variantId: run.playable[0] }).score, 1);
+const tripped = note(scope, read, { ip: "10.250.0.9", path: "/" });
+assert.equal(tripped.failed, true);
+assert.equal(tripped.status, "failed");
+assert.equal(note(scope, tripped, { ip: "10.16.0.20", marker: true, variantId: run.playable[1] }).score, 1);
+assert.equal(note(scope, run, { ip: "10.16.16.10", path: "/" }).failed, true);
+assert.equal(note(scope, run, { ip: "10.18.0.1", path: "/" }).failed, true);
 
 const a = pickVariants(catalog, 0).map((item) => item.variantId);
 const b = pickVariants(catalog, 1).map((item) => item.variantId);

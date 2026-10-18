@@ -1,4 +1,5 @@
-import { flagValue, loadCatalog, pickVariants } from "../../compiler/lib.mjs";
+import { emitScope, flagValue, loadCatalog, pickVariants } from "../../compiler/lib.mjs";
+import { note } from "../../compiler/judge.mjs";
 
 const claims = [
   { id: "c-100", owner: "ruth", title: "Roof, policy NM-100", note: "Synthetic packet. Photos still out." },
@@ -14,7 +15,34 @@ function marker(vaultKey, seed, variant) {
   return flagValue(vaultKey, variant.flagId, seed);
 }
 
-export function handle({ method, url, headers, seed, vaultKey, pins }) {
+export function handle(input) {
+  const result = respond(input);
+  if (!input.run) return result;
+  const catalog = loadCatalog();
+  const scope = emitScope(catalog);
+  const picked = pickVariants(catalog, input.seed, input.pins || {});
+  let variantId = "";
+  if (result.body) {
+    for (const item of picked) {
+      const value = flagValue(input.vaultKey, item.flagId, input.seed);
+      if (result.body.marker === value || result.body.description === value) {
+        variantId = item.variantId;
+        break;
+      }
+    }
+  }
+  const variant = picked.find((item) => item.variantId === variantId);
+  const next = note(scope, input.run, {
+    ip: input.ip || (variant ? variant.ip : ""),
+    path: (input.url || "/").split("?")[0],
+    marker: Boolean(variantId),
+    variantId,
+  });
+  if (next.failed) return { status: 403, body: { error: "out of scope" }, run: next };
+  return { ...result, run: next };
+}
+
+function respond({ method, url, headers, seed, vaultKey, pins }) {
   if (method !== "GET") return { status: 405, body: { error: "method" } };
   const path = url.split("?")[0];
   const picked = live(seed, pins || {});

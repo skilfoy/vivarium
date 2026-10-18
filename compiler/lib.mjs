@@ -179,6 +179,7 @@ export function pickVariants(catalog, seed, pins = {}) {
       variantId: variant.id,
       hostId: variant.hostId || "",
       fqdn: host ? host.fqdn : "",
+      ip: host ? host.ip : "",
       built: Boolean(host),
       personaId: variant.personaId,
       flagId: variant.flagId,
