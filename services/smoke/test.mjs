@@ -37,6 +37,35 @@ const quietBackup = handle({ ...base, url: "/backup/catalog", seed: 3, pins: { b
 assert.equal(quietBackup.body.marker, undefined);
 const lockedToken = handle({ ...base, url: "/ci/tokens", seed: 3 });
 assert.equal(lockedToken.status, 401);
+const signed = { ...base, headers: { authorization: "Bearer lab" } };
+const directory = handle({ ...signed, url: "/directory/users", seed: 0 });
+assert.equal(directory.status, 200);
+assert.equal(directory.body.users.some((user) => user.uid === "ruth"), true);
+assert.equal(directory.body.users.some((user) => user.uid === "mara"), false);
+assert.equal(JSON.stringify(directory.body).includes("habit"), false);
+const lockedDirectory = handle({ ...base, url: "/directory", seed: 0 });
+assert.equal(lockedDirectory.status, 401);
+const enroll = handle({ ...signed, url: "/enroll", seed: 0 });
+assert.equal(enroll.body.mode, "stand-in");
+assert.equal(enroll.body.marker, undefined);
+const sensor = handle({ ...base, url: "/sensor/edge", seed: 0 });
+assert.equal(sensor.status, 200);
+assert.equal(sensor.body.marker, undefined);
+const logStore = handle({
+  ...base,
+  url: "/",
+  seed: 0,
+  ip: "10.16.16.20",
+  run: openRun({
+    seed: 0,
+    pins: {},
+    scopeHash: scopeHash(emitScope(loadCatalog())),
+    scope: emitScope(loadCatalog()),
+    live: pickVariants(loadCatalog(), 0),
+  }),
+});
+assert.equal(logStore.status, 403);
+assert.equal(logStore.run.failed, true);
 const wiki = handle({ ...base, url: "/wiki/company", seed: 0 });
 assert.equal(wiki.status, 200);
 assert.equal(wiki.body.page.includes("regional insurer"), true);

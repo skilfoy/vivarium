@@ -82,6 +82,17 @@ function respond({ method, url, headers, seed, vaultKey, pins }) {
     return { status: 200, body };
   }
 
+  if (path === "/directory" || path === "/directory/users") {
+    if (!authed) return { status: 401, body: { error: "sign-in" } };
+    const people = loadCatalog()
+      .personas.personas.filter((person) => person.org === "northline")
+      .map((person) => ({ uid: person.id, role: person.role, team: person.team }));
+    if (path === "/directory") {
+      return { status: 200, body: { primary: "dc1.northline.lab", replica: "dc2.northline.lab", users: people.length } };
+    }
+    return { status: 200, body: { users: people } };
+  }
+
   if (path === "/directory/users/chris") {
     if (!authed) return { status: 401, body: { error: "sign-in" } };
     const body = { uid: "chris", role: "wire operator" };
@@ -89,11 +100,32 @@ function respond({ method, url, headers, seed, vaultKey, pins }) {
     return { status: 200, body };
   }
 
+  if (path === "/enroll") {
+    if (!authed) return { status: 401, body: { error: "sign-in" } };
+    return {
+      status: 200,
+      body: {
+        mode: "stand-in",
+        note: "Enrollment is not a Windows certificate authority. The offline issuer is on the management plane and is not a target.",
+      },
+    };
+  }
+
   if (path === "/enroll/templates") {
     if (!authed) return { status: 401, body: { error: "sign-in" } };
     const body = { templates: ["workstation", "vendor"] };
     if (picked["id-c"]) body.marker = marker(vaultKey, seed, picked["id-c"]);
     return { status: 200, body };
+  }
+
+  if (path === "/sensor/edge") {
+    return {
+      status: 200,
+      body: {
+        span: "edge.northline.lab",
+        note: "The log store is on the management plane and is not a target.",
+      },
+    };
   }
 
   if (path === "/notes/night" && picked["sh-a"]) {
