@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { emitScope, loadCatalog, pickVariants, repoRoot, scopeHash, validateCatalog, validateInhabitants, validateNoise } from "./lib.mjs";
 import { validateDepth } from "./depth.mjs";
+import { validateCompany } from "./books.mjs";
 import { snapshotBody, snapshotProblems } from "./snapshot.mjs";
 
 const problems = [];
@@ -10,6 +11,7 @@ problems.push(...validateCatalog(catalog));
 problems.push(...validateInhabitants(catalog));
 problems.push(...validateNoise(catalog, emitScope(catalog)));
 problems.push(...validateDepth(catalog, emitScope(catalog)));
+problems.push(...validateCompany(catalog));
 
 const scope = emitScope(catalog);
 const hash = scopeHash(scope);

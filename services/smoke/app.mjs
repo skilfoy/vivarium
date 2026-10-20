@@ -1,5 +1,16 @@
 import { emitScope, flagValue, loadCatalog, pickVariants } from "../../compiler/lib.mjs";
 import { note } from "../../compiler/judge.mjs";
+import { book, harnessRows, markerFor, sessionFor, signalFor } from "../../compiler/books.mjs";
+
+const edge = [];
+
+export function resetEdge() {
+  edge.length = 0;
+}
+
+function clockOf(input) {
+  return { hour: input.hour ?? 12, weekday: input.weekday ?? 2 };
+}
 
 const claims = [
   { id: "c-100", owner: "ruth", title: "Roof, policy NM-100", note: "Synthetic packet. Photos still out." },
@@ -55,7 +66,9 @@ function marker(vaultKey, seed, variant) {
   return flagValue(vaultKey, variant.flagId, seed);
 }
 
-function respond({ method, url, headers, seed, vaultKey, pins }) {
+function respond(input) {
+  const { method, url, headers, seed, vaultKey, pins } = input;
+  const { hour, weekday } = clockOf(input);
   if (method !== "GET") return { status: 405, body: { error: "method" } };
   const path = url.split("?")[0];
   const picked = live(seed, pins || {});
@@ -90,11 +103,13 @@ function respond({ method, url, headers, seed, vaultKey, pins }) {
 
   if (path === "/idp") {
     if (!authed) return { status: 401, body: { error: "sign-in" } };
+    const token = (headers.authorization || "").slice("Bearer ".length);
     return {
       status: 200,
       body: {
         portal: "idp.northline.lab",
         fronts: ["claims.northline.lab", "wire.northline.lab", "forge.northline.lab"],
+        caller: sessionFor(loadCatalog(), token),
       },
     };
   }
@@ -158,22 +173,33 @@ function respond({ method, url, headers, seed, vaultKey, pins }) {
       body: {
         span: "edge.northline.lab",
         note: "The log store is on the management plane and is not a target.",
+        signals: edge.map((item) => ({ signal: item })),
       },
     };
   }
 
   if (path.startsWith("/records/")) {
     if (!authed) return { status: 401, body: { error: "sign-in" } };
-    const desk = path.slice("/records/".length);
-    const rows = loadCatalog().depth.records[desk];
-    if (!rows) return { status: 404, body: { error: "not found" } };
-    return { status: 200, body: { desk, records: rows } };
+    const parts = path.split("/").filter(Boolean);
+    const desk = parts[1];
+    const id = parts[2];
+    const token = (headers.authorization || "").slice("Bearer ".length);
+    const snapshot = book(loadCatalog(), { hour, weekday });
+    const rows = harnessRows(snapshot.objects.filter((item) => item.desk === desk));
+    if (!rows.length) return { status: 404, body: { error: "not found" } };
+    if (!id) return { status: 200, body: { desk, records: rows, caller: sessionFor(loadCatalog(), token) } };
+    const record = rows.find((item) => item.id === id);
+    if (!record) return { status: 404, body: { error: "missing" } };
+    const body = { ...record, caller: sessionFor(loadCatalog(), token) };
+    const mark = markerFor(picked, desk, id, vaultKey, seed);
+    if (mark) body.marker = mark;
+    edge.push(signalFor(desk));
+    return { status: 200, body };
   }
 
   if (path === "/tickets") {
     if (!authed) return { status: 401, body: { error: "sign-in" } };
-    const tickets = loadCatalog().depth.tickets.map((ticket) => ({ id: ticket.id, queue: ticket.queue, owner: ticket.owner }));
-    return { status: 200, body: { tickets } };
+    return { status: 200, body: { tickets: book(loadCatalog(), { hour, weekday }).tickets } };
   }
 
   if (path === "/change-board") {

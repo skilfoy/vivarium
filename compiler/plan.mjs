@@ -27,6 +27,27 @@ function present(mod) {
   return { id: mod.id, title: mod.title, note: mod.note, plane: mod.plane };
 }
 
+export function awsFreePlacement(guestCount) {
+  const accounts = [];
+  for (let i = 0; i < guestCount; i += 1) {
+    accounts.push({
+      account: `free-${String(i + 1).padStart(3, "0")}`,
+      guest: i + 1,
+      shape: "t3.micro",
+      hours: 750,
+      spill: "next-account",
+    });
+  }
+  return {
+    shape: "t3.micro",
+    hoursPerGuest: 750,
+    accounts,
+    dropped: [],
+    assumption:
+      "750 hours covers one t3.micro for a month. Each extra guest is another account, not a deleted role. Confirm the current free tier before any account exists. Apply stays off.",
+  };
+}
+
 export function profileDiff(left, right) {
   const ids = (rows) => rows.map((row) => row.id);
   const added = (before, after) => ids(after).filter((id) => !ids(before).includes(id));
@@ -209,6 +230,7 @@ export function resolvePlan(profile, planes, orgs) {
           guests: guests.count,
           dropped: [],
           note: "One role per guest. Free-tier hours are a budget, not a reason to delete a role. Apply stays off.",
+          placement: budget.id === "free" ? awsFreePlacement(guests.count) : null,
         }
       : null,
     checklist,

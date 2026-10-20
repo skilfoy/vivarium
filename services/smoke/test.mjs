@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { handle } from "./app.mjs";
+import { handle, resetEdge } from "./app.mjs";
+import { campaign } from "./campaign.mjs";
 import { openRun } from "../../compiler/judge.mjs";
 import { emitScope, loadCatalog, pickVariants, scopeHash } from "../../compiler/lib.mjs";
 
@@ -79,7 +80,24 @@ const service = handle({ ...base, url: "/directory/users", seed: 0, headers: { a
 assert.equal(service.status, 200);
 assert.equal(service.body.users.some((user) => user.uid === "svc-claims"), true);
 const records = handle({ ...signed, url: "/records/claims", seed: 0 });
-assert.equal(records.body.records.length, 2);
+assert.ok(records.body.records.length > 50);
+assert.equal(JSON.stringify(records.body).includes("marker"), false);
+const one = handle({ ...signed, url: "/records/claims/c-214", seed: 4, pins: { "external-web": "ext-a" } });
+assert.equal(typeof one.body.marker, "string");
+assert.ok(one.body.readers.includes("Claims"));
+resetEdge();
+const night = handle({ ...signed, url: "/records/claims/wire-batch", seed: 0, hour: 22, weekday: 2 });
+assert.equal(night.status, 200);
+const day = handle({ ...signed, url: "/records/claims/wire-batch", seed: 0, hour: 12, weekday: 2 });
+assert.equal(day.status, 404);
+const sensorAfter = handle({ ...base, url: "/sensor/edge", seed: 0 });
+assert.equal(sensorAfter.body.signals.some((item) => item.signal === "file-open"), true);
+assert.equal(JSON.stringify(sensorAfter.body.signals).includes("ext-a"), false);
+const walked = campaign();
+assert.equal(walked.reproducible, true);
+assert.equal(walked.roeFailures, 1);
+assert.equal(walked.precision, 1);
+assert.ok(walked.rows > 200);
 const tickets = handle({ ...signed, url: "/tickets", seed: 0 });
 assert.equal(JSON.stringify(tickets.body).includes("missing object-owner"), false);
 const board = handle({ ...signed, url: "/change-board", seed: 0 });
