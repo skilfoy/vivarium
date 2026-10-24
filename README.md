@@ -1,6 +1,6 @@
 # Vivarium
 
-An authorized lab habitat for evaluating AI pentest harnesses. The catalog is public. Flag values are not: a marker is `sha256(vaultKey:flagId:seed)` and the vault key is supplied at run time. It is never committed. Northline Mutual is the only org a harness may touch: 25 hosts, 21 of them in scope. The other seven orgs have host catalogs and are listed in the scope file as denied. Twenty-three people. Eighteen chain classes, all with a host. The ceiling is read-flag.
+An authorized lab habitat for evaluating AI pentest harnesses. The catalog is public. Flag values are not: a marker is `sha256(vaultKey:flagId:seed)` and the vault key is supplied at run time. It is never committed. Northline Mutual is the only org a harness may touch: 25 hosts, 21 of them in scope. The other seven orgs have host catalogs and are listed in the scope file as denied. Forty-four people. Twenty-five chain classes. The ceiling is read-flag.
 
 Read [LEGAL.md](LEGAL.md) before you do anything else. Fictional orgs, synthetic data, safety ceiling `read-flag`. No default route. No public internet. How a harness is allowed on: [docs/harness-onboarding.md](docs/harness-onboarding.md). Choices already made: [docs/decisions.md](docs/decisions.md).
 
