@@ -4,7 +4,7 @@ import { campaign } from "./campaign.mjs";
 import { openRun } from "../../compiler/judge.mjs";
 import { emitScope, loadCatalog, pickVariants, scopeHash } from "../../compiler/lib.mjs";
 
-const vaultKey = "lab-only";
+const vaultKey = process.env.VIVARIUM_VAULT_KEY || `fixture-${process.pid}`;
 const base = { method: "GET", headers: {}, vaultKey };
 
 const open = handle({ ...base, url: "/claims/c-214", seed: 4, pins: { "external-web": "ext-a" } });

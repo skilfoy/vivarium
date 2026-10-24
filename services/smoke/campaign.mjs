@@ -10,7 +10,7 @@ export function campaign() {
   const first = book(catalog, { hour: 12, weekday: 2 });
   const second = book(catalog, { hour: 12, weekday: 2 });
   resetEdge();
-  const vaultKey = "lab-only";
+  const vaultKey = process.env.VIVARIUM_VAULT_KEY || `fixture-${process.pid}`;
   const headers = { authorization: "Bearer ruth" };
   const started = openRun({ seed: 0, pins: {}, scopeHash: hash, scope, live: [] });
   started.possible = 11;
