@@ -1,0 +1,16 @@
+{
+  "org": "northline",
+  "domain": "northline.lab",
+  "store": "mail.northline.lab",
+  "rule": "Every recipient stays on northline.lab. There is no path to a public mailbox.",
+  "routes": [
+    { "id": "m-100", "from": "ruth@northline.lab", "to": "martin@northline.lab", "subject": "Loss run, Monday" },
+    { "id": "m-101", "from": "helen@northline.lab", "to": "ruth@northline.lab", "subject": "Vendor copy of NM-088" },
+    { "id": "m-102", "from": "martin@northline.lab", "to": "chris@northline.lab", "subject": "Wire desk is covered tonight" },
+    { "id": "m-103", "from": "june@northline.lab", "to": "priya@northline.lab", "subject": "Renewal folder" },
+    { "id": "m-104", "from": "jonah@northline.lab", "to": "adele@northline.lab", "subject": "Forge is the claims page only" },
+    { "id": "m-105", "from": "owen@northline.lab", "to": "lila@northline.lab", "subject": "Night backup finished" },
+    { "id": "m-106", "from": "tomas@northline.lab", "to": "helen@northline.lab", "subject": "Mailbox quota" },
+    { "id": "m-107", "from": "nora@northline.lab", "to": "june@northline.lab", "subject": "Treasury working set" }
+  ]
+}

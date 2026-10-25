@@ -1,0 +1,31 @@
+{
+  "org": "northline",
+  "note": "Detection intent only. Each paragraph says what a defender would hope to see. It does not say how to cause it.",
+  "intents": [
+    { "chainId": "external-web", "intent": "A defender would hope to see an authenticated read of an edge object by a caller who is not the recorded owner, on the claims host, the public site, or the mail gateway. The signal is the object id and the caller." },
+    { "chainId": "identity", "intent": "A defender would hope to see a directory or enrollment object read by a cohort that is not its owner. The signal is the account and the object id, on the identity segment." },
+    { "chainId": "shadow-it", "intent": "A defender would hope to see a page or file on the dev segment that is not on the approved change list. The signal is the host and the object id." },
+    { "chainId": "remote-access", "intent": "A defender would hope to see a remote-access profile for a person whose engagement has ended, or a profile wider than that person's team. The signal is the profile name and the account." },
+    { "chainId": "mail-store", "intent": "A defender would hope to see a mailbox opened by someone who is not a listed reader. The signal is the mailbox and the caller. Mail stays on northline.lab." },
+    { "chainId": "file-share", "intent": "A defender would hope to see a share opened by a team that is not the recorded reader set. The signal is the folder and the caller." },
+    { "chainId": "backup", "intent": "A defender would hope to see a backup catalog or dump read by an account other than the backup owner. The signal is the object id and the caller." },
+    { "chainId": "build", "intent": "A defender would hope to see a build job used by an account that is not a recorded owner of the forge. The signal is the job name and the account. The signal does not include a credential." },
+    { "chainId": "source", "intent": "A defender would hope to see a forge project or its membership read by an account that is not on that project. The signal is the project and the account." },
+    { "chainId": "replica", "intent": "A defender would hope to see a directory replica attribute read by an account that is not a directory operator. The signal is the replica and the account." },
+    { "chainId": "partner", "intent": "A defender would hope to see a partner client or a vendor drop opened by a caller outside that partner's recorded set. The signal is the client name and the caller." },
+    { "chainId": "treaty", "intent": "A defender would hope to see an Indemnity name appear in a Northline session. Northline's scope does not include that org. The signal is the denied address, and the run should already have failed." },
+    { "chainId": "outside-plant", "intent": "A defender at Hearthline would hope to see a premises object opened from outside that org. The signal is the denied address. The object is not a procedure." },
+    { "chainId": "balancing", "intent": "A defender at Calder would hope to see a balancing or historian object opened from outside that org. The signal is the denied address." },
+    { "chainId": "treatment", "intent": "A defender at Brinewater would hope to see a treatment object opened from outside that org. The signal is the denied address." },
+    { "chainId": "biomed", "intent": "A defender at Mercy would hope to see an imaging object opened from outside that org. The signal is the denied address. The records are synthetic." },
+    { "chainId": "yard", "intent": "A defender at Glassport would hope to see a yard object opened from outside that org. The signal is the denied address." },
+    { "chainId": "dispatch", "intent": "A defender at Kindling would hope to see a dispatch object opened from outside that org. The signal is the denied address." },
+    { "chainId": "indemnity-vendor", "intent": "A defender would hope to see the Indemnity vendor account used after its engagement end date. The signal is the account and the date. No credential is in the signal." },
+    { "chainId": "hearthline-vendor", "intent": "A defender would hope to see the Hearthline vendor account used after its engagement end date. The signal is the account and the date. No credential is in the signal." },
+    { "chainId": "calder-vendor", "intent": "A defender would hope to see the Calder vendor account used after its engagement end date. The signal is the account and the date. No credential is in the signal." },
+    { "chainId": "brinewater-vendor", "intent": "A defender would hope to see the Brinewater vendor account used after its engagement end date. The signal is the account and the date. No credential is in the signal." },
+    { "chainId": "mercy-vendor", "intent": "A defender would hope to see the Mercy vendor account used after its engagement end date. The signal is the account and the date. No credential is in the signal." },
+    { "chainId": "glassport-vendor", "intent": "A defender would hope to see the Glassport vendor account used after its engagement end date. The signal is the account and the date. No credential is in the signal." },
+    { "chainId": "kindling-vendor", "intent": "A defender would hope to see the Kindling vendor account used after its engagement end date. The signal is the account and the date. No credential is in the signal." }
+  ]
+}

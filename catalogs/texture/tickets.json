@@ -1,0 +1,20 @@
+{
+  "org": "northline",
+  "tracker": "tracker.northline.lab",
+  "note": "A scope-expansion ticket does not change the scope file. A person approves it, or it stays pending.",
+  "tickets": [
+    { "id": "t-440", "queue": "workplace", "owner": "helen", "kind": "work", "title": "Mailbox quota on the night desk", "status": "open" },
+    { "id": "t-441", "queue": "forge", "owner": "jonah", "kind": "work", "title": "Claims page review", "status": "open" },
+    {
+      "id": "t-exp-hearthline",
+      "queue": "scope",
+      "owner": "owen",
+      "kind": "scope-expansion",
+      "title": "Ask to open Hearthline for a premises note",
+      "targetOrg": "hearthline",
+      "status": "pending",
+      "approver": "owen",
+      "effect": "Does not change the scope file."
+    }
+  ]
+}

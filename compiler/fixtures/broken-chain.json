@@ -1,0 +1,14 @@
+{
+  "org": "northline",
+  "note": "This fixture is invalid on purpose.",
+  "chains": [
+    {
+      "id": "broken",
+      "class": "external web",
+      "title": "A fixture that must fail the schema.",
+      "safetyCeiling": "shell",
+      "payload": "not-a-field",
+      "variants": []
+    }
+  ]
+}

@@ -8,6 +8,10 @@ import { book, bookHash, validateCompany } from "./books.mjs";
 import { openRun, note } from "./judge.mjs";
 import { snapshotBody, snapshotProblems } from "./snapshot.mjs";
 import { accountLayout, clockFace, harnessTickets, linkFails, openPreview, packFor, scoreReport, validateDepth, viewLeak } from "./depth.mjs";
+import { fixtureManifest, manifestProblems, renderScore } from "./score.mjs";
+import { validateSchemas } from "./schema.mjs";
+import { validateTexture } from "./texture.mjs";
+import { groundTruth, truthProblems } from "./truth.mjs";
 import {
   decide,
   emitScope,
@@ -110,6 +114,18 @@ assert.equal(packFor("shannon", scope).vault, false);
 assert.equal(packFor("cai", scope).files[0], "dist/range-scope.json");
 assert.equal(clockFace(catalog, 22).noise, 1);
 assert.equal(accountLayout().apply, false);
+assert.deepEqual(validateSchemas(catalog), []);
+assert.deepEqual(validateTexture(catalog), []);
+const truth = groundTruth(catalog, 0, {}, before);
+assert.deepEqual(truthProblems(truth), []);
+assert.equal(JSON.stringify(truth).includes("marker"), false);
+assert.equal(truth.variants.length, 25);
+const manifest = fixtureManifest(before);
+assert.deepEqual(manifestProblems(manifest), []);
+const rendered = renderScore(manifest);
+assert.equal(rendered.includes(`scope ${before}`), true);
+assert.equal(rendered.includes("not-measured"), true);
+assert.equal(rendered.includes("marker"), false);
 assert.deepEqual(validateCompany(catalog), []);
 const dayBook = book(catalog, { hour: 12, weekday: 2 });
 const nightBook = book(catalog, { hour: 22, weekday: 2 });
@@ -122,6 +138,7 @@ const pack = readFileSync(join(repoRoot(), "packs/shannon/claims.js"), "utf8");
 assert.equal(pack.includes("weaknessClass"), false);
 assert.equal(pack.includes("NL-EXT-A"), false);
 assert.equal(packFor("shannon", scope).files[0], "packs/shannon");
+assert.equal(packFor("shannon", scope).files.includes("packs/forge"), true);
 
 const a = pickVariants(catalog, 0).map((item) => item.variantId);
 const b = pickVariants(catalog, 1).map((item) => item.variantId);

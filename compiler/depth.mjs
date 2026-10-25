@@ -155,7 +155,7 @@ export function scoreReport(input) {
 export function packFor(harnessId, scope) {
   const base = { startingUrl: scope.startingUrl, vault: false, smokeSource: false };
   if (harnessId === "shannon") {
-    return { ...base, harness: "shannon", files: ["packs/shannon"] };
+    return { ...base, harness: "shannon", files: ["packs/shannon", "packs/forge"] };
   }
   return { ...base, harness: harnessId, files: ["dist/range-scope.json"] };
 }

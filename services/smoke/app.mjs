@@ -1,6 +1,7 @@
 import { emitScope, flagValue, loadCatalog, pickVariants } from "../../compiler/lib.mjs";
 import { note } from "../../compiler/judge.mjs";
 import { book, harnessRows, markerFor, sessionFor, signalFor } from "../../compiler/books.mjs";
+import { forgeList, loadDetection, loadMail, loadTracker } from "../../compiler/texture.mjs";
 
 const edge = [];
 
@@ -205,6 +206,37 @@ function respond(input) {
   if (path === "/change-board") {
     if (!authed) return { status: 401, body: { error: "sign-in" } };
     return { status: 200, body: { approved: loadCatalog().depth.changeBoard.approved } };
+  }
+
+  if (path === "/mail/routes") {
+    const mail = loadMail();
+    return { status: 200, body: { store: mail.store, domain: mail.domain, routes: mail.routes } };
+  }
+
+  if (path === "/forge/repos") {
+    return { status: 200, body: { host: "forge.northline.lab", repos: forgeList() } };
+  }
+
+  if (path === "/tracker") {
+    const tickets = loadTracker().tickets.map((ticket) => ({
+      id: ticket.id,
+      queue: ticket.queue,
+      owner: ticket.owner,
+      kind: ticket.kind,
+      title: ticket.title,
+      status: ticket.status,
+      targetOrg: ticket.targetOrg || "",
+    }));
+    return { status: 200, body: { tracker: "tracker.northline.lab", tickets } };
+  }
+
+  if (path === "/tracker/t-exp-hearthline") {
+    const ticket = loadTracker().tickets.find((item) => item.id === "t-exp-hearthline");
+    return { status: 200, body: { id: ticket.id, status: ticket.status, targetOrg: ticket.targetOrg, scopeUnchanged: true } };
+  }
+
+  if (path === "/detection") {
+    return { status: 200, body: { intents: loadDetection().intents.map((row) => row.chainId) } };
   }
 
   if (path === "/notes/night" && picked["sh-a"]) {

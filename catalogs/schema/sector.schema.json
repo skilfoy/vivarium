@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "prefix", "startingUrl", "zones", "hosts"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "name": { "type": "string", "minLength": 1 },
+    "prefix": { "type": "string" },
+    "startingUrl": { "type": "string", "minLength": 8 },
+    "zones": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "cidr", "scope"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "cidr": { "type": "string" },
+          "scope": { "type": "string", "enum": ["allow", "deny"] },
+          "denyReason": { "type": "string", "minLength": 4 }
+        }
+      }
+    },
+    "hosts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "fqdn", "ip", "zone", "ownerPersona", "purpose", "patchCohort", "logging", "classification"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "name": { "type": "string" },
+          "fqdn": { "type": "string" },
+          "ip": { "type": "string" },
+          "zone": { "type": "string" },
+          "ownerPersona": { "type": "string" },
+          "purpose": { "type": "string", "minLength": 4 },
+          "patchCohort": { "type": "string", "enum": ["current", "lagging", "frozen"] },
+          "logging": { "type": "string", "enum": ["none", "sample", "full"] },
+          "classification": { "type": "string", "enum": ["public", "internal", "restricted", "management"] }
+        }
+      }
+    }
+  }
+}

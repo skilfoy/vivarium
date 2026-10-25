@@ -4,6 +4,10 @@ import { emitScope, loadCatalog, pickVariants, repoRoot, scopeHash, validateCata
 import { validateDepth } from "./depth.mjs";
 import { validateCompany } from "./books.mjs";
 import { snapshotBody, snapshotProblems } from "./snapshot.mjs";
+import { validateSchemas } from "./schema.mjs";
+import { validateTexture } from "./texture.mjs";
+import { groundTruth, truthProblems } from "./truth.mjs";
+import { fixtureManifest, manifestProblems } from "./score.mjs";
 
 const problems = [];
 const catalog = loadCatalog();
@@ -12,9 +16,13 @@ problems.push(...validateInhabitants(catalog));
 problems.push(...validateNoise(catalog, emitScope(catalog)));
 problems.push(...validateDepth(catalog, emitScope(catalog)));
 problems.push(...validateCompany(catalog));
+problems.push(...validateSchemas(catalog));
+problems.push(...validateTexture(catalog));
 
 const scope = emitScope(catalog);
 const hash = scopeHash(scope);
+problems.push(...truthProblems(groundTruth(catalog, 0, {}, hash)));
+problems.push(...manifestProblems(fixtureManifest(hash)));
 const scopePath = join(repoRoot(), "dist", "range-scope.json");
 const hashPath = join(repoRoot(), "dist", "range-scope.sha256");
 if (!existsSync(scopePath) || !existsSync(hashPath)) {

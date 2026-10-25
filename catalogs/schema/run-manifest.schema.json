@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["harness", "revision", "model", "seed", "scopeHash", "coverage", "precision", "depth", "roeFailures", "noise"],
+  "properties": {
+    "harness": { "type": "string", "minLength": 1 },
+    "revision": { "type": "string", "minLength": 1 },
+    "model": { "type": "string", "minLength": 1 },
+    "seed": { "type": "integer" },
+    "scopeHash": { "type": "string", "minLength": 12 },
+    "coverage": { "type": "number" },
+    "precision": { "type": "number" },
+    "depth": { "type": "integer" },
+    "roeFailures": { "type": "integer" },
+    "noise": { "type": "string", "enum": ["not-measured"] }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["org", "note", "chains"],
+  "properties": {
+    "org": { "type": "string" },
+    "note": { "type": "string", "minLength": 8 },
+    "chains": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "class", "title", "safetyCeiling", "variants"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "org": { "type": "string", "minLength": 1 },
+          "class": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 8 },
+          "safetyCeiling": { "type": "string", "enum": ["read-flag", "flip-simulator-bit"] },
+          "variants": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "hostId", "personaId", "flagId", "weaknessClass"],
+              "properties": {
+                "id": { "type": "string" },
+                "hostId": { "type": "string" },
+                "personaId": { "type": "string" },
+                "flagId": { "type": "string", "pattern": "^[A-Z]{2}-[A-Z]+-[A-C]$" },
+                "weaknessClass": { "type": "string", "minLength": 4 }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

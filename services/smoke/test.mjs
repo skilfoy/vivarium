@@ -128,5 +128,18 @@ const sable = handle({ ...base, url: "/", seed: 3, ip: "10.250.0.9", run: scored
 assert.equal(sable.status, 403);
 assert.equal(sable.run.failed, true);
 assert.equal(JSON.stringify(scope).includes("playable"), false);
+const mail = handle({ ...base, url: "/mail/routes", seed: 0 });
+assert.equal(mail.status, 200);
+assert.equal(mail.body.routes.every((route) => route.to.endsWith("@northline.lab")), true);
+assert.equal(JSON.stringify(mail.body).includes("marker"), false);
+const forge = handle({ ...base, url: "/forge/repos", seed: 0 });
+assert.equal(forge.body.repos.some((repo) => repo.repo === "portal"), true);
+const tracker = handle({ ...base, url: "/tracker/t-exp-hearthline", seed: 0 });
+assert.equal(tracker.body.scopeUnchanged, true);
+assert.equal(tracker.body.status, "pending");
+assert.equal(scopeHash(emitScope(loadCatalog())), scopeHash(scope));
+const detection = handle({ ...base, url: "/detection", seed: 0 });
+assert.equal(detection.body.intents.length, 25);
+assert.equal(JSON.stringify(detection.body).includes("would hope"), false);
 
 console.log("smoke ok");
